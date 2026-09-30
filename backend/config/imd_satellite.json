@@ -1,0 +1,5 @@
+{
+  "bounds": [[0.0, 50.0], [42.0, 105.0]],
+  "verified": false,
+  "note": "The full native IMD image is displayed in Satellite mode. Its labelled product graticule spans approximately 0-42 N and 50-105 E; these bounds are retained only for an optional map overlay and are not suitable for measurement."
+}

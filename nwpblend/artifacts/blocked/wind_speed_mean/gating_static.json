@@ -1,0 +1,71 @@
+{
+ "static": true,
+ "hidden": [],
+ "num_cols": [],
+ "cat_cols": [
+  "season_id",
+  "lead_days"
+ ],
+ "vocab": {
+  "season_id": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "lead_days": [
+   1,
+   2,
+   3
+  ]
+ },
+ "experts": [
+  "climatology",
+  "persistence",
+  "recent3",
+  "anom_persistence"
+ ],
+ "expert_cols": [
+  "exp_climatology",
+  "exp_persistence",
+  "exp_recent3",
+  "exp_anom_persistence"
+ ],
+ "y_scale": 2.359621524810791,
+ "activation": "gelu",
+ "dropout": 0.0,
+ "anchored": false,
+ "leads": [
+  1,
+  2,
+  3
+ ],
+ "anchor_index": "season_id * n_leads + index(lead_days in leads)",
+ "history": [
+  {
+   "epoch": 0,
+   "train_mse_norm": 0.2664364153943743,
+   "val_mse_norm": 0.2155213547878477
+  },
+  {
+   "epoch": 1,
+   "train_mse_norm": 0.2562880086823872,
+   "val_mse_norm": 0.21508986956955325
+  },
+  {
+   "epoch": 2,
+   "train_mse_norm": 0.252600993750436,
+   "val_mse_norm": 0.21940413889053847
+  },
+  {
+   "epoch": 3,
+   "train_mse_norm": 0.25128124656745365,
+   "val_mse_norm": 0.22205170424330678
+  },
+  {
+   "epoch": 4,
+   "train_mse_norm": 0.25093521892888204,
+   "val_mse_norm": 0.22222855207214368
+  }
+ ]
+}

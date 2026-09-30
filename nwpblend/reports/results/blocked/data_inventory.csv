@@ -1,0 +1,8 @@
+file,content,dates,size,role
+"data_stream-oper_stepType-{accum,instant}.nc","ERA5 6-hourly 2025, 121x117 grid (7-37N, 68-97E)",2025-01-01..2025-12-31,"5,167,305 cell-days",USED: truth archive (rebuilt; the brief's processed csv.gz is absent)
+forecast_india_2026-09-24_0h_clean.csv (+ .grib2),ECMWF oper analysis step 0 h,2026-09-24,"14,157 points","NOT SCORABLE: tp=0 at step 0, no truth at valid time; optional inference input"
+rainfall_statewise_daily_imd_clean.csv,IMD statewise daily rain: actual/normal/departure,2026-08-19..2026-09-24,40 states/regions,USED: external validation (unseen year)
+export_meteostat_2025_clean.csv,single station daily 2025 (wpgt column holds shifted pressure values - dropped),2025-01-01..2025-12-31,365 days,USED: ERA5-vs-gauge check
+72d1.../data.grib (6.9 GB),"ERA5 global GRIB1, 1120 msgs: soil temp/moisture, runoff, skt, ssrd, tp","(2025, 1, 31)..(2025, 2, 28)",Feb 2025 only,"NOT USED: one month, no new target info"
+model_skill_summary.csv / blended_predictions_2025_Q4_test.csv,"earlier prototype, Q4 time split",2025-10..12,,USED: comparison in s.7
+"blend_framework.py, *_by_season.csv (named in brief)",-,-,-,ABSENT from workspace

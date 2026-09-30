@@ -1,0 +1,84 @@
+{
+ "levels": [
+  0.05,
+  0.1,
+  0.25,
+  0.5,
+  0.75,
+  0.9,
+  0.95
+ ],
+ "features": [
+  "latitude",
+  "longitude",
+  "is_ocean",
+  "elev_proxy_m",
+  "coastal",
+  "region_id",
+  "season_id",
+  "lead_days",
+  "lead_bucket_id",
+  "regime_id",
+  "mae7_climatology",
+  "mae7_persistence",
+  "mae7_recent3",
+  "mae7_anom_persistence",
+  "rmse30_climatology",
+  "rmse30_persistence",
+  "rmse30_recent3",
+  "rmse30_anom_persistence",
+  "regmae_climatology",
+  "regmae_persistence",
+  "regmae_recent3",
+  "regmae_anom_persistence",
+  "now_tp_mm",
+  "now_t2m_C_mean",
+  "now_t2m_C_max",
+  "now_wind_speed_mean",
+  "now_wind_speed_max",
+  "now_msl_hPa_mean",
+  "now_msl_hPa_min",
+  "now_tcc_mean",
+  "now_cape_max",
+  "now_rh_pct_mean",
+  "now_blh_mean",
+  "now_ssrd_MJ",
+  "now_msl_anom",
+  "now_tp3",
+  "now_tp7",
+  "now_target_tendency",
+  "now_anomaly",
+  "expert_spread",
+  "expert_range",
+  "exp_climatology",
+  "exp_persistence",
+  "exp_recent3",
+  "exp_anom_persistence",
+  "blend_pred"
+ ],
+ "cqr_by_season_id": {
+  "80": {
+   "0": 0.0409888556569755,
+   "1": 0.13237258749774014,
+   "2": 0.18505682714307814,
+   "3": -0.01712680555467652
+  },
+  "90": {
+   "0": 0.06936295452016616,
+   "1": 0.18478910230098114,
+   "2": 0.26671476414164935,
+   "3": 0.004938914802106854
+  }
+ },
+ "intervals": {
+  "80": [
+   0.1,
+   0.9
+  ],
+  "90": [
+   0.05,
+   0.95
+  ]
+ },
+ "nonneg": false
+}

@@ -1,0 +1,66 @@
+{
+  "model_version": "intent-slots-2026-09-30-iter10-acceptance50",
+  "datasets": [
+    "training\\weathergpt_intent_slots_1000.jsonl",
+    "training\\iterations\\weathergpt_intent_slots_iteration_01.jsonl",
+    "training\\iterations\\weathergpt_intent_slots_iteration_02.jsonl",
+    "training\\iterations\\weathergpt_intent_slots_iteration_03.jsonl",
+    "training\\iterations\\weathergpt_intent_slots_iteration_04.jsonl",
+    "training\\iterations\\weathergpt_intent_slots_iteration_05.jsonl",
+    "training\\iterations\\weathergpt_intent_slots_iteration_06.jsonl",
+    "training\\iterations\\weathergpt_intent_slots_iteration_07.jsonl",
+    "training\\iterations\\weathergpt_intent_slots_iteration_08.jsonl",
+    "training\\iterations\\weathergpt_intent_slots_iteration_09.jsonl",
+    "training\\iterations\\weathergpt_intent_slots_iteration_10.jsonl",
+    "training\\remediation\\weathergpt_acceptance_failures.jsonl"
+  ],
+  "records": 3030,
+  "remediation_weight": 20,
+  "intent_distribution": {
+    "point_query": 460,
+    "range_stats": 605,
+    "comparison": 303,
+    "conditional_filter": 300,
+    "trend_anomaly": 240,
+    "inference_explain": 365,
+    "model_explain": 456,
+    "compound": 151,
+    "out_of_scope": 90,
+    "clarification_needed": 60
+  },
+  "evaluation": {
+    "test_fraction": 0.2,
+    "intent": {
+      "accuracy": 0.9818,
+      "macro_f1": 0.9768
+    },
+    "slots": {
+      "variable": {
+        "accuracy": 0.967,
+        "macro_f1": 0.9649
+      },
+      "aggregation": {
+        "accuracy": 0.9752,
+        "macro_f1": 0.9461
+      },
+      "time_type": {
+        "accuracy": 0.9835,
+        "macro_f1": 0.9599
+      },
+      "inference_type": {
+        "accuracy": 0.9752,
+        "macro_f1": 0.9174
+      },
+      "model_explain_type": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "output_format": {
+        "accuracy": 0.9851,
+        "macro_f1": 0.9848
+      }
+    }
+  },
+  "trained_at_utc": "2026-09-30T07:01:02+00:00",
+  "runtime_contract": "assistive evidence only; deterministic parser remains authoritative"
+}

@@ -1,0 +1,2 @@
+grid_points,init_time,valid_time,lead_hours_unique,tp_mm_max,ssrd_max,truth_available_at_valid_time,verdict
+14157,2026-09-24,2026-09-24,0,0.0,0.0,"none gridded (ERA5 is 2025; IMD is statewise and ends at this date, daily accumulations)",no verifiable comparison point -> ECMWF cannot be scored or used as a trained expert

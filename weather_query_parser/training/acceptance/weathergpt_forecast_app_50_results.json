@@ -1,0 +1,3494 @@
+{
+  "total": 50,
+  "passed": 50,
+  "failed": 0,
+  "failures": [],
+  "results": [
+    {
+      "text": "Will it rain at grid cell 12000 tomorrow?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer \u00b7 no LLM configured",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": "12000",
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.5246,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.6348
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9492
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.8086
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.4344
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.8175
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9036
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          },
+          "resolved_grid": {
+            "cell": "12000",
+            "latitude": 11.5,
+            "longitude": 84.5
+          }
+        }
+      }
+    },
+    {
+      "text": "What is the temperature at 11.50, 84.50 in 48 hours?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer \u00b7 no LLM configured",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 11.5,
+            "lon": 84.5
+          },
+          "weather_variable": "temperature",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 48,
+            "start_date": null,
+            "end_date": null,
+            "text": "in 48 hours"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.4838,
+            "slots": {
+              "variable": {
+                "value": "temperature",
+                "confidence": 0.8068
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.6854
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.2809
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.6111
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.8553
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.812
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Show wind at grid cell 12000 tomorrow.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA trained-output query",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "wind",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "location_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "spatial_ranking",
+          "ranking_scope": "locations",
+          "grid_cell": "12000",
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.5897,
+            "slots": {
+              "variable": {
+                "value": "wind_speed",
+                "confidence": 0.748
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9412
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.664
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.4413
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.6601
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8349
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          },
+          "resolved_grid": {
+            "cell": "12000",
+            "latitude": 11.5,
+            "longitude": 84.5
+          }
+        }
+      }
+    },
+    {
+      "text": "Humidity in Kerala now",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Kerala",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "humidity",
+          "data_layer": "open_meteo_humidity",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 0,
+            "start_date": null,
+            "end_date": null,
+            "text": "today"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.7614,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.7964
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.797
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9531
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8506
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9452
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9291
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Current rainfall in Maharashtra",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Maharashtra",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "open_meteo_rainfall",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 0,
+            "start_date": null,
+            "end_date": null,
+            "text": "today"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.7401,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.8294
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.6369
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9453
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8837
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9304
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8905
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Wind in Tamil Nadu today",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Tamil Nadu",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "wind",
+          "data_layer": "open_meteo_wind_speed",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 0,
+            "start_date": null,
+            "end_date": null,
+            "text": "today"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.7647,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.7509
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.7865
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.8883
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8974
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9469
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9302
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "What is the next 24 hour rain outlook in Kerala?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Kerala",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "open_meteo_rainfall_24h",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.6891,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.7922
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9033
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9059
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.7005
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9496
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9296
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Lightning watch in Maharashtra today",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Maharashtra",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "thunderstorm",
+          "data_layer": "open_meteo_lightning",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 0,
+            "start_date": null,
+            "end_date": null,
+            "text": "today"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.8427,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.9047
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.818
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9587
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.9129
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9176
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9026
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Thunderstorm potential in Karnataka now",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Karnataka",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "thunderstorm",
+          "data_layer": "open_meteo_thunderstorm",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 0,
+            "start_date": null,
+            "end_date": null,
+            "text": "today"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.7827,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.8872
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.7378
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9561
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8658
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.928
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9057
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Wind gusts in Kerala today",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Kerala",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "wind_gust",
+          "data_layer": "open_meteo_wind_gust",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 0,
+            "start_date": null,
+            "end_date": null,
+            "text": "today"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.7647,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.8412
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.754
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9306
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8927
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9546
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9617
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "What was rainfall in Kerala on 20 September 2026?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Kerala",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "open_meteo_rainfall",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2026-09-20",
+            "end_date": "2026-09-20",
+            "text": "20 september 2026"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "range_stats",
+            "confidence": 0.6478,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.9634
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.5685
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.8754
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8567
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9555
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9656
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Which state had the highest rainfall from 20 September 2026 to 25 September 2026?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "open_meteo_rainfall",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "location_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2026-09-20",
+            "end_date": "2026-09-20",
+            "text": "20 september 2026"
+          },
+          "extreme_event_type": null,
+          "query_scope": "spatial_ranking",
+          "ranking_scope": "states",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "range_stats",
+            "confidence": 0.8921,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.832
+              },
+              "aggregation": {
+                "value": "sum",
+                "confidence": 0.8799
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.941
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.9337
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9131
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9194
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Where had the highest temperature from 20 September 2026 to 25 September 2026?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "temperature",
+          "data_layer": "live_weather",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "location_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2026-09-20",
+            "end_date": "2026-09-20",
+            "text": "20 september 2026"
+          },
+          "extreme_event_type": null,
+          "query_scope": "spatial_ranking",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "range_stats",
+            "confidence": 0.8153,
+            "slots": {
+              "variable": {
+                "value": "temperature",
+                "confidence": 0.8658
+              },
+              "aggregation": {
+                "value": "max",
+                "confidence": 0.8751
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.9476
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8735
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9072
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9137
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Which month was wettest in India in 2014?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "2014 rainfall observation analysis",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "rainfall_observations_2014",
+          "data_domain": "historical_observations",
+          "use_case": "general",
+          "query_bucket": "historical_rainfall_2014",
+          "question_operation": "time_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2014-01-01",
+            "end_date": "2014-12-31",
+            "text": "2014"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "range_stats",
+            "confidence": 0.7146,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.7338
+              },
+              "aggregation": {
+                "value": "max",
+                "confidence": 0.9106
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.8575
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.9069
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9086
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9188
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "What was the highest rainfall in India in 2014?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "2014 rainfall observation analysis",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "rainfall_observations_2014",
+          "data_domain": "historical_observations",
+          "use_case": "general",
+          "query_bucket": "historical_rainfall_2014",
+          "question_operation": "location_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2014-01-01",
+            "end_date": "2014-12-31",
+            "text": "2014"
+          },
+          "extreme_event_type": null,
+          "query_scope": "spatial_ranking",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "range_stats",
+            "confidence": 0.8351,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.9531
+              },
+              "aggregation": {
+                "value": "max",
+                "confidence": 0.9733
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.7542
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8835
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9452
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9538
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "What was rainfall at 22.75, 75.75 on 2014-07-01?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "2014 rainfall observation analysis",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 22.75,
+            "lon": 75.75
+          },
+          "weather_variable": "rainfall",
+          "data_layer": "rainfall_observations_2014",
+          "data_domain": "historical_observations",
+          "use_case": "general",
+          "query_bucket": "historical_rainfall_2014",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2014-07-01",
+            "end_date": "2014-07-01",
+            "text": "2014-07-01"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.7566,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.8626
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.745
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.8316
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8518
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9231
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.925
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Where was humidity highest over the last 30 days?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Retained live-layer timeline query",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "humidity",
+          "data_layer": "open_meteo_humidity",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "location_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": 30,
+          "analysis_window_text": "30 days",
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2026-08-31",
+            "end_date": "2026-09-29",
+            "text": "last 30 days"
+          },
+          "extreme_event_type": null,
+          "query_scope": "spatial_ranking",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "range_stats",
+            "confidence": 0.657,
+            "slots": {
+              "variable": {
+                "value": "humidity",
+                "confidence": 0.8776
+              },
+              "aggregation": {
+                "value": "max",
+                "confidence": 0.9767
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.9052
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.7509
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9455
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8556
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Where are wind gusts strongest today?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "wind_gust",
+          "data_layer": "open_meteo_wind_gust",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "location_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 0,
+            "start_date": null,
+            "end_date": null,
+            "text": "today"
+          },
+          "extreme_event_type": null,
+          "query_scope": "spatial_ranking",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "range_stats",
+            "confidence": 0.6909,
+            "slots": {
+              "variable": {
+                "value": "wind_speed",
+                "confidence": 0.8617
+              },
+              "aggregation": {
+                "value": "max",
+                "confidence": 0.9215
+              },
+              "time_type": {
+                "value": "present",
+                "confidence": 0.9308
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8474
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9224
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9214
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Compare rainfall in Mumbai and Pune tomorrow.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer",
+        "parsed": {
+          "location": "Mumbai",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 19.076,
+            "lon": 72.8777
+          },
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "comparison",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "comparison",
+            "confidence": 0.3614,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.9263
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9127
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.9469
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.6115
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9491
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.7198
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "How will temperature in Kochi differ between today and tomorrow?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Kochi",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 9.9312,
+            "lon": 76.2673
+          },
+          "weather_variable": "temperature",
+          "data_layer": "live_weather",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "comparison",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "ambiguous",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": "today or tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "comparison",
+            "confidence": 0.9386,
+            "slots": {
+              "variable": {
+                "value": "temperature",
+                "confidence": 0.8481
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.942
+              },
+              "time_type": {
+                "value": "present",
+                "confidence": 0.8652
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8807
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9401
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8893
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Is Bengaluru or Chennai windier tomorrow?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer",
+        "parsed": {
+          "location": "Bengaluru",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 12.9716,
+            "lon": 77.5946
+          },
+          "weather_variable": null,
+          "data_layer": null,
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "comparison",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "comparison",
+            "confidence": 0.8583,
+            "slots": {
+              "variable": {
+                "value": "wind_speed",
+                "confidence": 0.858
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.8801
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.9229
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.7458
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9322
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9141
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Compare the 24 hour rain outlook for Kerala and Tamil Nadu.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Tamil Nadu",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "open_meteo_rainfall_24h",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "comparison",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "comparison",
+            "confidence": 0.7946,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.6354
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.8884
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.655
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.7958
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9462
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9149
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "List Kerala locations where rainfall was above 20 mm during the last 7 days.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Retained live-layer timeline query",
+        "parsed": {
+          "location": "Kerala",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "open_meteo_rainfall",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "location_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": 7,
+          "analysis_window_text": "7 days",
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2026-09-23",
+            "end_date": "2026-09-29",
+            "text": "last 7 days"
+          },
+          "extreme_event_type": null,
+          "query_scope": "spatial_ranking",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "conditional_filter",
+            "confidence": 0.805,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.8546
+              },
+              "aggregation": {
+                "value": "count_days",
+                "confidence": 0.9354
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.9575
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8772
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9681
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8663
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Find places in Rajasthan with maximum temperature at least 35 celsius this week.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer",
+        "parsed": {
+          "location": "Rajasthan",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "temperature",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "time_ranking",
+          "ranking_direction": "ascending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "conditional_filter",
+            "confidence": 0.9274,
+            "slots": {
+              "variable": {
+                "value": "max_temp",
+                "confidence": 0.8224
+              },
+              "aggregation": {
+                "value": "count_days",
+                "confidence": 0.8847
+              },
+              "time_type": {
+                "value": "present",
+                "confidence": 0.8432
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8626
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9265
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.6382
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Show days in Maharashtra with a dry spell over the last 30 days.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA historical-model query",
+        "parsed": {
+          "location": "Maharashtra",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": null,
+          "data_layer": null,
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": 30,
+          "analysis_window_text": "30 days",
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2026-08-31",
+            "end_date": "2026-09-29",
+            "text": "last 30 days"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "conditional_filter",
+            "confidence": 0.8609,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.2781
+              },
+              "aggregation": {
+                "value": "count_days",
+                "confidence": 0.8375
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.7975
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8658
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9575
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.6468
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Which Assam areas had a heatwave in summer 2025?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA trained-output query",
+        "parsed": {
+          "location": "Assam",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": null,
+          "data_layer": null,
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "location_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "events",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2025-01-01",
+            "end_date": "2025-12-31",
+            "text": "2025"
+          },
+          "extreme_event_type": "heatwave",
+          "query_scope": "spatial_ranking",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "conditional_filter",
+            "confidence": 0.5658,
+            "slots": {
+              "variable": {
+                "value": "temperature",
+                "confidence": 0.2566
+              },
+              "aggregation": {
+                "value": "count_days",
+                "confidence": 0.4581
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.8785
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8323
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.8631
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.6053
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "What is the rainfall trend in Kerala over the last 30 days?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Retained live-layer timeline query",
+        "parsed": {
+          "location": "Kerala",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "open_meteo_rainfall",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": 30,
+          "analysis_window_text": "30 days",
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2026-08-31",
+            "end_date": "2026-09-29",
+            "text": "last 30 days"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "trend_anomaly",
+            "confidence": 0.6074,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.8917
+              },
+              "aggregation": {
+                "value": "trend",
+                "confidence": 0.8061
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.8736
+              },
+              "inference_type": {
+                "value": "trend_explanation",
+                "confidence": 0.8863
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9674
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.9335
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Was temperature unusual in Mumbai during August 2025?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live IndianAPI / Open-Meteo layer query",
+        "parsed": {
+          "location": "Mumbai",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 19.076,
+            "lon": 72.8777
+          },
+          "weather_variable": "temperature",
+          "data_layer": "live_weather",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2025-01-01",
+            "end_date": "2025-12-31",
+            "text": "2025"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "trend_anomaly",
+            "confidence": 0.7695,
+            "slots": {
+              "variable": {
+                "value": "temperature",
+                "confidence": 0.6817
+              },
+              "aggregation": {
+                "value": "anomaly",
+                "confidence": 0.5781
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.9254
+              },
+              "inference_type": {
+                "value": "cause",
+                "confidence": 0.6801
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9581
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.798
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Detect a humidity anomaly in Chennai for the last week.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live layer query",
+        "parsed": {
+          "location": "Chennai",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 13.0827,
+            "lon": 80.2707
+          },
+          "weather_variable": "humidity",
+          "data_layer": "open_meteo_humidity",
+          "data_domain": "live_layers",
+          "use_case": "general",
+          "query_bucket": "live_weather_layers",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "date_range",
+            "lead_hours": null,
+            "start_date": "2026-09-23",
+            "end_date": "2026-09-29",
+            "text": "last week"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "trend_anomaly",
+            "confidence": 0.9409,
+            "slots": {
+              "variable": {
+                "value": "humidity",
+                "confidence": 0.8623
+              },
+              "aggregation": {
+                "value": "anomaly",
+                "confidence": 0.956
+              },
+              "time_type": {
+                "value": "past",
+                "confidence": 0.6241
+              },
+              "inference_type": {
+                "value": "cause",
+                "confidence": 0.9467
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9142
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.5417
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Explain the wind trend in Bengaluru this week.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer",
+        "parsed": {
+          "location": "Bengaluru",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 12.9716,
+            "lon": 77.5946
+          },
+          "weather_variable": "wind",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "trend_anomaly",
+            "confidence": 0.5511,
+            "slots": {
+              "variable": {
+                "value": "wind_speed",
+                "confidence": 0.89
+              },
+              "aggregation": {
+                "value": "trend",
+                "confidence": 0.8213
+              },
+              "time_type": {
+                "value": "present",
+                "confidence": 0.9181
+              },
+              "inference_type": {
+                "value": "trend_explanation",
+                "confidence": 0.9064
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.8964
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.4285
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Why is rainfall forecast at grid cell 12000 tomorrow?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer \u00b7 no LLM configured",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": "12000",
+          "trained_intent": {
+            "status": "available",
+            "intent": "inference_explain",
+            "confidence": 0.6827,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.7803
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9472
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.813
+              },
+              "inference_type": {
+                "value": "why",
+                "confidence": 0.9235
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.605
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8634
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          },
+          "resolved_grid": {
+            "cell": "12000",
+            "latitude": 11.5,
+            "longitude": 84.5
+          }
+        }
+      }
+    },
+    {
+      "text": "How certain is the temperature forecast at 11.50, 84.50 tomorrow?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer \u00b7 no LLM configured",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 11.5,
+            "lon": 84.5
+          },
+          "weather_variable": "temperature",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "inference_explain",
+            "confidence": 0.7011,
+            "slots": {
+              "variable": {
+                "value": "temperature",
+                "confidence": 0.7284
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9034
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.9653
+              },
+              "inference_type": {
+                "value": "confidence",
+                "confidence": 0.9203
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.7394
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.618
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Explain the heavy-rain risk for grid cell 12000 tomorrow.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA model methodology",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_model_methodology",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "events",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": "12000",
+          "trained_intent": {
+            "status": "available",
+            "intent": "inference_explain",
+            "confidence": 0.5951,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.244
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9534
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.7948
+              },
+              "inference_type": {
+                "value": "risk",
+                "confidence": 0.6391
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.453
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.8037
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          },
+          "resolved_grid": {
+            "cell": "12000",
+            "latitude": 11.5,
+            "longitude": 84.5
+          }
+        }
+      }
+    },
+    {
+      "text": "What should farmers plan for if it rains in Kerala tomorrow?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer",
+        "parsed": {
+          "location": "Kerala",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "inference_explain",
+            "confidence": 0.7757,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.756
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9255
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.8397
+              },
+              "inference_type": {
+                "value": "advice",
+                "confidence": 0.9602
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9387
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8994
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "What is causing the wind forecast at grid cell 12000?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer \u00b7 no LLM configured",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "wind",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": "12000",
+          "trained_intent": {
+            "status": "available",
+            "intent": "inference_explain",
+            "confidence": 0.7722,
+            "slots": {
+              "variable": {
+                "value": "wind_speed",
+                "confidence": 0.8673
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.8691
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.823
+              },
+              "inference_type": {
+                "value": "cause",
+                "confidence": 0.9051
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.7287
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8152
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          },
+          "resolved_grid": {
+            "cell": "12000",
+            "latitude": 11.5,
+            "longitude": 84.5
+          }
+        }
+      }
+    },
+    {
+      "text": "Show HYDRA head weights for rainfall at grid cell 12000 tomorrow.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA adaptive-blend weight evidence",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "location_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": true,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": "12000",
+          "trained_intent": {
+            "status": "available",
+            "intent": "model_explain",
+            "confidence": 0.8934,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.6798
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9662
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.7163
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.6039
+              },
+              "model_explain_type": {
+                "value": "head_weights",
+                "confidence": 0.6137
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.618
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          },
+          "resolved_grid": {
+            "cell": "12000",
+            "latitude": 11.5,
+            "longitude": 84.5
+          }
+        }
+      }
+    },
+    {
+      "text": "Give the HYDRA weight distribution for temperature at 11.50, 84.50 tomorrow.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA adaptive-blend weight evidence",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 11.5,
+            "lon": 84.5
+          },
+          "weather_variable": "temperature",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "weights",
+          "model_evidence_request": true,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "model_explain",
+            "confidence": 0.8874,
+            "slots": {
+              "variable": {
+                "value": "temperature",
+                "confidence": 0.7178
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9543
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.9526
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.9135
+              },
+              "model_explain_type": {
+                "value": "weight_distribution",
+                "confidence": 0.9826
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.7342
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Which HYDRA head contributes most to wind at grid cell 12000?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA adaptive-blend weight evidence",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "wind",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "location_ranking",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": true,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": "12000",
+          "trained_intent": {
+            "status": "available",
+            "intent": "model_explain",
+            "confidence": 0.9087,
+            "slots": {
+              "variable": {
+                "value": "wind_speed",
+                "confidence": 0.8713
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9008
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.8353
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8226
+              },
+              "model_explain_type": {
+                "value": "head_contribution",
+                "confidence": 0.9737
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.8074
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          },
+          "resolved_grid": {
+            "cell": "12000",
+            "latitude": 11.5,
+            "longitude": 84.5
+          }
+        }
+      }
+    },
+    {
+      "text": "Why did the Hydra weights change for rainfall tomorrow?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA adaptive-blend weight evidence",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": true,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "model_explain",
+            "confidence": 0.8787,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.8642
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9445
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.8797
+              },
+              "inference_type": {
+                "value": "why",
+                "confidence": 0.672
+              },
+              "model_explain_type": {
+                "value": "weight_change",
+                "confidence": 0.9732
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.5485
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "How reliable is each Hydra head for temperature at grid cell 12000?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA adaptive-blend weight evidence",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "temperature",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": true,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": "12000",
+          "trained_intent": {
+            "status": "available",
+            "intent": "model_explain",
+            "confidence": 0.8913,
+            "slots": {
+              "variable": {
+                "value": "temperature",
+                "confidence": 0.8369
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9199
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.8577
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.7523
+              },
+              "model_explain_type": {
+                "value": "head_reliability",
+                "confidence": 0.9718
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.7932
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          },
+          "resolved_grid": {
+            "cell": "12000",
+            "latitude": 11.5,
+            "longitude": 84.5
+          }
+        }
+      }
+    },
+    {
+      "text": "What features influenced the rainfall prediction for grid cell 12000 tomorrow?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer \u00b7 no LLM configured",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": "12000",
+          "trained_intent": {
+            "status": "available",
+            "intent": "model_explain",
+            "confidence": 0.6039,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.5443
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9365
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.5824
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.5606
+              },
+              "model_explain_type": {
+                "value": "feature_importance",
+                "confidence": 0.7838
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.6232
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          },
+          "resolved_grid": {
+            "cell": "12000",
+            "latitude": 11.5,
+            "longitude": 84.5
+          }
+        }
+      }
+    },
+    {
+      "text": "Explain the saved 80% interval for rainfall at grid cell 12000 tomorrow.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA model methodology",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_model_methodology",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "uncertainty",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": "12000",
+          "trained_intent": {
+            "status": "available",
+            "intent": "model_explain",
+            "confidence": 0.696,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.8267
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.8958
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.8803
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.6476
+              },
+              "model_explain_type": {
+                "value": "head_reliability",
+                "confidence": 0.943
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.8232
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          },
+          "resolved_grid": {
+            "cell": "12000",
+            "latitude": 11.5,
+            "longitude": 84.5
+          }
+        }
+      }
+    },
+    {
+      "text": "What do the Hydra expert weights mean?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA model methodology",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": null,
+          "data_layer": null,
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_model_methodology",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "weights",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "model_explain",
+            "confidence": 0.8171,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.8667
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.8707
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9443
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.866
+              },
+              "model_explain_type": {
+                "value": "head_weights",
+                "confidence": 0.9607
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.8881
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "How does Hydra make a weather forecast?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA model methodology",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": null,
+          "data_layer": null,
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_model_methodology",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "architecture",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "model_explain",
+            "confidence": 0.7359,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.9134
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.8865
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9583
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.7049
+              },
+              "model_explain_type": {
+                "value": "feature_importance",
+                "confidence": 0.9499
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.8156
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Is radar available right now?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Live radar layer metadata",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "radar",
+          "data_layer": "radar",
+          "data_domain": "imagery",
+          "use_case": "general",
+          "query_bucket": "radar_satellite_imagery",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 0,
+            "start_date": null,
+            "end_date": null,
+            "text": "today"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "point_query",
+            "confidence": 0.7825,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.8721
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.7691
+              },
+              "time_type": {
+                "value": "present",
+                "confidence": 0.9153
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.879
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.9006
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8985
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "What does the IMD satellite layer show?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "IMD satellite layer metadata",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": "satellite",
+          "data_layer": "satellite",
+          "data_domain": "imagery",
+          "use_case": "general",
+          "query_bucket": "radar_satellite_imagery",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "inference_explain",
+            "confidence": 0.7833,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.8886
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.7871
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9573
+              },
+              "inference_type": {
+                "value": "why",
+                "confidence": 0.9429
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.871
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8901
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "What weather questions can HYDRA answer?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "WeatherGPT capability catalog",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": null,
+          "data_layer": null,
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "capability",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "inference_explain",
+            "confidence": 0.7662,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.9154
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.8383
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9708
+              },
+              "inference_type": {
+                "value": "advice",
+                "confidence": 0.9545
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.7423
+              },
+              "output_format": {
+                "value": null,
+                "confidence": 0.8195
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "What data is missing for fresh HYDRA inference?",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA model methodology",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": null,
+          "weather_variable": null,
+          "data_layer": null,
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_model_methodology",
+          "question_operation": "explanation",
+          "ranking_direction": "descending",
+          "explanation_topic": "data_coverage",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "unspecified",
+            "lead_hours": null,
+            "start_date": null,
+            "end_date": null,
+            "text": null
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "model_explain",
+            "confidence": 0.7795,
+            "slots": {
+              "variable": {
+                "value": null,
+                "confidence": 0.8737
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.8298
+              },
+              "time_type": {
+                "value": null,
+                "confidence": 0.9524
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.8363
+              },
+              "model_explain_type": {
+                "value": "feature_importance",
+                "confidence": 0.9551
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.8265
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "What is rainfall at 19.076, 72.8777 tomorrow, and show the Hydra weights.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "HYDRA adaptive-blend weight evidence unavailable",
+        "parsed": {
+          "location": null,
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 19.076,
+            "lon": 72.8777
+          },
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "point_lookup",
+          "ranking_direction": "descending",
+          "explanation_topic": "forecast_value",
+          "model_evidence_request": true,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "compound",
+            "confidence": 0.5701,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.8946
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9502
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.8717
+              },
+              "inference_type": {
+                "value": null,
+                "confidence": 0.6225
+              },
+              "model_explain_type": {
+                "value": "head_weights",
+                "confidence": 0.8818
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.6659
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    },
+    {
+      "text": "Compare Mumbai and Pune rainfall tomorrow, then explain the forecast confidence.",
+      "passed": true,
+      "reasons": [],
+      "response": {
+        "engine": "Structured evidence explainer",
+        "parsed": {
+          "location": "Mumbai",
+          "location_suggestion": null,
+          "location_candidate": null,
+          "coordinates": {
+            "lat": 19.076,
+            "lon": 72.8777
+          },
+          "weather_variable": "rainfall",
+          "data_layer": "hydra_forecast",
+          "data_domain": "hydra_model",
+          "use_case": "general",
+          "query_bucket": "hydra_short_range_forecast",
+          "question_operation": "comparison",
+          "ranking_direction": "descending",
+          "explanation_topic": "uncertainty",
+          "model_evidence_request": false,
+          "analysis_window_days": null,
+          "analysis_window_text": null,
+          "time_range": {
+            "kind": "lead_hours",
+            "lead_hours": 24,
+            "start_date": null,
+            "end_date": null,
+            "text": "tomorrow"
+          },
+          "extreme_event_type": null,
+          "query_scope": "selected_location",
+          "ranking_scope": "locations",
+          "grid_cell": null,
+          "trained_intent": {
+            "status": "available",
+            "intent": "compound",
+            "confidence": 0.9082,
+            "slots": {
+              "variable": {
+                "value": "rainfall",
+                "confidence": 0.8761
+              },
+              "aggregation": {
+                "value": null,
+                "confidence": 0.9297
+              },
+              "time_type": {
+                "value": "forecast",
+                "confidence": 0.9625
+              },
+              "inference_type": {
+                "value": "confidence",
+                "confidence": 0.9695
+              },
+              "model_explain_type": {
+                "value": null,
+                "confidence": 0.8429
+              },
+              "output_format": {
+                "value": "explanation",
+                "confidence": 0.8669
+              }
+            },
+            "model_version": "intent-slots-2026-09-30-iter10-acceptance50"
+          }
+        }
+      }
+    }
+  ]
+}

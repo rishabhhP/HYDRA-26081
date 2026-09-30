@@ -1,0 +1,53 @@
+{
+ "split": "blocked",
+ "targets": [
+  "tp_mm",
+  "t2m_C_mean",
+  "wind_speed_mean"
+ ],
+ "leads_days": [
+  1,
+  2,
+  3
+ ],
+ "experts": [
+  "climatology",
+  "persistence",
+  "recent3",
+  "anom_persistence"
+ ],
+ "flags": [
+  "heavy_rain_day_flag",
+  "heatwave_day_flag",
+  "high_wind_day_flag"
+ ],
+ "seasons": [
+  "winter",
+  "pre_monsoon",
+  "monsoon",
+  "post_monsoon"
+ ],
+ "regimes": [
+  "cyclonic",
+  "heatwave",
+  "monsoon",
+  "wet_spell",
+  "dry_spell",
+  "normal"
+ ],
+ "quantiles": [
+  0.05,
+  0.1,
+  0.25,
+  0.5,
+  0.75,
+  0.9,
+  0.95
+ ],
+ "n_train_days": 158,
+ "thresholds": {
+  "heavy_rain_mm": 64.5,
+  "heatwave_tmax_c": 40.0,
+  "high_wind_max_ms": 13.9
+ }
+}

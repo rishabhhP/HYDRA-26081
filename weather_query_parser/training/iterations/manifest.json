@@ -1,0 +1,196 @@
+{
+  "base_corpus": "weathergpt_intent_slots_1000.jsonl",
+  "iterations": [
+    {
+      "iteration": 1,
+      "seed": 20260931,
+      "file": "weathergpt_intent_slots_iteration_01.jsonl",
+      "records": 200,
+      "noisy_queries": 30,
+      "intent_distribution": {
+        "point_query": 30,
+        "range_stats": 40,
+        "comparison": 20,
+        "conditional_filter": 20,
+        "trend_anomaly": 16,
+        "inference_explain": 24,
+        "model_explain": 30,
+        "compound": 10,
+        "out_of_scope": 6,
+        "clarification_needed": 4
+      }
+    },
+    {
+      "iteration": 2,
+      "seed": 20260932,
+      "file": "weathergpt_intent_slots_iteration_02.jsonl",
+      "records": 200,
+      "noisy_queries": 30,
+      "intent_distribution": {
+        "point_query": 30,
+        "range_stats": 40,
+        "comparison": 20,
+        "conditional_filter": 20,
+        "trend_anomaly": 16,
+        "inference_explain": 24,
+        "model_explain": 30,
+        "compound": 10,
+        "out_of_scope": 6,
+        "clarification_needed": 4
+      }
+    },
+    {
+      "iteration": 3,
+      "seed": 20260933,
+      "file": "weathergpt_intent_slots_iteration_03.jsonl",
+      "records": 200,
+      "noisy_queries": 30,
+      "intent_distribution": {
+        "point_query": 30,
+        "range_stats": 40,
+        "comparison": 20,
+        "conditional_filter": 20,
+        "trend_anomaly": 16,
+        "inference_explain": 24,
+        "model_explain": 30,
+        "compound": 10,
+        "out_of_scope": 6,
+        "clarification_needed": 4
+      }
+    },
+    {
+      "iteration": 4,
+      "seed": 20260934,
+      "file": "weathergpt_intent_slots_iteration_04.jsonl",
+      "records": 200,
+      "noisy_queries": 30,
+      "intent_distribution": {
+        "point_query": 30,
+        "range_stats": 40,
+        "comparison": 20,
+        "conditional_filter": 20,
+        "trend_anomaly": 16,
+        "inference_explain": 24,
+        "model_explain": 30,
+        "compound": 10,
+        "out_of_scope": 6,
+        "clarification_needed": 4
+      }
+    },
+    {
+      "iteration": 5,
+      "seed": 20260935,
+      "file": "weathergpt_intent_slots_iteration_05.jsonl",
+      "records": 200,
+      "noisy_queries": 30,
+      "intent_distribution": {
+        "point_query": 30,
+        "range_stats": 40,
+        "comparison": 20,
+        "conditional_filter": 20,
+        "trend_anomaly": 16,
+        "inference_explain": 24,
+        "model_explain": 30,
+        "compound": 10,
+        "out_of_scope": 6,
+        "clarification_needed": 4
+      }
+    },
+    {
+      "iteration": 6,
+      "seed": 20260936,
+      "file": "weathergpt_intent_slots_iteration_06.jsonl",
+      "records": 200,
+      "noisy_queries": 30,
+      "intent_distribution": {
+        "point_query": 30,
+        "range_stats": 40,
+        "comparison": 20,
+        "conditional_filter": 20,
+        "trend_anomaly": 16,
+        "inference_explain": 24,
+        "model_explain": 30,
+        "compound": 10,
+        "out_of_scope": 6,
+        "clarification_needed": 4
+      }
+    },
+    {
+      "iteration": 7,
+      "seed": 20260937,
+      "file": "weathergpt_intent_slots_iteration_07.jsonl",
+      "records": 200,
+      "noisy_queries": 30,
+      "intent_distribution": {
+        "point_query": 30,
+        "range_stats": 40,
+        "comparison": 20,
+        "conditional_filter": 20,
+        "trend_anomaly": 16,
+        "inference_explain": 24,
+        "model_explain": 30,
+        "compound": 10,
+        "out_of_scope": 6,
+        "clarification_needed": 4
+      }
+    },
+    {
+      "iteration": 8,
+      "seed": 20260938,
+      "file": "weathergpt_intent_slots_iteration_08.jsonl",
+      "records": 200,
+      "noisy_queries": 30,
+      "intent_distribution": {
+        "point_query": 30,
+        "range_stats": 40,
+        "comparison": 20,
+        "conditional_filter": 20,
+        "trend_anomaly": 16,
+        "inference_explain": 24,
+        "model_explain": 30,
+        "compound": 10,
+        "out_of_scope": 6,
+        "clarification_needed": 4
+      }
+    },
+    {
+      "iteration": 9,
+      "seed": 20260939,
+      "file": "weathergpt_intent_slots_iteration_09.jsonl",
+      "records": 200,
+      "noisy_queries": 30,
+      "intent_distribution": {
+        "point_query": 30,
+        "range_stats": 40,
+        "comparison": 20,
+        "conditional_filter": 20,
+        "trend_anomaly": 16,
+        "inference_explain": 24,
+        "model_explain": 30,
+        "compound": 10,
+        "out_of_scope": 6,
+        "clarification_needed": 4
+      }
+    },
+    {
+      "iteration": 10,
+      "seed": 20260940,
+      "file": "weathergpt_intent_slots_iteration_10.jsonl",
+      "records": 200,
+      "noisy_queries": 30,
+      "intent_distribution": {
+        "point_query": 30,
+        "range_stats": 40,
+        "comparison": 20,
+        "conditional_filter": 20,
+        "trend_anomaly": 16,
+        "inference_explain": 24,
+        "model_explain": 30,
+        "compound": 10,
+        "out_of_scope": 6,
+        "clarification_needed": 4
+      }
+    }
+  ],
+  "combined_records": 3000
+}

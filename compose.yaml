@@ -1,0 +1,11 @@
+services:
+  hydra:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      HYDRA_MODE: demo
+    volumes:
+      - ./nwpblend:/app/nwpblend:ro
+      - ./crop-yield-analysis:/app/crop-yield-analysis:ro
+      - ./runtime:/app/runtime:ro

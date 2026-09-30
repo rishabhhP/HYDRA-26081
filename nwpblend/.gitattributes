@@ -1,0 +1,6 @@
+* text=auto eol=lf
+# trained model files must stay byte-identical
+artifacts/** -text
+*.npz binary
+*.pt binary
+*.png binary

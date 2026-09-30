@@ -1,0 +1,21 @@
+.venv/
+node_modules/
+frontend/dist/
+__pycache__/
+.pytest_cache/
+runtime/
+.env
+drive-folder.html
+test-results/
+frontend/test-results/
+frontend/tsconfig.tsbuildinfo
+
+# Local source archives and extracted ERA5 inputs.  The published runtime
+# contains the compact trained HYDRA artifacts needed to run the dashboard.
+data/
+*.zip
+*.nc
+*.grib
+.drive_folder.html
+crop-yield-analysis/
+nwpblend/.git.local-source-backup/

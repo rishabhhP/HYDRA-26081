@@ -1,0 +1,164 @@
+{
+ "static": false,
+ "hidden": [
+  128,
+  64
+ ],
+ "num_cols": [
+  "latitude",
+  "longitude",
+  "is_ocean",
+  "elev_proxy_m",
+  "coastal",
+  "lead_days",
+  "mae7_climatology",
+  "mae7_persistence",
+  "mae7_recent3",
+  "mae7_anom_persistence",
+  "rmse30_climatology",
+  "rmse30_persistence",
+  "rmse30_recent3",
+  "rmse30_anom_persistence",
+  "regmae_climatology",
+  "regmae_persistence",
+  "regmae_recent3",
+  "regmae_anom_persistence",
+  "now_tp_mm",
+  "now_t2m_C_mean",
+  "now_t2m_C_max",
+  "now_wind_speed_mean",
+  "now_wind_speed_max",
+  "now_msl_hPa_mean",
+  "now_msl_hPa_min",
+  "now_tcc_mean",
+  "now_cape_max",
+  "now_rh_pct_mean",
+  "now_blh_mean",
+  "now_ssrd_MJ",
+  "now_msl_anom",
+  "now_tp3",
+  "now_tp7",
+  "now_target_tendency",
+  "now_anomaly",
+  "expert_spread",
+  "expert_range",
+  "exp_climatology",
+  "exp_persistence",
+  "exp_recent3",
+  "exp_anom_persistence"
+ ],
+ "cat_cols": [
+  "season_id",
+  "regime_id",
+  "region_id",
+  "lead_bucket_id"
+ ],
+ "vocab": {
+  "season_id": [
+   0,
+   1,
+   2
+  ],
+  "regime_id": [
+   2,
+   4,
+   5
+  ],
+  "region_id": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35
+  ],
+  "lead_bucket_id": [
+   1,
+   2
+  ]
+ },
+ "experts": [
+  "climatology",
+  "persistence",
+  "recent3",
+  "anom_persistence"
+ ],
+ "expert_cols": [
+  "exp_climatology",
+  "exp_persistence",
+  "exp_recent3",
+  "exp_anom_persistence"
+ ],
+ "y_scale": 1.564117921179748,
+ "activation": "gelu",
+ "dropout": 0.2,
+ "anchored": true,
+ "leads": [
+  1,
+  2,
+  3
+ ],
+ "anchor_index": "season_id * n_leads + index(lead_days in leads)",
+ "history": [
+  {
+   "epoch": 0,
+   "train_mse_norm": 0.22146890609794193,
+   "val_mse_norm": 0.20795211951937564
+  },
+  {
+   "epoch": 1,
+   "train_mse_norm": 0.2202342120276557,
+   "val_mse_norm": 0.20681933836866975
+  },
+  {
+   "epoch": 2,
+   "train_mse_norm": 0.21808924527963003,
+   "val_mse_norm": 0.20570687028097157
+  },
+  {
+   "epoch": 3,
+   "train_mse_norm": 0.21514417509237926,
+   "val_mse_norm": 0.20584551093463377
+  },
+  {
+   "epoch": 4,
+   "train_mse_norm": 0.21230120372772215,
+   "val_mse_norm": 0.2077871518564924
+  },
+  {
+   "epoch": 5,
+   "train_mse_norm": 0.21060624929269156,
+   "val_mse_norm": 0.20901671595543436
+  }
+ ]
+}
