@@ -1,6 +1,6 @@
 # HYDRA v2 prototype
 
-Map-first weather intelligence workspace with React/TypeScript, Leaflet and FastAPI. Scientific model code and checkpoints in `nwpblend/` are unchanged. Read `ARCHITECTURE.md` and `DATASET_ASSESSMENT.md` for the integration boundaries.
+Map-first weather intelligence workspace with React/TypeScript, Leaflet and FastAPI. It includes the HYDRA neural-gating model code in `nwpblend/`, a retrained daily-mean state forecast cycle, and a WeatherGPT intent/slot model. Read `ARCHITECTURE.md` and `DATASET_ASSESSMENT.md` for integration boundaries.
 
 ## Run locally (PowerShell, from HYDRA)
 
@@ -24,9 +24,32 @@ For frontend development run `npm.cmd run dev --prefix frontend` in a second ter
 - IMD state CSV through `/api/imd?state=KERALA`.
 - Deterministic weather scenarios and grounded evidence explanations. No risk numbers or live observations are fabricated.
 - Independent floating panels, world/India/Kerala views, map picking, layer search, command palette, timeline, and analytics dialogs.
-- Clickable boundaries for all 36 Indian states and union territories. A state click opens an area average from the supplied ECMWF analysis and the matching latest supplied IMD rainfall row. The HYDRA archive remains limited to its actual three cells.
+- Clickable boundaries for all 36 Indian states and union territories. Selecting a state loads the published HYDRA daily-mean neural-gating forecast at +24h and +48h.
 - Stackable renderers for forecast points, rainfall heatmaps, temperature cells, wind arrows, disagreement rings, event rings, expert diamonds and regime squares.
 - **Live IMD station weather** is a stackable map layer backed by IndianAPI. It fetches reports for distributed Indian cities through the server, caches them for 30 minutes, and never sends the provider key to the browser. Markers are live reporting stations rather than interpolated nationwide coverage.
+
+## Published HYDRA state forecast
+
+The dashboard includes a retrained HYDRA daily-mean state cycle under `runtime/hydra_daily_mean_state_blend.json`. It is issued on **2025-12-31** and provides forecasts for **2026-01-01 (+24h)** and **2026-01-02 (+48h)** across all 36 Indian states and UTs.
+
+For each state, lead, and target, HYDRA's neural gate blends four experts:
+
+- climatology
+- persistence
+- recent-three-day persistence
+- anomaly-persistence
+
+The AI Insights state panel and its state-aware WeatherGPT briefing show the blend forecast, learned expert allocations, expert disagreement, an empirical 80% residual interval, and held-out chronological backtest MAE/RMSE. Expert weights show blend allocation; they do not establish causal feature importance. Disagreement is spread between expert forecasts. The error metrics describe held-out 2025 backtests and are not future observed error.
+
+Open-Meteo is shown only as a live +24h/+48h provider comparison. It never replaces a HYDRA value, changes gate weights, or verifies this historical HYDRA issue cycle.
+
+To rebuild the published state cycle after staging compatible daily-mean ERA5 inputs, run:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/train_hydra_daily_mean_state_blend.py
+```
+
+The raw ERA5 archives are intentionally excluded from Git because of their size. The compact published HYDRA artifacts are committed under `runtime/hydra_daily_mean_state_blend/`.
 
 The local Natural Earth basemap works without a tile service. Fonts fall back to system fonts when offline. Natural Earth geographic data is public domain, obtained from https://github.com/nvkelso/natural-earth-vector. India state boundaries are supplied by `vardhan-maps`, generated from OpenStreetMap and licensed under ODbL 1.0; they are best-effort operational boundaries rather than survey-grade geometry.
 
@@ -53,15 +76,20 @@ WeatherGPT reads only the published summary whose coverage exactly matches the r
 
 `HYDRA_MODE=production` defaults the UI to fresh output; it never silently substitutes archive data. `HYDRA_MODEL_REPO` can change the server-side model repository path. No API accepts arbitrary filesystem paths. Keep the prototype on localhost; authentication and deployment hardening are needed before internet exposure.
 
-## Attach a trained NLP model
+## WeatherGPT
 
-WeatherGPT currently falls back to a deterministic evidence explainer. Set `HYDRA_NLP_API_URL` and, when needed, `HYDRA_NLP_API_KEY` to use the adapter in `backend/nlp.py`. HYDRA sends `{ "question": string, "context": HydraContext }`; the service returns `{ "answer": string, "model"?: string }`. The context includes the selected state or cell, valid time, forecast values, intervals, learned weights, regime, events and provenance. API credentials stay server-side. Restart the API after changing environment variables.
+WeatherGPT has two distinct entry points:
 
-The service must treat the structured context as evidence, preserve units and valid times, and decline unsupported claims. Add authentication, rate limiting and response logging before exposing it publicly.
+- The **taskbar WeatherGPT** chat handles general trained question families: current weather, forecast lookups, dates and date ranges, rankings, historical rainfall coverage, comparisons, conditional filters, trends, uncertainty, and HYDRA model explanations.
+- **Ask WeatherGPT about [state]** in AI Insights opens a state-aware briefing. It uses the selected state's published HYDRA payload directly and formats the forecast, learned weights, disagreement, backtest metrics, 80% interval, and provider comparison without substituting a provider forecast.
+
+The intent/slot artifact is stored at `weather_query_parser/training/models/weathergpt_intent_slot_model.joblib`. It works with deterministic location, date, and evidence resolution so every answer can state its source and coverage. The complete question set and response contract are in [docs/weathergpt_question_set.md](docs/weathergpt_question_set.md).
+
+Set `HYDRA_NLP_API_URL` and, when needed, `HYDRA_NLP_API_KEY` only to attach an additional external response adapter through `backend/nlp.py`. It receives structured HYDRA context and must preserve units, valid times, and source limits. API credentials stay server-side.
 
 ## Connect the deterministic WeatherGPT query parser
 
-`weather_query_parser/` is a separate FastAPI service adapted from the supplied deterministic parser. It is vocabulary and rule based, so there is no model retraining step. It optionally uses Gemini only to normalize wording; a failure always falls back to deterministic extraction.
+`weather_query_parser/` is a separate FastAPI service that combines the trained intent/slot artifact with deterministic parsing for dates, locations, and evidence boundaries. The deterministic layer remains the fallback when a request is outside the learned model's supported coverage.
 
 ```powershell
 cd weather_query_parser
@@ -72,7 +100,7 @@ cd weather_query_parser
 $env:HYDRA_QUERY_PARSER_URL = 'http://127.0.0.1:8010/parse'
 ```
 
-WeatherGPT then parses Indian states/UTs and the prototype's mapped cities, coordinates, rainfall/temperature/wind, `0/24/48/72` hour leads, and the three `nwpblend` classifier events: heavy rain, heatwave, and high wind. Requests that name multi-day windows remain date ranges rather than being silently reduced to one forecast lead.
+WeatherGPT parses Indian states/UTs and mapped cities, coordinates, rainfall/temperature/wind, date points and date ranges, forecast leads, model-weight questions, and the three `nwpblend` classifier events: heavy rain, heatwave, and high wind. Requests that name multi-day windows remain date ranges rather than being silently reduced to one forecast lead.
 
 ## WeatherGPT question catalog
 
@@ -82,7 +110,7 @@ WeatherGPT uses one shared intent catalog rather than a separate rule or model f
 | --- | --- | --- | --- |
 | 2014 historical rainfall observations | rainfall, year, India/state scope, annual or monthly aggregation, highest/lowest | location ranking, wettest/driest month, point lookup, aggregate | Daily 0.25° rainfall grid for 2014 only |
 | Live weather and retained timeline | temperature, rainfall, humidity, thunderstorm potential, gusts, heat stress, soil moisture, location, retained days | current lookup, location ranking, timeline ranking | Representative provider locations; timeline begins when HYDRA collects data |
-| HYDRA short-range forecast | rainfall, temperature, wind, lead, state/location, heavy-rain/heatwave/high-wind event | point forecast, location ranking, forecast explanation | Limited to the supplied archive/fresh-inference coverage |
+| HYDRA state neural-gating forecast | rainfall, temperature, wind, +24h/+48h, state, expert weights, disagreement, interval, backtest error | state forecast, model explanation, weight distribution, uncertainty explanation | Published 2025-12-31 cycle for 36 India states/UTs; valid 2026-01-01 and 2026-01-02 |
 | Radar and satellite imagery | radar, satellite, time | availability and imagery explanation | Image data are not converted into city measurements |
 
 For example, “Which month had the most rainfall in India in 2014?” resolves to the historical-rainfall bucket, a month-ranking operation, descending rainfall, India scope, and the 2014 calendar-year window. “What questions can HYDRA answer?” returns this catalog through WeatherGPT.
@@ -126,4 +154,4 @@ Browser tests (with API running on port 8000): `npm.cmd test --prefix frontend`.
 
 ## Known limits
 
-This prototype is not an operationally validated forecasting service. Archived HYDRA coverage is only three cells. Kochi and most locations have no archived HYDRA forecast; ECMWF analysis is available where the supplied grid covers them. Other NWP experts, global weather fields, operational ingestion, calibrated confidence/bust models, impact/exposure models and an LLM are integration pending. Historical benchmark skill is not local forecast verification. All pending modules explain the missing evidence.
+This prototype is not an operationally validated forecasting service. The published HYDRA state cycle is a retrained 2025 daily-mean cycle with a fixed 2025-12-31 issue date; it is not a continuously refreshed operational forecast. The dashboard reports held-out backtest error, while actual forecast error can only be calculated after matching observations for the forecast-valid period become available. The older three-cell archive remains limited to its supplied coverage. Other NWP experts, global weather fields, operational ingestion, calibrated confidence/bust models, impact/exposure models, and an LLM are integration pending. Historical benchmark skill is not local forecast verification. All pending modules explain the missing evidence.
