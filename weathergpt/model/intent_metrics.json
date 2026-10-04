@@ -1,0 +1,119 @@
+{
+ "corpus_size": 124000,
+ "per_intent": 4000,
+ "intents": [
+  "advice",
+  "anomaly",
+  "capabilities",
+  "compare",
+  "current_weather",
+  "data_coverage",
+  "extremes",
+  "forecast",
+  "greeting",
+  "imagery",
+  "model_accuracy",
+  "model_how",
+  "model_vs_actual",
+  "model_weights",
+  "observed",
+  "out_of_scope",
+  "provenance",
+  "rank_days",
+  "rank_places",
+  "thanks_bye",
+  "threshold_days",
+  "trend",
+  "uncertainty",
+  "why"
+ ],
+ "templates": 697,
+ "unseen_template_test": {
+  "accuracy": 0.7615,
+  "macro_f1": 0.7206
+ },
+ "acceptance": {
+  "accuracy": 0.9286,
+  "macro_f1": 0.942,
+  "size": 140,
+  "errors": [
+   [
+    "tell me the live conditions for Guwahati",
+    "current_weather",
+    "observed"
+   ],
+   [
+    "is a heatwave coming to Rajasthan this week?",
+    "forecast",
+    "extremes"
+   ],
+   [
+    "Bihar rainfall between 1 and 10 September 2026",
+    "observed",
+    "compare"
+   ],
+   [
+    "how does Tamil Nadu compare with Andhra Pradesh for rainfall this season",
+    "compare",
+    "anomaly"
+   ],
+   [
+    "explain the neural gate in simple words",
+    "model_how",
+    "model_weights"
+   ],
+   [
+    "what weight did persistence get in Assam on 18 Aug 2025",
+    "model_weights",
+    "observed"
+   ],
+   [
+    "what is the heavy rain recall for Kerala",
+    "model_accuracy",
+    "forecast"
+   ],
+   [
+    "does the model underpredict heavy rain",
+    "model_accuracy",
+    "model_how"
+   ],
+   [
+    "is it too hot for kids to play outside in Delhi today",
+    "advice",
+    "current_weather"
+   ],
+   [
+    "tell me a joke",
+    "out_of_scope",
+    "current_weather"
+   ]
+  ]
+ },
+ "per_intent_f1_unseen": {
+  "advice": 0.837,
+  "anomaly": 0.6664,
+  "capabilities": 0.6546,
+  "compare": 0.9173,
+  "current_weather": 0.7752,
+  "data_coverage": 0.6769,
+  "extremes": 0.6438,
+  "forecast": 0.8937,
+  "greeting": 0.6148,
+  "imagery": 1.0,
+  "model_accuracy": 0.7419,
+  "model_how": 0.5577,
+  "model_vs_actual": 0.9479,
+  "model_weights": 0.8227,
+  "observed": 0.8742,
+  "out_of_scope": 0.2919,
+  "provenance": 0.0097,
+  "rank_days": 0.553,
+  "rank_places": 0.8331,
+  "thanks_bye": 0.6654,
+  "threshold_days": 0.8938,
+  "trend": 0.9218,
+  "uncertainty": 0.6975,
+  "why": 0.8046
+ },
+ "train_seconds": 87.7
+}

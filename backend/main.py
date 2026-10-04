@@ -44,6 +44,7 @@ class Scenario(Selection):
 
 class Question(Selection):
     question: str = Field(min_length=1, max_length=2000)
+    session_id: str | None = Field(default=None, max_length=100)
 
 
 def methodology_answer(topic: str) -> str:
@@ -130,6 +131,20 @@ def catalog():
                 ('spread','Model disagreement','Intelligence',True),('weights','Expert weights','Intelligence',True),('regime','Weather regime','Intelligence',True),
                 ('events','Extreme probabilities','Events',True),('confidence','Forecast confidence','Intelligence',False),('bust','Forecast bust risk','Intelligence',False),
                 ('rainfall_obs','Current city weather','Observations',True),('radar','Radar precipitation','Observations',True),('satellite','IMD satellite IR','Observations',True),('flood','Flood risk','Impact',False),('exposure','Population exposure','Impact',False)]]}
+
+
+@app.get('/api/weathergpt-v2/status')
+def weathergpt_v2_status():
+    """Model version, evaluation scores and data coverage of WeatherGPT v2."""
+    import json
+    from weathergpt import datahub, intent
+    metrics = intent.MODEL_PATH.parent / 'intent_metrics.json'
+    evaluation = intent.MODEL_PATH.parent / 'system_eval.json'
+    return {'model_available': intent.MODEL_PATH.exists(),
+            'training': json.loads(metrics.read_text()) if metrics.exists() else None,
+            'evaluation': {k: {m: v[m] for m in ('size', 'model_only_accuracy', 'system_accuracy')}
+                           for k, v in json.loads(evaluation.read_text()).items()} if evaluation.exists() else None,
+            'coverage': [{**c, 'start': str(c['start']), 'end': str(c['end']) if c['end'] else None} for c in datahub.coverage()]}
 
 
 @app.get('/api/weathergpt-capabilities')
@@ -282,6 +297,22 @@ def scenario(q: Scenario):
 @app.post('/api/weathergpt')
 def explain(q: Question):
     from . import nlp
+    # WeatherGPT v2 (weathergpt/ package) answers first; it returns None for the questions the original
+    # pipeline below already owns (grid-cell archive, 2014 grid, long-window model rankings).
+    # Existing API clients without a session retain a configured legacy NLP
+    # adapter/parser. The updated taskbar chat sends a session ID, opting into
+    # v2's follow-up context without changing the old API contract. Set
+    # WEATHERGPT_V2=0 to switch the add-on off entirely.
+    import os
+    legacy_nlp_configured = not q.session_id and (nlp.configured() or nlp.query_parser_configured())
+    if os.getenv('WEATHERGPT_V2', '1') != '0' and not legacy_nlp_configured:
+        try:
+            from weathergpt.engine import answer as weathergpt_answer
+            result = weathergpt_answer(q.question, q.model_dump(), q.session_id)
+            if result is not None:
+                return result
+        except Exception:
+            log.exception('WeatherGPT v2 failed; falling back to the original WeatherGPT')
     parsed_query = None
     resolved_location = None
     latitude, longitude, state, lead = q.latitude, q.longitude, q.state, q.lead

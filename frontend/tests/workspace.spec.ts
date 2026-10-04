@@ -28,8 +28,8 @@ test('map panels, time context, navigation, scenarios and evidence',async({page}
  await expect(page.getByRole('heading',{name:/SIMULATED SCENARIO/})).toBeVisible();
  await page.getByLabel('Close dialog').click();
  await page.locator('.taskbar').getByRole('button',{name:'WeatherGPT',exact:true}).click();
- await page.getByRole('button',{name:'Explain forecast uncertainty',exact:true}).click();
- await expect(page.locator('.chat-answer').last()).toContainText(/interval|uncertainty/i);
+ await page.getByRole('button',{name:'How accurate is HYDRA in Kerala?',exact:true}).click();
+ await expect(page.locator('.chat-answer').last()).toContainText(/MAE|accuracy/i);
  await page.getByLabel('Close dialog').click();
  await page.keyboard.press('Control+k');
  await page.getByLabel('Command search').fill('Kochi');

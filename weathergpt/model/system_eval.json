@@ -1,0 +1,36 @@
+{
+ "acceptance.tsv": {
+  "set": "acceptance.tsv",
+  "size": 140,
+  "model_only_accuracy": 0.9857,
+  "system_accuracy": 0.9857,
+  "misses": [
+   {
+    "text": "cumulative season rainfall for Punjab",
+    "gold": "observed",
+    "system": "anomaly",
+    "model": "observed"
+   },
+   {
+    "text": "probability of very heavy rain in Mumbai tomorrow",
+    "gold": "extremes",
+    "system": "forecast",
+    "model": "extremes"
+   }
+  ]
+ },
+ "blind.tsv": {
+  "set": "blind.tsv",
+  "size": 86,
+  "model_only_accuracy": 0.9419,
+  "system_accuracy": 0.9884,
+  "misses": [
+   {
+    "text": "kal Kolkata mein baarish ki sambhavna hai kya",
+    "gold": "forecast",
+    "system": "extremes",
+    "model": "extremes"
+   }
+  ]
+ }
+}

@@ -101,6 +101,14 @@ The intent/slot artifact is stored at `weather_query_parser/training/models/weat
 
 Set `HYDRA_NLP_API_URL` and, when needed, `HYDRA_NLP_API_KEY` only to attach an additional external response adapter through `backend/nlp.py`. It receives structured HYDRA context and must preserve units, valid times, and source limits. API credentials stay server-side.
 
+### WeatherGPT v2 add-on
+
+The included `weathergpt/` package adds a trained 24-intent classifier, deterministic slot extraction, data-source routing, formatted answers, and per-tab follow-up context. It handles broad state, city, date, historical, live-weather, forecast, model-accuracy, and uncertainty questions. The taskbar chat sends a session ID and renders suggested follow-up questions.
+
+WeatherGPT v2 is enabled by default for the taskbar chat, which sends a session ID. Existing API clients without a session ID retain a configured external parser/adapter, so their current behavior remains unchanged. V2 returns `None` for grid-cell archive questions, literal coordinate questions, 2014 rainfall-grid questions, unsupported external-model questions, and one-year model-ranking questions, allowing the original implementation to answer those unchanged. Set `WEATHERGPT_V2=0` to disable the add-on without removing it. Model status, evaluation metadata, and published data coverage are available at `GET /api/weathergpt-v2/status`.
+
+See [WeatherGPT v2 documentation](docs/WEATHERGPT_V2.md) for its supported intents, source priority, test sets, and retraining command.
+
 ## Connect the deterministic WeatherGPT query parser
 
 `weather_query_parser/` is a separate FastAPI service that combines the trained intent/slot artifact with deterministic parsing for dates, locations, and evidence boundaries. The deterministic layer remains the fallback when a request is outside the learned model's supported coverage.
