@@ -550,3 +550,29 @@ def test_verification_scope():
     assert data['rows']
     assert 'aggregate benchmark' in data['scope']
     assert any(r['model']=='gating_adaptive' for r in data['rows'])
+
+
+def test_rolling_rainfall_reports_interval_contract():
+    from backend import data as D
+    payload = D.hydra_rolling_rainfall_replay('Maharashtra')
+    assert payload['status'] == 'available'
+    interval = payload['interval']
+    assert interval['label']
+    if interval.get('legacy'):
+        assert interval['nominal'] is None and '90%' in interval['label']
+    else:
+        assert interval['nominal'] == 0.8 and payload['model_version'].startswith('hydra-rain-v3')
+
+
+def test_daily_mean_blend_flags_legacy_p90_interval():
+    from backend import data as D
+    outlook = D.daily_mean_hydra_state_outlook('Maharashtra')
+    forecast = outlook['outlooks'][0]['forecast']['tp_mm']
+    if 'interval80_margin' not in (forecast.get('backtest_error') or {}):
+        assert 'p90' in forecast['interval_note']
+
+
+def test_rainfall_validation_endpoint_shape():
+    from backend import data as D
+    result = D.hydra_rainfall_validation()
+    assert result['status'] in {'available', 'dry_run', 'integration_pending'}

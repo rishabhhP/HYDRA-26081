@@ -162,23 +162,30 @@ npm.cmd run build --prefix frontend
 
 Browser tests (with API running on port 8000): `npm.cmd test --prefix frontend`. First install its browser with `node frontend/node_modules/@playwright/test/cli.js install chromium`.
 
-## Rainfall replay assessment and next model work
+## HYDRA rainfall v3
 
-The six-month Overview chart is a historical HYDRA replay, not an operational accuracy claim. It compares the +24-hour neural-gated rainfall forecast with the held-back ERA5 state-average rainfall for each day from 2025-07-01 to 2025-12-31.
+`hydra_rain/` replaces the state-average rainfall replay model. Baseline scores of the published v2 replay, computed with the v3 metric code, are in `reports/rainfall_replay_baseline_v2.json` (Maharashtra: MAE 3.36 mm/day, RMSE 5.17, MAE 15% worse than persistence, state-mean >= 20 mm recall 15%, "80%" band coverage 90.8%, expert weight std 0.0006).
 
-For the default Maharashtra replay, HYDRA follows the broad wet-to-dry seasonal pattern but does not yet predict intense rainfall accurately enough for warning decisions: MAE is **3.36 mm/day**, RMSE is **5.17 mm/day**, and the largest observed daily mean (**40.45 mm/day** on 2025-08-18) was predicted as **18.10 mm/day**. These values measure a state-average historical replay; they do not describe accuracy for every state, district, or event.
+What changed:
 
-Current limitations and planned changes:
+- **Grid-cell first.** Training and prediction run on every 0.25 degree ERA5 cell; results are aggregated to states at the end, together with the wettest cell, the expected area above 20 / 64.5 mm/day and the highest cell heavy-rain probability.
+- **Atmospheric predictors.** Temperature, dew point and depression, humidity, CAPE, pressure and its tendency/anomaly, wind components, cloud, radiation, boundary-layer height, plus total-column water vapour and gusts when the archives include them. Neighbourhood (+-0.5 and +-1 degree) rain, CAPE and moisture summaries.
+- **Nine experts.** Climatology, persistence, recent-three-day and anomaly persistence as baselines, plus ERA5 gradient boosting, a wet/dry hurdle model, a spatial-neighbourhood model, a monsoon specialist and an 85th-percentile model. The gate learns from out-of-fold expert predictions.
+- **Multi-head gate.** Expert weights, P(rain >= 1 mm), P(>= 20), P(>= 64.5), P(>= state wet-day p95), amount if wet, and lower/upper interval heads. Squared error is weighted up on heavy-rain days. No zero-initialised static anchor, lower weight decay, longer training, and weight-dynamics reporting.
+- **Correct 80% intervals.** Stratified split-conformal CQR at alpha = 0.20 (state x season x lead x regime with hierarchical fallback), fitted on a pre-replay slice the experts and gate never trained on. The daily-mean state forecast script now uses a conformal 80% half-width too; its already-published cycle is flagged in the UI until retrained.
+- **Rolling-origin validation** across years, seasons, states, leads, regimes and intensities with MAE, RMSE, bias, rain/no-rain skill, heavy-rain precision/recall, peak error, interval coverage and width, and skill against persistence and climatology.
 
-- The current experts derive mainly from prior rainfall. They cannot reliably anticipate a new convective system before local rainfall begins.
-- State aggregation smooths local extremes. The next training cycle should predict on the 0.25-degree grid first, then aggregate state results for display.
-- Add ERA5 atmospheric predictors to the gate and experts: temperature, dew point, humidity, CAPE, pressure, wind components, cloud cover, radiation, and moisture indicators.
-- Retain climatology and persistence as baselines, then add trained meteorological, spatial-neighbourhood, wet/dry occurrence, rainfall-amount, and monsoon-regime experts. HYDRA's neural gate should allocate among those experts using the atmospheric state.
-- Train a separate rain-occurrence and heavy-rain head, and weight high-rainfall errors appropriately. This addresses the current underprediction of peaks.
-- Use rolling-origin evaluation across years, seasons, states, and rainfall regimes. Report MAE, RMSE, bias, rain occurrence skill, heavy-rain precision/recall, peak error, interval coverage, and interval width.
-- The displayed interval is conservative: the implementation currently uses a 90th-percentile calibration residual but labels it as 80%. Replace it with a correctly calibrated central 80% conformal interval, stratified by state, season, lead, and rainfall regime.
+Run (put one or more years of ERA5 daily-mean archives anywhere under the source folder):
 
-The present HYDRA replay is useful for testing the end-to-end neural-gating workflow and comparing experts. It should not be presented as a high-accuracy heavy-rainfall warning model until these changes are trained and independently validated.
+```powershell
+.\.venv\Scripts\python.exe scripts/build_hydra_rolling_rainfall_replay.py --source-dir data/raw/era5_daily
+.\.venv\Scripts\python.exe scripts/validate_hydra_rainfall.py --source-dir data/raw/era5_daily
+.\.venv\Scripts\python.exe scripts/evaluate_rainfall_replay.py   # scores whatever replay is published
+```
+
+`--synthetic-dry-run` on the first two scripts checks the pipeline on made-up weather and writes `*.dry_run.*` files only; those numbers mean nothing. Rolling validation retrains once per origin, so a multi-year run takes a while on CPU.
+
+Status: the v3 code has been exercised end to end on synthetic data, but it has not yet been trained or validated on real ERA5. Treat the replay as a heavy-rain warning model only after the rolling validation supports it.
 
 ## Docker
 

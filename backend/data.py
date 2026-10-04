@@ -22,6 +22,13 @@ RUNTIME = ROOT / 'runtime'
 ERA5_IMPORT_PREFLIGHT = ROOT / 'data' / 'processed' / 'hydra_era5_2025_import_preflight.json'
 HYDRA_DAILY_MEAN_BLEND = RUNTIME / 'hydra_daily_mean_state_blend.json'
 HYDRA_ROLLING_RAINFALL_REPLAY = RUNTIME / 'hydra_rolling_rainfall_replay.json'
+HYDRA_RAINFALL_VALIDATION = RUNTIME / 'hydra_rainfall_validation.json'
+LEGACY_INTERVAL = {
+    'nominal': None, 'label': 'Legacy p90 residual band (about 90% coverage, not 80%)',
+    'method': 'v2 replay: 90th percentile of absolute calibration residuals. Wider than a central 80% '
+              'interval; rebuild with scripts/build_hydra_rolling_rainfall_replay.py for a conformal 80% interval.',
+    'legacy': True,
+}
 INDIA_STATES = ROOT / 'frontend' / 'public' / 'india-states.geojson'
 MAP_CITIES = (
     ('Srinagar', 34.0837, 74.7973), ('Shimla', 31.1048, 77.1734),
@@ -92,6 +99,12 @@ def daily_mean_hydra_state_outlook(name):
         outlooks = state.get('outlooks')
         if not isinstance(outlooks, list) or {item.get('lead_hours') for item in outlooks} != {24, 48}:
             return None
+        for outlook in outlooks:
+            for forecast in (outlook.get('forecast') or {}).values():
+                error = forecast.get('backtest_error') or {}
+                if forecast.get('interval80') and 'interval80_margin' not in error:
+                    forecast['interval_note'] = ('Published before the conformal fix: this band uses the p90 absolute '
+                                                 'residual and covers about 90%, not 80%. Retrain to correct it.')
         return {
             'status': 'available', 'state': name, 'outlooks': outlooks,
             'source': 'HYDRA daily-mean neural-gating adaptive blend',
@@ -123,18 +136,41 @@ def hydra_rolling_rainfall_replay(name, start=None, end=None):
         if not records:
             return {'status': 'unavailable', 'state': name, 'rows': [],
                     'message': 'The requested dates are outside the published HYDRA rainfall replay.'}
+        metrics = payload.get('metrics') or {}
+        dynamics = payload.get('gate_dynamics') or {}
         return {
             'status': 'available', 'state': name, 'rows': records,
+            'model_version': payload.get('model_version', 'hydra-rain-v2-legacy'),
             'target': payload.get('target'), 'unit': payload.get('unit'),
             'lead_hours': payload.get('lead_hours'), 'history_days': payload.get('history_days'),
             'training_cutoff': payload.get('training_cutoff'),
             'calibration': payload.get('calibration'), 'coverage': payload.get('coverage'),
+            'interval': payload.get('interval') or LEGACY_INTERVAL,
+            'heavy_thresholds_mm': payload.get('heavy_thresholds_mm'),
+            'state_p95_mm': (payload.get('state_p95_mm') or {}).get(name),
+            'experts': payload.get('experts'),
+            'metrics': {'state_scale': (metrics.get('state_scale') or {}).get(name),
+                        'cell_scale': (metrics.get('cell_scale') or {}).get(name)} if metrics else None,
+            'gate_dynamics': (dynamics.get('states') or {}).get(name),
             'message': payload.get('message'),
             'grid_cell_count': payload.get('grid_cell_count', {}).get(name),
             'nearest_grid_fallback': bool(payload.get('nearest_grid_fallback', {}).get(name)),
         }
     except (OSError, ValueError, TypeError):
         return pending('The HYDRA rolling rainfall replay could not be read.')
+
+
+def hydra_rainfall_validation():
+    """Published rolling-origin validation summary (multi-year, all seasons, states and intensities)."""
+    if not HYDRA_RAINFALL_VALIDATION.exists():
+        return pending('Rolling-origin validation has not been run yet. Run scripts/validate_hydra_rainfall.py '
+                       'after staging ERA5 daily means for one or more years.')
+    try:
+        payload = json.loads(HYDRA_RAINFALL_VALIDATION.read_text(encoding='utf-8'))
+        return {key: payload.get(key) for key in ('status', 'model_version', 'design', 'coverage', 'folds',
+                                                   'state_scale', 'cell_scale', 'gate_dynamics')}
+    except (OSError, ValueError, TypeError):
+        return pending('The HYDRA rainfall validation summary could not be read.')
 
 
 def era5_import_preflight():

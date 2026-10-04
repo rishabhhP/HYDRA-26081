@@ -31,6 +31,7 @@ from backend import data as D
 from nwpblend import config as C
 from nwpblend.features import CONTEXT_COLS
 from nwpblend.models.gating import GatingBlender
+from hydra_rain.calibration import symmetric_margin
 
 
 SOURCE_DIR = ROOT / "data" / "raw" / "era5_2025_full_source"
@@ -191,7 +192,11 @@ def _frames(series: dict[str, dict[str, np.ndarray]], days: list[date], target: 
 
 def _error(actual: np.ndarray, prediction: np.ndarray) -> dict:
     residual = actual - prediction
+    # ``interval80_margin`` is the split-conformal half-width for a central 80% interval (alpha = 0.20).
+    # The p90 absolute residual is kept for reference only: used as a half-width it gives ~90% coverage.
     return {"mae": round(float(np.mean(np.abs(residual))), 4), "rmse": round(float(np.sqrt(np.mean(residual ** 2))), 4),
+            "bias": round(float(np.mean(prediction - actual)), 4),
+            "interval80_margin": round(symmetric_margin(residual, 0.20), 4),
             "abs_error_p90": round(float(np.quantile(np.abs(residual), .90)), 4), "samples": int(len(actual))}
 
 
@@ -261,7 +266,7 @@ def train(source: Path, output: Path, artifacts: Path) -> dict:
                 value, weights = models[target].predict(frame, return_weights=True)
                 expert_values = [float(frame.iloc[0][f"exp_{expert}"]) for expert in EXPERTS]
                 error = metrics[target][str(lead)]["states"].get(state, metrics[target][str(lead)]["global"])
-                margin = error["abs_error_p90"]
+                margin = error["interval80_margin"]
                 lower = float(value[0] - margin)
                 if target == "tp_mm":
                     lower = max(0.0, lower)
@@ -278,7 +283,7 @@ def train(source: Path, output: Path, artifacts: Path) -> dict:
     payload = {
         "status": "available", "kind": "hydra_daily_mean_neural_gating", "issue_date": str(days[-1]),
         "source_archives": {str(month): path.name for month, path in archives.items()}, "states": states,
-        "message": "HYDRA daily-mean adaptive blend retrained on supplied 2025 ERA5 state series. Neural gating learns a convex allocation across climatology, persistence, recent-three-day, and anomaly-persistence experts. Disagreement is expert spread; the 80% band uses held-out rolling backtest residuals.",
+        "message": "HYDRA daily-mean adaptive blend retrained on supplied 2025 ERA5 state series. Neural gating learns a convex allocation across climatology, persistence, recent-three-day, and anomaly-persistence experts. Disagreement is expert spread; the central 80% band is a split-conformal half-width (alpha = 0.20) from held-out chronological backtest residuals.",
         "training_metrics": metrics,
     }
     output.parent.mkdir(parents=True, exist_ok=True)

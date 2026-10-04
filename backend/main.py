@@ -94,6 +94,7 @@ def weight_distribution_answer(context: dict, requested_location: str | None = N
         interval = forecast.get('interval80')
         uncertainty = (
             f"; expert spread {forecast['spread']:.2f} {forecast['unit']}; saved 80% interval {interval[0]:.2f}-{interval[1]:.2f} {forecast['unit']}"
+            + (f" ({forecast['interval_note']})" if forecast.get('interval_note') else "")
             if forecast.get('spread') is not None and interval and None not in interval else ""
         )
         sections.append(
@@ -175,6 +176,12 @@ def hydra_rolling_rainfall(state: str=Query(min_length=2, max_length=100), start
     if start and end and start > end:
         raise HTTPException(422, 'start must be on or before end')
     return D.hydra_rolling_rainfall_replay(feature['properties']['name'], start, end)
+
+
+@app.get('/api/hydra-rainfall-validation')
+def hydra_rainfall_validation():
+    """Rolling-origin validation of the HYDRA v3 rainfall model."""
+    return D.hydra_rainfall_validation()
 
 
 @app.get('/api/radar-frames')
@@ -516,7 +523,7 @@ def explain(q: Question):
             # state as a filter.
             ranking = (
                 live_weather.rank_state_layer_for_day(layer, past_date)
-                if state_ranking and past_date == date.today() - timedelta(days=1) and time_range.get('text') == 'yesterday'
+                if state_ranking and past_date is not None and time_range.get('text') == 'yesterday'
                 else live_weather.rank_state_layer_for_window(layer, window_start, window_end)
                 if state_ranking and window_start and window_end
                 else live_weather.rank_state_layer(layer)

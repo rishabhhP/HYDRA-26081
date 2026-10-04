@@ -1,7 +1,7 @@
 ﻿export type Source = 'archive'|'ecmwf'|'production';
 export type Variable = 'tp_mm'|'t2m_C_mean'|'wind_speed_mean';
 export type Point = {latitude:number;longitude:number;name?:string;state?:string};
-export type ForecastValue = {value:number;minimum?:number;maximum?:number;unit:string;spread:number|null;interval80:[number,number]|null;experts:{name:string;weight:number;value:number}[];backtest_error?:{mae:number;rmse:number;abs_error_p90:number;samples:number};lgbm?:number;static?:number};
+export type ForecastValue = {value:number;minimum?:number;maximum?:number;unit:string;spread:number|null;interval80:[number,number]|null;experts:{name:string;weight:number;value:number}[];backtest_error?:{mae:number;rmse:number;abs_error_p90:number;interval80_margin?:number;bias?:number;samples:number};interval_note?:string;lgbm?:number;static?:number};
 export type Context = {status:string;scope?:'state';state?:string;source:Source;requested:Point;location?:Point;lead_hours:number;grid_cell_count?:number;forecast:Partial<Record<Variable,ForecastValue>>;events:{id:string;name:string;probability:number|null;threshold:string;valid_date:string}[];message:string;valid_date?:string;issue_date?:string;regime?:string|null;provenance?:Record<string,unknown>;risk:{message:string};conditions?:Record<string,number>;observations?:Record<string,string|number|null>};
 export type Layer = {id:string;name:string;group:string;available:boolean};
 export type StateObservation={date:string;daily_actual_mm:number|null;daily_normal_mm:number|null;daily_category:string};

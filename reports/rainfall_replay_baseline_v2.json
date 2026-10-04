@@ -1,0 +1,5537 @@
+{
+ "model_version": "hydra-rain-v2-legacy",
+ "note": "State-average replay; thresholds 10 and 20 mm/day apply to state means, not to cells.",
+ "pooled": {
+  "continuous": {
+   "mae": 3.9225,
+   "rmse": 7.1032,
+   "bias": 0.5559,
+   "samples": 6624
+  },
+  "occurrence": {
+   "events": 3839,
+   "forecast_events": 5147,
+   "samples": 6624,
+   "hits": 3795,
+   "misses": 44,
+   "false_alarms": 1352,
+   "accuracy": 0.7893,
+   "recall": 0.9885,
+   "precision": 0.7373,
+   "csi": 0.7311,
+   "trustworthy": true,
+   "threshold_mm": 1.0,
+   "decision": "forecast >= 1.0 mm"
+  },
+  "heavy": {
+   "10": {
+    "events": 1406,
+    "forecast_events": 1580,
+    "samples": 6624,
+    "hits": 970,
+    "misses": 436,
+    "false_alarms": 610,
+    "accuracy": 0.8421,
+    "recall": 0.6899,
+    "precision": 0.6139,
+    "csi": 0.4812,
+    "trustworthy": true,
+    "threshold_mm": 10.0,
+    "decision": "forecast >= 10.0 mm"
+   },
+   "20": {
+    "events": 483,
+    "forecast_events": 304,
+    "samples": 6624,
+    "hits": 161,
+    "misses": 322,
+    "false_alarms": 143,
+    "accuracy": 0.9298,
+    "recall": 0.3333,
+    "precision": 0.5296,
+    "csi": 0.2572,
+    "trustworthy": true,
+    "threshold_mm": 20.0,
+    "decision": "forecast >= 20.0 mm"
+   }
+  },
+  "peaks": {
+   "max_observed": 161.871,
+   "predicted_at_max": 9.201,
+   "error_at_max": -152.67,
+   "ratio_at_max": 0.057,
+   "top5_mean_error": -80.957,
+   "top5_mean_ratio": 0.255,
+   "date_of_max": "2025-09-28"
+  },
+  "by_intensity": {
+   "dry_lt1": {
+    "mae": 1.5626,
+    "rmse": 2.5231,
+    "bias": 1.5523,
+    "samples": 2785
+   },
+   "light_1_10": {
+    "mae": 4.0078,
+    "rmse": 6.1449,
+    "bias": 3.1464,
+    "samples": 2433
+   },
+   "moderate_10_20": {
+    "mae": 4.9294,
+    "rmse": 6.3056,
+    "bias": -1.8816,
+    "samples": 923
+   },
+   "rather_heavy_20_64_5": {
+    "mae": 14.1782,
+    "rmse": 17.0438,
+    "bias": -12.5382,
+    "samples": 470
+   },
+   "heavy_ge64_5": {
+    "mae": 51.2513,
+    "rmse": 62.8715,
+    "bias": -51.2513,
+    "samples": 13
+   }
+  },
+  "interval": {
+   "nominal": 0.8,
+   "coverage": 0.8915,
+   "mean_width": 15.722,
+   "below": 0.0454,
+   "above": 0.0631,
+   "samples": 6624
+  },
+  "skill": {
+   "persistence": {
+    "reference_mae": 3.7003,
+    "reference_rmse": 7.9635,
+    "mae_skill": -0.06,
+    "rmse_skill": 0.108
+   },
+   "climatology": {
+    "reference_mae": 5.0657,
+    "reference_rmse": 8.1632,
+    "mae_skill": 0.2257,
+    "rmse_skill": 0.1299
+   }
+  }
+ },
+ "by_season": {
+  "monsoon": {
+   "continuous": {
+    "mae": 5.5623,
+    "rmse": 8.7625,
+    "bias": 0.3307,
+    "samples": 3312
+   },
+   "occurrence": {
+    "events": 2916,
+    "forecast_events": 3262,
+    "samples": 3312,
+    "hits": 2902,
+    "misses": 14,
+    "false_alarms": 360,
+    "accuracy": 0.8871,
+    "recall": 0.9952,
+    "precision": 0.8896,
+    "csi": 0.8858,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 1206,
+     "forecast_events": 1383,
+     "samples": 3312,
+     "hits": 876,
+     "misses": 330,
+     "false_alarms": 507,
+     "accuracy": 0.7473,
+     "recall": 0.7264,
+     "precision": 0.6334,
+     "csi": 0.5114,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 424,
+     "forecast_events": 274,
+     "samples": 3312,
+     "hits": 156,
+     "misses": 268,
+     "false_alarms": 118,
+     "accuracy": 0.8835,
+     "recall": 0.3679,
+     "precision": 0.5693,
+     "csi": 0.2878,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 161.871,
+    "predicted_at_max": 9.201,
+    "error_at_max": -152.67,
+    "ratio_at_max": 0.057,
+    "top5_mean_error": -66.489,
+    "top5_mean_ratio": 0.345,
+    "date_of_max": "2025-09-28"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 3.6274,
+     "rmse": 4.4316,
+     "bias": 3.6262,
+     "samples": 396
+    },
+    "light_1_10": {
+     "mae": 4.2496,
+     "rmse": 6.3142,
+     "bias": 3.52,
+     "samples": 1710
+    },
+    "moderate_10_20": {
+     "mae": 4.7201,
+     "rmse": 6.1166,
+     "bias": -1.4101,
+     "samples": 782
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 13.3049,
+     "rmse": 16.0868,
+     "bias": -11.4385,
+     "samples": 413
+    },
+    "heavy_ge64_5": {
+     "mae": 48.4681,
+     "rmse": 61.9485,
+     "bias": -48.4681,
+     "samples": 11
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.8448,
+    "mean_width": 18.439,
+    "below": 0.0601,
+    "above": 0.0951,
+    "samples": 3312
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 5.6693,
+     "reference_rmse": 9.859,
+     "mae_skill": 0.0189,
+     "rmse_skill": 0.1112
+    },
+    "climatology": {
+     "reference_mae": 6.9778,
+     "reference_rmse": 10.0595,
+     "mae_skill": 0.2029,
+     "rmse_skill": 0.1289
+    }
+   }
+  },
+  "post_monsoon": {
+   "continuous": {
+    "mae": 2.2826,
+    "rmse": 4.9121,
+    "bias": 0.7812,
+    "samples": 3312
+   },
+   "occurrence": {
+    "events": 923,
+    "forecast_events": 1885,
+    "samples": 3312,
+    "hits": 893,
+    "misses": 30,
+    "false_alarms": 992,
+    "accuracy": 0.6914,
+    "recall": 0.9675,
+    "precision": 0.4737,
+    "csi": 0.4663,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 200,
+     "forecast_events": 197,
+     "samples": 3312,
+     "hits": 94,
+     "misses": 106,
+     "false_alarms": 103,
+     "accuracy": 0.9369,
+     "recall": 0.47,
+     "precision": 0.4772,
+     "csi": 0.3102,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 59,
+     "forecast_events": 30,
+     "samples": 3312,
+     "hits": 5,
+     "misses": 54,
+     "false_alarms": 25,
+     "accuracy": 0.9761,
+     "recall": 0.0847,
+     "precision": 0.1667,
+     "csi": 0.0595,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 110.124,
+    "predicted_at_max": 31.061,
+    "error_at_max": -79.063,
+    "ratio_at_max": 0.282,
+    "top5_mean_error": -44.749,
+    "top5_mean_ratio": 0.357,
+    "date_of_max": "2025-11-29"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.2203,
+     "rmse": 2.041,
+     "bias": 1.2086,
+     "samples": 2389
+    },
+    "light_1_10": {
+     "mae": 3.436,
+     "rmse": 5.7246,
+     "bias": 2.2628,
+     "samples": 723
+    },
+    "moderate_10_20": {
+     "mae": 6.0898,
+     "rmse": 7.2648,
+     "bias": -4.4963,
+     "samples": 141
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 20.5059,
+     "rmse": 22.8087,
+     "bias": -20.5059,
+     "samples": 57
+    },
+    "heavy_ge64_5": {
+     "mae": 66.559,
+     "rmse": 67.7233,
+     "bias": -66.559,
+     "samples": 2
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9381,
+    "mean_width": 13.005,
+    "below": 0.0308,
+    "above": 0.0311,
+    "samples": 3312
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 1.7313,
+     "reference_rmse": 5.4436,
+     "mae_skill": -0.3184,
+     "rmse_skill": 0.0976
+    },
+    "climatology": {
+     "reference_mae": 3.1536,
+     "reference_rmse": 5.6639,
+     "mae_skill": 0.2762,
+     "rmse_skill": 0.1327
+    }
+   }
+  }
+ },
+ "states": {
+  "Andaman and Nicobar Islands": {
+   "continuous": {
+    "mae": 4.838,
+    "rmse": 6.9524,
+    "bias": 0.4375,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 152,
+    "forecast_events": 181,
+    "samples": 184,
+    "hits": 151,
+    "misses": 1,
+    "false_alarms": 30,
+    "accuracy": 0.8315,
+    "recall": 0.9934,
+    "precision": 0.8343,
+    "csi": 0.8297,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 55,
+     "forecast_events": 59,
+     "samples": 184,
+     "hits": 36,
+     "misses": 19,
+     "false_alarms": 23,
+     "accuracy": 0.7717,
+     "recall": 0.6545,
+     "precision": 0.6102,
+     "csi": 0.4615,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 15,
+     "forecast_events": 8,
+     "samples": 184,
+     "hits": 3,
+     "misses": 12,
+     "false_alarms": 5,
+     "accuracy": 0.9076,
+     "recall": 0.2,
+     "precision": 0.375,
+     "csi": 0.15,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 40.631,
+    "predicted_at_max": 15.239,
+    "error_at_max": -25.392,
+    "ratio_at_max": 0.375,
+    "top5_mean_error": -21.436,
+    "top5_mean_ratio": 0.413,
+    "date_of_max": "2025-09-29"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 2.5519,
+     "rmse": 3.0926,
+     "bias": 2.5519,
+     "samples": 32
+    },
+    "light_1_10": {
+     "mae": 4.0296,
+     "rmse": 5.5,
+     "bias": 3.287,
+     "samples": 97
+    },
+    "moderate_10_20": {
+     "mae": 4.8913,
+     "rmse": 6.135,
+     "bias": -2.604,
+     "samples": 40
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 14.8002,
+     "rmse": 16.6293,
+     "bias": -14.3898,
+     "samples": 15
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9076,
+    "mean_width": 18.893,
+    "below": 0.038,
+    "above": 0.0543,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 4.9825,
+     "reference_rmse": 7.8576,
+     "mae_skill": 0.029,
+     "rmse_skill": 0.1152
+    },
+    "climatology": {
+     "reference_mae": 5.8173,
+     "reference_rmse": 7.7392,
+     "mae_skill": 0.1683,
+     "rmse_skill": 0.1017
+    }
+   }
+  },
+  "Andhra Pradesh": {
+   "continuous": {
+    "mae": 3.247,
+    "rmse": 5.104,
+    "bias": 0.2298,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 112,
+    "forecast_events": 158,
+    "samples": 184,
+    "hits": 112,
+    "misses": 0,
+    "false_alarms": 46,
+    "accuracy": 0.75,
+    "recall": 1.0,
+    "precision": 0.7089,
+    "csi": 0.7089,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 21,
+     "forecast_events": 12,
+     "samples": 184,
+     "hits": 5,
+     "misses": 16,
+     "false_alarms": 7,
+     "accuracy": 0.875,
+     "recall": 0.2381,
+     "precision": 0.4167,
+     "csi": 0.1786,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 7,
+     "forecast_events": 1,
+     "samples": 184,
+     "hits": 0,
+     "misses": 7,
+     "false_alarms": 1,
+     "accuracy": 0.9565,
+     "recall": 0.0,
+     "precision": 0.0,
+     "csi": 0.0,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 37.846,
+    "predicted_at_max": 12.151,
+    "error_at_max": -25.695,
+    "ratio_at_max": 0.321,
+    "top5_mean_error": -15.581,
+    "top5_mean_ratio": 0.422,
+    "date_of_max": "2025-10-28"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 2.0272,
+     "rmse": 2.5332,
+     "bias": 2.0272,
+     "samples": 72
+    },
+    "light_1_10": {
+     "mae": 2.6865,
+     "rmse": 3.9869,
+     "bias": 1.1065,
+     "samples": 91
+    },
+    "moderate_10_20": {
+     "mae": 7.7214,
+     "rmse": 8.8772,
+     "bias": -7.5326,
+     "samples": 14
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 14.1307,
+     "rmse": 15.9538,
+     "bias": -14.1307,
+     "samples": 7
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.7717,
+    "mean_width": 6.91,
+    "below": 0.1196,
+    "above": 0.1087,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.0423,
+     "reference_rmse": 5.706,
+     "mae_skill": -0.0673,
+     "rmse_skill": 0.1055
+    },
+    "climatology": {
+     "reference_mae": 4.1006,
+     "reference_rmse": 5.7618,
+     "mae_skill": 0.2082,
+     "rmse_skill": 0.1142
+    }
+   }
+  },
+  "Arunachal Pradesh": {
+   "continuous": {
+    "mae": 3.7376,
+    "rmse": 5.5806,
+    "bias": 0.9339,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 131,
+    "forecast_events": 160,
+    "samples": 184,
+    "hits": 128,
+    "misses": 3,
+    "false_alarms": 32,
+    "accuracy": 0.8098,
+    "recall": 0.9771,
+    "precision": 0.8,
+    "csi": 0.7853,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 66,
+     "forecast_events": 84,
+     "samples": 184,
+     "hits": 62,
+     "misses": 4,
+     "false_alarms": 22,
+     "accuracy": 0.8587,
+     "recall": 0.9394,
+     "precision": 0.7381,
+     "csi": 0.7045,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 18,
+     "forecast_events": 14,
+     "samples": 184,
+     "hits": 7,
+     "misses": 11,
+     "false_alarms": 7,
+     "accuracy": 0.9022,
+     "recall": 0.3889,
+     "precision": 0.5,
+     "csi": 0.28,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 46.308,
+    "predicted_at_max": 23.128,
+    "error_at_max": -23.18,
+    "ratio_at_max": 0.499,
+    "top5_mean_error": -18.075,
+    "top5_mean_ratio": 0.492,
+    "date_of_max": "2025-08-29"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.6977,
+     "rmse": 2.2403,
+     "bias": 1.6638,
+     "samples": 53
+    },
+    "light_1_10": {
+     "mae": 4.0043,
+     "rmse": 5.2335,
+     "bias": 3.5144,
+     "samples": 65
+    },
+    "moderate_10_20": {
+     "mae": 3.1185,
+     "rmse": 4.6437,
+     "bias": 0.4135,
+     "samples": 48
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 10.4319,
+     "rmse": 12.1309,
+     "bias": -9.1458,
+     "samples": 18
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.962,
+    "mean_width": 22.318,
+    "below": 0.0109,
+    "above": 0.0272,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.5926,
+     "reference_rmse": 5.9561,
+     "mae_skill": -0.0404,
+     "rmse_skill": 0.063
+    },
+    "climatology": {
+     "reference_mae": 5.4079,
+     "reference_rmse": 7.1451,
+     "mae_skill": 0.3089,
+     "rmse_skill": 0.219
+    }
+   }
+  },
+  "Assam": {
+   "continuous": {
+    "mae": 3.9185,
+    "rmse": 6.2949,
+    "bias": 0.753,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 111,
+    "forecast_events": 157,
+    "samples": 184,
+    "hits": 111,
+    "misses": 0,
+    "false_alarms": 46,
+    "accuracy": 0.75,
+    "recall": 1.0,
+    "precision": 0.707,
+    "csi": 0.707,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 56,
+     "forecast_events": 68,
+     "samples": 184,
+     "hits": 42,
+     "misses": 14,
+     "false_alarms": 26,
+     "accuracy": 0.7826,
+     "recall": 0.75,
+     "precision": 0.6176,
+     "csi": 0.5122,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 15,
+     "forecast_events": 5,
+     "samples": 184,
+     "hits": 2,
+     "misses": 13,
+     "false_alarms": 3,
+     "accuracy": 0.913,
+     "recall": 0.1333,
+     "precision": 0.4,
+     "csi": 0.1111,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 49.61,
+    "predicted_at_max": 11.08,
+    "error_at_max": -38.53,
+    "ratio_at_max": 0.223,
+    "top5_mean_error": -23.37,
+    "top5_mean_ratio": 0.352,
+    "date_of_max": "2025-08-02"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.4708,
+     "rmse": 2.1303,
+     "bias": 1.4461,
+     "samples": 73
+    },
+    "light_1_10": {
+     "mae": 4.5972,
+     "rmse": 5.7876,
+     "bias": 4.0384,
+     "samples": 55
+    },
+    "moderate_10_20": {
+     "mae": 4.0016,
+     "rmse": 5.1863,
+     "bias": -0.5816,
+     "samples": 41
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 13.1156,
+     "rmse": 16.3601,
+     "bias": -11.0184,
+     "samples": 15
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9293,
+    "mean_width": 16.193,
+    "below": 0.038,
+    "above": 0.0326,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.8418,
+     "reference_rmse": 7.1694,
+     "mae_skill": -0.02,
+     "rmse_skill": 0.122
+    },
+    "climatology": {
+     "reference_mae": 4.5297,
+     "reference_rmse": 6.6972,
+     "mae_skill": 0.1349,
+     "rmse_skill": 0.0601
+    }
+   }
+  },
+  "Bihar": {
+   "continuous": {
+    "mae": 4.47,
+    "rmse": 7.6009,
+    "bias": 0.5156,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 101,
+    "forecast_events": 157,
+    "samples": 184,
+    "hits": 101,
+    "misses": 0,
+    "false_alarms": 56,
+    "accuracy": 0.6957,
+    "recall": 1.0,
+    "precision": 0.6433,
+    "csi": 0.6433,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 45,
+     "forecast_events": 50,
+     "samples": 184,
+     "hits": 30,
+     "misses": 15,
+     "false_alarms": 20,
+     "accuracy": 0.8098,
+     "recall": 0.6667,
+     "precision": 0.6,
+     "csi": 0.4615,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 15,
+     "forecast_events": 7,
+     "samples": 184,
+     "hits": 3,
+     "misses": 12,
+     "false_alarms": 4,
+     "accuracy": 0.913,
+     "recall": 0.2,
+     "precision": 0.4286,
+     "csi": 0.1579,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 58.325,
+    "predicted_at_max": 21.573,
+    "error_at_max": -36.752,
+    "ratio_at_max": 0.37,
+    "top5_mean_error": -23.916,
+    "top5_mean_ratio": 0.456,
+    "date_of_max": "2025-10-04"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 2.3406,
+     "rmse": 4.4131,
+     "bias": 2.3368,
+     "samples": 83
+    },
+    "light_1_10": {
+     "mae": 4.3277,
+     "rmse": 6.9003,
+     "bias": 3.7491,
+     "samples": 56
+    },
+    "moderate_10_20": {
+     "mae": 4.4437,
+     "rmse": 5.6479,
+     "bias": -1.8829,
+     "samples": 30
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 16.8358,
+     "rmse": 18.957,
+     "bias": -16.8358,
+     "samples": 15
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.788,
+    "mean_width": 9.98,
+    "below": 0.0924,
+    "above": 0.1196,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.9259,
+     "reference_rmse": 8.5026,
+     "mae_skill": -0.1386,
+     "rmse_skill": 0.106
+    },
+    "climatology": {
+     "reference_mae": 5.8661,
+     "reference_rmse": 8.8776,
+     "mae_skill": 0.238,
+     "rmse_skill": 0.1438
+    }
+   }
+  },
+  "Chandigarh": {
+   "continuous": {
+    "mae": 3.7588,
+    "rmse": 7.8712,
+    "bias": 0.3115,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 70,
+    "forecast_events": 102,
+    "samples": 184,
+    "hits": 69,
+    "misses": 1,
+    "false_alarms": 33,
+    "accuracy": 0.8152,
+    "recall": 0.9857,
+    "precision": 0.6765,
+    "csi": 0.6699,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 17,
+     "forecast_events": 16,
+     "samples": 184,
+     "hits": 6,
+     "misses": 11,
+     "false_alarms": 10,
+     "accuracy": 0.8859,
+     "recall": 0.3529,
+     "precision": 0.375,
+     "csi": 0.2222,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 7,
+     "forecast_events": 5,
+     "samples": 184,
+     "hits": 2,
+     "misses": 5,
+     "false_alarms": 3,
+     "accuracy": 0.9565,
+     "recall": 0.2857,
+     "precision": 0.4,
+     "csi": 0.2,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 72.793,
+    "predicted_at_max": 13.373,
+    "error_at_max": -59.42,
+    "ratio_at_max": 0.184,
+    "top5_mean_error": -27.002,
+    "top5_mean_ratio": 0.433,
+    "date_of_max": "2025-09-01"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.5346,
+     "rmse": 2.8673,
+     "bias": 1.5344,
+     "samples": 114
+    },
+    "light_1_10": {
+     "mae": 4.1466,
+     "rmse": 6.345,
+     "bias": 2.5215,
+     "samples": 53
+    },
+    "moderate_10_20": {
+     "mae": 10.3659,
+     "rmse": 11.4533,
+     "bias": -7.6349,
+     "samples": 10
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 22.3033,
+     "rmse": 24.105,
+     "bias": -19.2467,
+     "samples": 6
+    },
+    "heavy_ge64_5": {
+     "mae": 59.42,
+     "rmse": 59.42,
+     "bias": -59.42,
+     "samples": 1
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.913,
+    "mean_width": 13.961,
+    "below": 0.0326,
+    "above": 0.0543,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.8105,
+     "reference_rmse": 9.0153,
+     "mae_skill": 0.0136,
+     "rmse_skill": 0.1269
+    },
+    "climatology": {
+     "reference_mae": 4.204,
+     "reference_rmse": 8.553,
+     "mae_skill": 0.1059,
+     "rmse_skill": 0.0797
+    }
+   }
+  },
+  "Chhattisgarh": {
+   "continuous": {
+    "mae": 3.9288,
+    "rmse": 6.1117,
+    "bias": 0.6214,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 116,
+    "forecast_events": 136,
+    "samples": 184,
+    "hits": 116,
+    "misses": 0,
+    "false_alarms": 20,
+    "accuracy": 0.8913,
+    "recall": 1.0,
+    "precision": 0.8529,
+    "csi": 0.8529,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 52,
+     "forecast_events": 68,
+     "samples": 184,
+     "hits": 41,
+     "misses": 11,
+     "false_alarms": 27,
+     "accuracy": 0.7935,
+     "recall": 0.7885,
+     "precision": 0.6029,
+     "csi": 0.519,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 15,
+     "forecast_events": 8,
+     "samples": 184,
+     "hits": 4,
+     "misses": 11,
+     "false_alarms": 4,
+     "accuracy": 0.9185,
+     "recall": 0.2667,
+     "precision": 0.5,
+     "csi": 0.2105,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 41.667,
+    "predicted_at_max": 24.025,
+    "error_at_max": -17.642,
+    "ratio_at_max": 0.577,
+    "top5_mean_error": -21.375,
+    "top5_mean_ratio": 0.419,
+    "date_of_max": "2025-07-25"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 0.9607,
+     "rmse": 1.69,
+     "bias": 0.9607,
+     "samples": 68
+    },
+    "light_1_10": {
+     "mae": 4.7319,
+     "rmse": 6.0475,
+     "bias": 4.4795,
+     "samples": 64
+    },
+    "moderate_10_20": {
+     "mae": 4.2036,
+     "rmse": 5.1622,
+     "bias": -1.7663,
+     "samples": 37
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 13.2803,
+     "rmse": 14.9488,
+     "bias": -11.4883,
+     "samples": 15
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.8967,
+    "mean_width": 15.133,
+    "below": 0.0435,
+    "above": 0.0598,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.8953,
+     "reference_rmse": 6.6797,
+     "mae_skill": -0.0086,
+     "rmse_skill": 0.085
+    },
+    "climatology": {
+     "reference_mae": 4.8364,
+     "reference_rmse": 7.1227,
+     "mae_skill": 0.1877,
+     "rmse_skill": 0.1419
+    }
+   }
+  },
+  "Dadra and Nagar Haveli and Daman and Diu": {
+   "continuous": {
+    "mae": 6.1166,
+    "rmse": 15.692,
+    "bias": 0.7335,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 107,
+    "forecast_events": 156,
+    "samples": 184,
+    "hits": 107,
+    "misses": 0,
+    "false_alarms": 49,
+    "accuracy": 0.7337,
+    "recall": 1.0,
+    "precision": 0.6859,
+    "csi": 0.6859,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 38,
+     "forecast_events": 40,
+     "samples": 184,
+     "hits": 24,
+     "misses": 14,
+     "false_alarms": 16,
+     "accuracy": 0.837,
+     "recall": 0.6316,
+     "precision": 0.6,
+     "csi": 0.4444,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 18,
+     "forecast_events": 9,
+     "samples": 184,
+     "hits": 3,
+     "misses": 15,
+     "false_alarms": 6,
+     "accuracy": 0.8859,
+     "recall": 0.1667,
+     "precision": 0.3333,
+     "csi": 0.125,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 161.871,
+    "predicted_at_max": 9.201,
+    "error_at_max": -152.67,
+    "ratio_at_max": 0.057,
+    "top5_mean_error": -56.477,
+    "top5_mean_ratio": 0.216,
+    "date_of_max": "2025-09-28"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 2.2219,
+     "rmse": 3.2901,
+     "bias": 2.2211,
+     "samples": 77
+    },
+    "light_1_10": {
+     "mae": 6.4565,
+     "rmse": 13.5664,
+     "bias": 6.1281,
+     "samples": 69
+    },
+    "moderate_10_20": {
+     "mae": 3.2105,
+     "rmse": 4.7846,
+     "bias": -0.8365,
+     "samples": 20
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 17.1753,
+     "rmse": 21.7054,
+     "bias": -17.0286,
+     "samples": 17
+    },
+    "heavy_ge64_5": {
+     "mae": 152.67,
+     "rmse": 152.67,
+     "bias": -152.67,
+     "samples": 1
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.875,
+    "mean_width": 15.959,
+    "below": 0.0489,
+    "above": 0.0761,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 5.9325,
+     "reference_rmse": 18.667,
+     "mae_skill": -0.031,
+     "rmse_skill": 0.1594
+    },
+    "climatology": {
+     "reference_mae": 7.5049,
+     "reference_rmse": 14.855,
+     "mae_skill": 0.185,
+     "rmse_skill": -0.0563
+    }
+   }
+  },
+  "Delhi": {
+   "continuous": {
+    "mae": 4.4898,
+    "rmse": 8.3094,
+    "bias": 0.3104,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 67,
+    "forecast_events": 125,
+    "samples": 184,
+    "hits": 67,
+    "misses": 0,
+    "false_alarms": 58,
+    "accuracy": 0.6848,
+    "recall": 1.0,
+    "precision": 0.536,
+    "csi": 0.536,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 26,
+     "forecast_events": 23,
+     "samples": 184,
+     "hits": 10,
+     "misses": 16,
+     "false_alarms": 13,
+     "accuracy": 0.8424,
+     "recall": 0.3846,
+     "precision": 0.4348,
+     "csi": 0.2564,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 12,
+     "forecast_events": 6,
+     "samples": 184,
+     "hits": 2,
+     "misses": 10,
+     "false_alarms": 4,
+     "accuracy": 0.9239,
+     "recall": 0.1667,
+     "precision": 0.3333,
+     "csi": 0.125,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 49.006,
+    "predicted_at_max": 5.985,
+    "error_at_max": -43.021,
+    "ratio_at_max": 0.122,
+    "top5_mean_error": -30.013,
+    "top5_mean_ratio": 0.285,
+    "date_of_max": "2025-07-29"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.8337,
+     "rmse": 3.0972,
+     "bias": 1.8335,
+     "samples": 117
+    },
+    "light_1_10": {
+     "mae": 5.5493,
+     "rmse": 8.1891,
+     "bias": 4.4724,
+     "samples": 41
+    },
+    "moderate_10_20": {
+     "mae": 6.741,
+     "rmse": 7.5757,
+     "bias": -4.7426,
+     "samples": 14
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 24.1408,
+     "rmse": 25.867,
+     "bias": -22.8637,
+     "samples": 12
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.8641,
+    "mean_width": 13.112,
+    "below": 0.0598,
+    "above": 0.0761,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 4.6113,
+     "reference_rmse": 9.7843,
+     "mae_skill": 0.0263,
+     "rmse_skill": 0.1507
+    },
+    "climatology": {
+     "reference_mae": 4.9713,
+     "reference_rmse": 8.4112,
+     "mae_skill": 0.0969,
+     "rmse_skill": 0.0121
+    }
+   }
+  },
+  "Goa": {
+   "continuous": {
+    "mae": 6.4152,
+    "rmse": 10.1371,
+    "bias": 1.4223,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 119,
+    "forecast_events": 153,
+    "samples": 184,
+    "hits": 119,
+    "misses": 0,
+    "false_alarms": 34,
+    "accuracy": 0.8152,
+    "recall": 1.0,
+    "precision": 0.7778,
+    "csi": 0.7778,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 73,
+     "forecast_events": 99,
+     "samples": 184,
+     "hits": 67,
+     "misses": 6,
+     "false_alarms": 32,
+     "accuracy": 0.7935,
+     "recall": 0.9178,
+     "precision": 0.6768,
+     "csi": 0.6381,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 43,
+     "forecast_events": 49,
+     "samples": 184,
+     "hits": 33,
+     "misses": 10,
+     "false_alarms": 16,
+     "accuracy": 0.8587,
+     "recall": 0.7674,
+     "precision": 0.6735,
+     "csi": 0.5593,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 94.185,
+    "predicted_at_max": 42.278,
+    "error_at_max": -51.907,
+    "ratio_at_max": 0.449,
+    "top5_mean_error": -26.754,
+    "top5_mean_ratio": 0.65,
+    "date_of_max": "2025-07-24"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 2.2593,
+     "rmse": 3.7406,
+     "bias": 2.2593,
+     "samples": 65
+    },
+    "light_1_10": {
+     "mae": 7.2561,
+     "rmse": 9.8283,
+     "bias": 7.077,
+     "samples": 46
+    },
+    "moderate_10_20": {
+     "mae": 7.108,
+     "rmse": 8.5795,
+     "bias": 3.0232,
+     "samples": 30
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 9.4757,
+     "rmse": 11.6737,
+     "bias": -4.729,
+     "samples": 39
+    },
+    "heavy_ge64_5": {
+     "mae": 29.24,
+     "rmse": 38.8333,
+     "bias": -29.24,
+     "samples": 4
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9674,
+    "mean_width": 33.726,
+    "below": 0.0109,
+    "above": 0.0217,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 5.9145,
+     "reference_rmse": 10.7869,
+     "mae_skill": -0.0847,
+     "rmse_skill": 0.0602
+    },
+    "climatology": {
+     "reference_mae": 9.4121,
+     "reference_rmse": 13.7801,
+     "mae_skill": 0.3184,
+     "rmse_skill": 0.2644
+    }
+   }
+  },
+  "Gujarat": {
+   "continuous": {
+    "mae": 3.1981,
+    "rmse": 5.3123,
+    "bias": 0.5189,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 95,
+    "forecast_events": 154,
+    "samples": 184,
+    "hits": 95,
+    "misses": 0,
+    "false_alarms": 59,
+    "accuracy": 0.6793,
+    "recall": 1.0,
+    "precision": 0.6169,
+    "csi": 0.6169,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 26,
+     "forecast_events": 15,
+     "samples": 184,
+     "hits": 8,
+     "misses": 18,
+     "false_alarms": 7,
+     "accuracy": 0.8641,
+     "recall": 0.3077,
+     "precision": 0.5333,
+     "csi": 0.2424,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 8,
+     "forecast_events": 3,
+     "samples": 184,
+     "hits": 2,
+     "misses": 6,
+     "false_alarms": 1,
+     "accuracy": 0.962,
+     "recall": 0.25,
+     "precision": 0.6667,
+     "csi": 0.2222,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 45.29,
+    "predicted_at_max": 20.887,
+    "error_at_max": -24.403,
+    "ratio_at_max": 0.461,
+    "top5_mean_error": -20.192,
+    "top5_mean_ratio": 0.368,
+    "date_of_max": "2025-09-07"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.4722,
+     "rmse": 1.9968,
+     "bias": 1.4612,
+     "samples": 89
+    },
+    "light_1_10": {
+     "mae": 2.9766,
+     "rmse": 4.1786,
+     "bias": 2.6259,
+     "samples": 69
+    },
+    "moderate_10_20": {
+     "mae": 5.8648,
+     "rmse": 6.6334,
+     "bias": -4.8937,
+     "samples": 18
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 18.3094,
+     "rmse": 18.8447,
+     "bias": -15.9581,
+     "samples": 8
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9293,
+    "mean_width": 13.317,
+    "below": 0.0163,
+    "above": 0.0543,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 2.6585,
+     "reference_rmse": 5.7095,
+     "mae_skill": -0.203,
+     "rmse_skill": 0.0696
+    },
+    "climatology": {
+     "reference_mae": 4.4447,
+     "reference_rmse": 6.6373,
+     "mae_skill": 0.2805,
+     "rmse_skill": 0.1996
+    }
+   }
+  },
+  "Haryana": {
+   "continuous": {
+    "mae": 3.0227,
+    "rmse": 5.3248,
+    "bias": 0.3054,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 71,
+    "forecast_events": 105,
+    "samples": 184,
+    "hits": 71,
+    "misses": 0,
+    "false_alarms": 34,
+    "accuracy": 0.8152,
+    "recall": 1.0,
+    "precision": 0.6762,
+    "csi": 0.6762,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 22,
+     "forecast_events": 18,
+     "samples": 184,
+     "hits": 11,
+     "misses": 11,
+     "false_alarms": 7,
+     "accuracy": 0.9022,
+     "recall": 0.5,
+     "precision": 0.6111,
+     "csi": 0.3793,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 11,
+     "forecast_events": 2,
+     "samples": 184,
+     "hits": 2,
+     "misses": 9,
+     "false_alarms": 0,
+     "accuracy": 0.9511,
+     "recall": 0.1818,
+     "precision": 1.0,
+     "csi": 0.1818,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 41.463,
+    "predicted_at_max": 22.399,
+    "error_at_max": -19.064,
+    "ratio_at_max": 0.54,
+    "top5_mean_error": -18.07,
+    "top5_mean_ratio": 0.413,
+    "date_of_max": "2025-09-01"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.4338,
+     "rmse": 2.5007,
+     "bias": 1.4241,
+     "samples": 113
+    },
+    "light_1_10": {
+     "mae": 3.265,
+     "rmse": 4.0397,
+     "bias": 1.8654,
+     "samples": 49
+    },
+    "moderate_10_20": {
+     "mae": 6.6441,
+     "rmse": 7.5628,
+     "bias": -3.5412,
+     "samples": 11
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 14.644,
+     "rmse": 16.7376,
+     "bias": -14.2896,
+     "samples": 11
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9185,
+    "mean_width": 11.834,
+    "below": 0.0217,
+    "above": 0.0598,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 2.7924,
+     "reference_rmse": 5.7313,
+     "mae_skill": -0.0825,
+     "rmse_skill": 0.0709
+    },
+    "climatology": {
+     "reference_mae": 3.891,
+     "reference_rmse": 6.4295,
+     "mae_skill": 0.2232,
+     "rmse_skill": 0.1718
+    }
+   }
+  },
+  "Himachal Pradesh": {
+   "continuous": {
+    "mae": 3.3489,
+    "rmse": 5.783,
+    "bias": 0.4186,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 93,
+    "forecast_events": 120,
+    "samples": 184,
+    "hits": 89,
+    "misses": 4,
+    "false_alarms": 31,
+    "accuracy": 0.8098,
+    "recall": 0.957,
+    "precision": 0.7417,
+    "csi": 0.7177,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 35,
+     "forecast_events": 36,
+     "samples": 184,
+     "hits": 24,
+     "misses": 11,
+     "false_alarms": 12,
+     "accuracy": 0.875,
+     "recall": 0.6857,
+     "precision": 0.6667,
+     "csi": 0.5106,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 13,
+     "forecast_events": 7,
+     "samples": 184,
+     "hits": 3,
+     "misses": 10,
+     "false_alarms": 4,
+     "accuracy": 0.9239,
+     "recall": 0.2308,
+     "precision": 0.4286,
+     "csi": 0.1765,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 45.033,
+    "predicted_at_max": 11.175,
+    "error_at_max": -33.858,
+    "ratio_at_max": 0.248,
+    "top5_mean_error": -15.409,
+    "top5_mean_ratio": 0.559,
+    "date_of_max": "2025-07-29"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.1425,
+     "rmse": 1.9313,
+     "bias": 1.0978,
+     "samples": 91
+    },
+    "light_1_10": {
+     "mae": 3.79,
+     "rmse": 5.2347,
+     "bias": 2.9746,
+     "samples": 58
+    },
+    "moderate_10_20": {
+     "mae": 4.6149,
+     "rmse": 6.0149,
+     "bias": -0.2065,
+     "samples": 22
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 14.6823,
+     "rmse": 16.2407,
+     "bias": -14.6823,
+     "samples": 13
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.8967,
+    "mean_width": 13.234,
+    "below": 0.0489,
+    "above": 0.0543,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.1836,
+     "reference_rmse": 6.4923,
+     "mae_skill": -0.0519,
+     "rmse_skill": 0.1093
+    },
+    "climatology": {
+     "reference_mae": 4.2006,
+     "reference_rmse": 6.6753,
+     "mae_skill": 0.2028,
+     "rmse_skill": 0.1337
+    }
+   }
+  },
+  "Jammu and Kashmir": {
+   "continuous": {
+    "mae": 3.9785,
+    "rmse": 7.7254,
+    "bias": 0.2709,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 92,
+    "forecast_events": 121,
+    "samples": 184,
+    "hits": 89,
+    "misses": 3,
+    "false_alarms": 32,
+    "accuracy": 0.8098,
+    "recall": 0.9674,
+    "precision": 0.7355,
+    "csi": 0.7177,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 31,
+     "forecast_events": 25,
+     "samples": 184,
+     "hits": 13,
+     "misses": 18,
+     "false_alarms": 12,
+     "accuracy": 0.837,
+     "recall": 0.4194,
+     "precision": 0.52,
+     "csi": 0.3023,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 8,
+     "forecast_events": 5,
+     "samples": 184,
+     "hits": 3,
+     "misses": 5,
+     "false_alarms": 2,
+     "accuracy": 0.962,
+     "recall": 0.375,
+     "precision": 0.6,
+     "csi": 0.3,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 73.349,
+    "predicted_at_max": 24.534,
+    "error_at_max": -48.815,
+    "ratio_at_max": 0.334,
+    "top5_mean_error": -30.522,
+    "top5_mean_ratio": 0.298,
+    "date_of_max": "2025-08-26"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.3992,
+     "rmse": 2.3804,
+     "bias": 1.3679,
+     "samples": 92
+    },
+    "light_1_10": {
+     "mae": 4.7382,
+     "rmse": 7.9407,
+     "bias": 3.393,
+     "samples": 61
+    },
+    "moderate_10_20": {
+     "mae": 5.9719,
+     "rmse": 7.0575,
+     "bias": -5.619,
+     "samples": 23
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 18.302,
+     "rmse": 20.9944,
+     "bias": -14.9894,
+     "samples": 7
+    },
+    "heavy_ge64_5": {
+     "mae": 48.815,
+     "rmse": 48.815,
+     "bias": -48.815,
+     "samples": 1
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.8696,
+    "mean_width": 11.208,
+    "below": 0.0489,
+    "above": 0.0815,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.7401,
+     "reference_rmse": 8.7707,
+     "mae_skill": -0.0637,
+     "rmse_skill": 0.1192
+    },
+    "climatology": {
+     "reference_mae": 4.6346,
+     "reference_rmse": 8.1824,
+     "mae_skill": 0.1416,
+     "rmse_skill": 0.0559
+    }
+   }
+  },
+  "Jharkhand": {
+   "continuous": {
+    "mae": 3.4188,
+    "rmse": 5.1898,
+    "bias": 0.7612,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 105,
+    "forecast_events": 126,
+    "samples": 184,
+    "hits": 105,
+    "misses": 0,
+    "false_alarms": 21,
+    "accuracy": 0.8859,
+    "recall": 1.0,
+    "precision": 0.8333,
+    "csi": 0.8333,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 42,
+     "forecast_events": 52,
+     "samples": 184,
+     "hits": 32,
+     "misses": 10,
+     "false_alarms": 20,
+     "accuracy": 0.837,
+     "recall": 0.7619,
+     "precision": 0.6154,
+     "csi": 0.5161,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 13,
+     "forecast_events": 8,
+     "samples": 184,
+     "hits": 4,
+     "misses": 9,
+     "false_alarms": 4,
+     "accuracy": 0.9293,
+     "recall": 0.3077,
+     "precision": 0.5,
+     "csi": 0.2353,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 46.583,
+    "predicted_at_max": 22.272,
+    "error_at_max": -24.311,
+    "ratio_at_max": 0.478,
+    "top5_mean_error": -11.299,
+    "top5_mean_ratio": 0.656,
+    "date_of_max": "2025-07-15"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.0076,
+     "rmse": 1.6532,
+     "bias": 1.0067,
+     "samples": 79
+    },
+    "light_1_10": {
+     "mae": 4.3216,
+     "rmse": 5.3889,
+     "bias": 3.7917,
+     "samples": 63
+    },
+    "moderate_10_20": {
+     "mae": 4.8063,
+     "rmse": 6.1492,
+     "bias": -1.398,
+     "samples": 29
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 10.6006,
+     "rmse": 11.8117,
+     "bias": -10.6006,
+     "samples": 13
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9837,
+    "mean_width": 21.946,
+    "below": 0.0054,
+    "above": 0.0109,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.0976,
+     "reference_rmse": 5.7269,
+     "mae_skill": -0.1037,
+     "rmse_skill": 0.0938
+    },
+    "climatology": {
+     "reference_mae": 4.4845,
+     "reference_rmse": 6.3358,
+     "mae_skill": 0.2376,
+     "rmse_skill": 0.1809
+    }
+   }
+  },
+  "Karnataka": {
+   "continuous": {
+    "mae": 2.6043,
+    "rmse": 3.7012,
+    "bias": 0.4239,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 119,
+    "forecast_events": 153,
+    "samples": 184,
+    "hits": 116,
+    "misses": 3,
+    "false_alarms": 37,
+    "accuracy": 0.7826,
+    "recall": 0.9748,
+    "precision": 0.7582,
+    "csi": 0.7436,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 31,
+     "forecast_events": 29,
+     "samples": 184,
+     "hits": 21,
+     "misses": 10,
+     "false_alarms": 8,
+     "accuracy": 0.9022,
+     "recall": 0.6774,
+     "precision": 0.7241,
+     "csi": 0.5385,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 6,
+     "forecast_events": 0,
+     "samples": 184,
+     "hits": 0,
+     "misses": 6,
+     "false_alarms": 0,
+     "accuracy": 0.9674,
+     "recall": 0.0,
+     "precision": null,
+     "csi": 0.0,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 25.883,
+    "predicted_at_max": 11.264,
+    "error_at_max": -14.619,
+    "ratio_at_max": 0.435,
+    "top5_mean_error": -8.827,
+    "top5_mean_ratio": 0.599,
+    "date_of_max": "2025-08-17"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.4345,
+     "rmse": 1.8676,
+     "bias": 1.4309,
+     "samples": 65
+    },
+    "light_1_10": {
+     "mae": 2.5095,
+     "rmse": 3.3283,
+     "bias": 1.4948,
+     "samples": 88
+    },
+    "moderate_10_20": {
+     "mae": 4.2433,
+     "rmse": 4.9877,
+     "bias": -3.5011,
+     "samples": 25
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 9.8385,
+     "rmse": 10.7793,
+     "bias": -9.8385,
+     "samples": 6
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.962,
+    "mean_width": 13.607,
+    "below": 0.0109,
+    "above": 0.0272,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 2.3968,
+     "reference_rmse": 3.9394,
+     "mae_skill": -0.0866,
+     "rmse_skill": 0.0605
+    },
+    "climatology": {
+     "reference_mae": 3.6663,
+     "reference_rmse": 4.8884,
+     "mae_skill": 0.2897,
+     "rmse_skill": 0.2429
+    }
+   }
+  },
+  "Kerala": {
+   "continuous": {
+    "mae": 5.6202,
+    "rmse": 8.7383,
+    "bias": 0.9297,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 140,
+    "forecast_events": 181,
+    "samples": 184,
+    "hits": 140,
+    "misses": 0,
+    "false_alarms": 41,
+    "accuracy": 0.7772,
+    "recall": 1.0,
+    "precision": 0.7735,
+    "csi": 0.7735,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 48,
+     "forecast_events": 65,
+     "samples": 184,
+     "hits": 37,
+     "misses": 11,
+     "false_alarms": 28,
+     "accuracy": 0.788,
+     "recall": 0.7708,
+     "precision": 0.5692,
+     "csi": 0.4868,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 21,
+     "forecast_events": 19,
+     "samples": 184,
+     "hits": 12,
+     "misses": 9,
+     "false_alarms": 7,
+     "accuracy": 0.913,
+     "recall": 0.5714,
+     "precision": 0.6316,
+     "csi": 0.4286,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 66.24,
+    "predicted_at_max": 43.893,
+    "error_at_max": -22.347,
+    "ratio_at_max": 0.663,
+    "top5_mean_error": -30.116,
+    "top5_mean_ratio": 0.497,
+    "date_of_max": "2025-07-20"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 3.1944,
+     "rmse": 3.956,
+     "bias": 3.1944,
+     "samples": 44
+    },
+    "light_1_10": {
+     "mae": 4.6813,
+     "rmse": 6.5505,
+     "bias": 3.8235,
+     "samples": 92
+    },
+    "moderate_10_20": {
+     "mae": 3.5921,
+     "rmse": 4.4942,
+     "bias": -1.2633,
+     "samples": 27
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 16.3104,
+     "rmse": 19.5147,
+     "bias": -12.1651,
+     "samples": 19
+    },
+    "heavy_ge64_5": {
+     "mae": 28.0055,
+     "rmse": 28.5714,
+     "bias": -28.0055,
+     "samples": 2
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9402,
+    "mean_width": 25.491,
+    "below": 0.0163,
+    "above": 0.0435,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 4.8951,
+     "reference_rmse": 9.0794,
+     "mae_skill": -0.1481,
+     "rmse_skill": 0.0376
+    },
+    "climatology": {
+     "reference_mae": 8.0389,
+     "reference_rmse": 11.7345,
+     "mae_skill": 0.3009,
+     "rmse_skill": 0.2553
+    }
+   }
+  },
+  "Ladakh": {
+   "continuous": {
+    "mae": 1.3059,
+    "rmse": 1.9606,
+    "bias": 0.0121,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 79,
+    "forecast_events": 106,
+    "samples": 184,
+    "hits": 72,
+    "misses": 7,
+    "false_alarms": 34,
+    "accuracy": 0.7772,
+    "recall": 0.9114,
+    "precision": 0.6792,
+    "csi": 0.6372,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 3,
+     "forecast_events": 0,
+     "samples": 184,
+     "hits": 0,
+     "misses": 3,
+     "false_alarms": 0,
+     "accuracy": 0.9837,
+     "recall": 0.0,
+     "precision": null,
+     "csi": 0.0,
+     "trustworthy": false,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 0,
+     "forecast_events": 0,
+     "samples": 184,
+     "hits": 0,
+     "misses": 0,
+     "false_alarms": 0,
+     "accuracy": 1.0,
+     "recall": null,
+     "precision": null,
+     "csi": null,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 12.516,
+    "predicted_at_max": 7.483,
+    "error_at_max": -5.033,
+    "ratio_at_max": 0.598,
+    "top5_mean_error": -5.373,
+    "top5_mean_ratio": 0.489,
+    "date_of_max": "2025-08-26"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 0.7689,
+     "rmse": 1.2595,
+     "bias": 0.7209,
+     "samples": 105
+    },
+    "light_1_10": {
+     "mae": 1.8421,
+     "rmse": 2.3222,
+     "bias": -0.7094,
+     "samples": 76
+    },
+    "moderate_10_20": {
+     "mae": 6.5157,
+     "rmse": 6.6047,
+     "bias": -6.5157,
+     "samples": 3
+    },
+    "rather_heavy_20_64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.7446,
+    "mean_width": 2.792,
+    "below": 0.0978,
+    "above": 0.1576,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 1.1742,
+     "reference_rmse": 2.0729,
+     "mae_skill": -0.1122,
+     "rmse_skill": 0.0542
+    },
+    "climatology": {
+     "reference_mae": 1.7459,
+     "reference_rmse": 2.4023,
+     "mae_skill": 0.252,
+     "rmse_skill": 0.1839
+    }
+   }
+  },
+  "Lakshadweep": {
+   "continuous": {
+    "mae": 3.3203,
+    "rmse": 5.092,
+    "bias": 0.3392,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 113,
+    "forecast_events": 158,
+    "samples": 184,
+    "hits": 112,
+    "misses": 1,
+    "false_alarms": 46,
+    "accuracy": 0.7446,
+    "recall": 0.9912,
+    "precision": 0.7089,
+    "csi": 0.7044,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 26,
+     "forecast_events": 16,
+     "samples": 184,
+     "hits": 10,
+     "misses": 16,
+     "false_alarms": 6,
+     "accuracy": 0.8804,
+     "recall": 0.3846,
+     "precision": 0.625,
+     "csi": 0.3125,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 5,
+     "forecast_events": 2,
+     "samples": 184,
+     "hits": 0,
+     "misses": 5,
+     "false_alarms": 2,
+     "accuracy": 0.962,
+     "recall": 0.0,
+     "precision": 0.0,
+     "csi": 0.0,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 42.896,
+    "predicted_at_max": 19.26,
+    "error_at_max": -23.636,
+    "ratio_at_max": 0.449,
+    "top5_mean_error": -18.713,
+    "top5_mean_ratio": 0.368,
+    "date_of_max": "2025-10-17"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 2.0158,
+     "rmse": 2.4294,
+     "bias": 2.0078,
+     "samples": 71
+    },
+    "light_1_10": {
+     "mae": 2.834,
+     "rmse": 3.9439,
+     "bias": 1.3741,
+     "samples": 87
+    },
+    "moderate_10_20": {
+     "mae": 6.0807,
+     "rmse": 6.9681,
+     "bias": -5.0536,
+     "samples": 21
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 18.713,
+     "rmse": 19.8948,
+     "bias": -18.713,
+     "samples": 5
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9402,
+    "mean_width": 13.285,
+    "below": 0.0163,
+    "above": 0.0435,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 2.794,
+     "reference_rmse": 5.4558,
+     "mae_skill": -0.1884,
+     "rmse_skill": 0.0667
+    },
+    "climatology": {
+     "reference_mae": 4.4506,
+     "reference_rmse": 6.3036,
+     "mae_skill": 0.254,
+     "rmse_skill": 0.1922
+    }
+   }
+  },
+  "Madhya Pradesh": {
+   "continuous": {
+    "mae": 3.3488,
+    "rmse": 5.1077,
+    "bias": 0.6209,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 103,
+    "forecast_events": 145,
+    "samples": 184,
+    "hits": 103,
+    "misses": 0,
+    "false_alarms": 42,
+    "accuracy": 0.7717,
+    "recall": 1.0,
+    "precision": 0.7103,
+    "csi": 0.7103,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 49,
+     "forecast_events": 62,
+     "samples": 184,
+     "hits": 41,
+     "misses": 8,
+     "false_alarms": 21,
+     "accuracy": 0.8424,
+     "recall": 0.8367,
+     "precision": 0.6613,
+     "csi": 0.5857,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 18,
+     "forecast_events": 7,
+     "samples": 184,
+     "hits": 4,
+     "misses": 14,
+     "false_alarms": 3,
+     "accuracy": 0.9076,
+     "recall": 0.2222,
+     "precision": 0.5714,
+     "csi": 0.1905,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 41.545,
+    "predicted_at_max": 28.089,
+    "error_at_max": -13.456,
+    "ratio_at_max": 0.676,
+    "top5_mean_error": -12.699,
+    "top5_mean_ratio": 0.636,
+    "date_of_max": "2025-07-26"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.3494,
+     "rmse": 2.5932,
+     "bias": 1.3494,
+     "samples": 81
+    },
+    "light_1_10": {
+     "mae": 3.9497,
+     "rmse": 5.1962,
+     "bias": 3.6709,
+     "samples": 54
+    },
+    "moderate_10_20": {
+     "mae": 4.1511,
+     "rmse": 5.52,
+     "bias": -0.9154,
+     "samples": 31
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 9.1617,
+     "rmse": 10.1462,
+     "bias": -9.1617,
+     "samples": 18
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9293,
+    "mean_width": 14.992,
+    "below": 0.0272,
+    "above": 0.0435,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 2.933,
+     "reference_rmse": 5.3551,
+     "mae_skill": -0.1418,
+     "rmse_skill": 0.0462
+    },
+    "climatology": {
+     "reference_mae": 4.7478,
+     "reference_rmse": 6.8636,
+     "mae_skill": 0.2947,
+     "rmse_skill": 0.2558
+    }
+   }
+  },
+  "Maharashtra": {
+   "continuous": {
+    "mae": 3.3603,
+    "rmse": 5.1738,
+    "bias": 0.5062,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 115,
+    "forecast_events": 152,
+    "samples": 184,
+    "hits": 115,
+    "misses": 0,
+    "false_alarms": 37,
+    "accuracy": 0.7989,
+    "recall": 1.0,
+    "precision": 0.7566,
+    "csi": 0.7566,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 48,
+     "forecast_events": 49,
+     "samples": 184,
+     "hits": 38,
+     "misses": 10,
+     "false_alarms": 11,
+     "accuracy": 0.8859,
+     "recall": 0.7917,
+     "precision": 0.7755,
+     "csi": 0.6441,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 13,
+     "forecast_events": 6,
+     "samples": 184,
+     "hits": 2,
+     "misses": 11,
+     "false_alarms": 4,
+     "accuracy": 0.9185,
+     "recall": 0.1538,
+     "precision": 0.3333,
+     "csi": 0.1176,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 40.447,
+    "predicted_at_max": 18.1,
+    "error_at_max": -22.347,
+    "ratio_at_max": 0.447,
+    "top5_mean_error": -16.731,
+    "top5_mean_ratio": 0.532,
+    "date_of_max": "2025-08-18"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.3476,
+     "rmse": 2.0559,
+     "bias": 1.3475,
+     "samples": 69
+    },
+    "light_1_10": {
+     "mae": 3.4438,
+     "rmse": 4.5481,
+     "bias": 3.0936,
+     "samples": 67
+    },
+    "moderate_10_20": {
+     "mae": 4.2273,
+     "rmse": 5.3648,
+     "bias": -1.7279,
+     "samples": 35
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 11.2782,
+     "rmse": 13.1277,
+     "bias": -11.2782,
+     "samples": 13
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9076,
+    "mean_width": 12.669,
+    "below": 0.038,
+    "above": 0.0543,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 2.9124,
+     "reference_rmse": 5.3651,
+     "mae_skill": -0.1538,
+     "rmse_skill": 0.0357
+    },
+    "climatology": {
+     "reference_mae": 5.168,
+     "reference_rmse": 7.2054,
+     "mae_skill": 0.3498,
+     "rmse_skill": 0.282
+    }
+   }
+  },
+  "Manipur": {
+   "continuous": {
+    "mae": 3.1847,
+    "rmse": 5.4782,
+    "bias": 0.9491,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 114,
+    "forecast_events": 134,
+    "samples": 184,
+    "hits": 114,
+    "misses": 0,
+    "false_alarms": 20,
+    "accuracy": 0.8913,
+    "recall": 1.0,
+    "precision": 0.8507,
+    "csi": 0.8507,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 32,
+     "forecast_events": 44,
+     "samples": 184,
+     "hits": 21,
+     "misses": 11,
+     "false_alarms": 23,
+     "accuracy": 0.8152,
+     "recall": 0.6562,
+     "precision": 0.4773,
+     "csi": 0.3818,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 9,
+     "forecast_events": 7,
+     "samples": 184,
+     "hits": 5,
+     "misses": 4,
+     "false_alarms": 2,
+     "accuracy": 0.9674,
+     "recall": 0.5556,
+     "precision": 0.7143,
+     "csi": 0.4545,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 64.064,
+    "predicted_at_max": 20.867,
+    "error_at_max": -43.197,
+    "ratio_at_max": 0.326,
+    "top5_mean_error": -12.238,
+    "top5_mean_ratio": 0.663,
+    "date_of_max": "2025-07-05"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 0.8838,
+     "rmse": 1.3823,
+     "bias": 0.8767,
+     "samples": 70
+    },
+    "light_1_10": {
+     "mae": 3.4943,
+     "rmse": 4.5185,
+     "bias": 2.9399,
+     "samples": 82
+    },
+    "moderate_10_20": {
+     "mae": 4.965,
+     "rmse": 6.1593,
+     "bias": -1.28,
+     "samples": 23
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 13.7091,
+     "rmse": 17.7687,
+     "bias": -10.9302,
+     "samples": 9
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9946,
+    "mean_width": 26.084,
+    "below": 0.0,
+    "above": 0.0054,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.1192,
+     "reference_rmse": 6.0329,
+     "mae_skill": -0.021,
+     "rmse_skill": 0.0919
+    },
+    "climatology": {
+     "reference_mae": 4.2278,
+     "reference_rmse": 6.6201,
+     "mae_skill": 0.2467,
+     "rmse_skill": 0.1725
+    }
+   }
+  },
+  "Meghalaya": {
+   "continuous": {
+    "mae": 4.8892,
+    "rmse": 8.7024,
+    "bias": 0.852,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 114,
+    "forecast_events": 158,
+    "samples": 184,
+    "hits": 114,
+    "misses": 0,
+    "false_alarms": 44,
+    "accuracy": 0.7609,
+    "recall": 1.0,
+    "precision": 0.7215,
+    "csi": 0.7215,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 62,
+     "forecast_events": 84,
+     "samples": 184,
+     "hits": 54,
+     "misses": 8,
+     "false_alarms": 30,
+     "accuracy": 0.7935,
+     "recall": 0.871,
+     "precision": 0.6429,
+     "csi": 0.587,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 21,
+     "forecast_events": 16,
+     "samples": 184,
+     "hits": 10,
+     "misses": 11,
+     "false_alarms": 6,
+     "accuracy": 0.9076,
+     "recall": 0.4762,
+     "precision": 0.625,
+     "csi": 0.3704,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 86.887,
+    "predicted_at_max": 23.113,
+    "error_at_max": -63.774,
+    "ratio_at_max": 0.266,
+    "top5_mean_error": -30.891,
+    "top5_mean_ratio": 0.404,
+    "date_of_max": "2025-07-27"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.5171,
+     "rmse": 2.0853,
+     "bias": 1.4894,
+     "samples": 70
+    },
+    "light_1_10": {
+     "mae": 5.6854,
+     "rmse": 6.8834,
+     "bias": 5.5415,
+     "samples": 52
+    },
+    "moderate_10_20": {
+     "mae": 4.4851,
+     "rmse": 6.1821,
+     "bias": 0.5731,
+     "samples": 41
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 12.5051,
+     "rmse": 16.6319,
+     "bias": -9.7688,
+     "samples": 20
+    },
+    "heavy_ge64_5": {
+     "mae": 63.774,
+     "rmse": 63.774,
+     "bias": -63.774,
+     "samples": 1
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.913,
+    "mean_width": 19.152,
+    "below": 0.038,
+    "above": 0.0489,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 4.8055,
+     "reference_rmse": 9.6591,
+     "mae_skill": -0.0174,
+     "rmse_skill": 0.099
+    },
+    "climatology": {
+     "reference_mae": 6.3584,
+     "reference_rmse": 9.8774,
+     "mae_skill": 0.2311,
+     "rmse_skill": 0.119
+    }
+   }
+  },
+  "Mizoram": {
+   "continuous": {
+    "mae": 2.9799,
+    "rmse": 5.0705,
+    "bias": 0.8033,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 118,
+    "forecast_events": 151,
+    "samples": 184,
+    "hits": 118,
+    "misses": 0,
+    "false_alarms": 33,
+    "accuracy": 0.8207,
+    "recall": 1.0,
+    "precision": 0.7815,
+    "csi": 0.7815,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 26,
+     "forecast_events": 26,
+     "samples": 184,
+     "hits": 13,
+     "misses": 13,
+     "false_alarms": 13,
+     "accuracy": 0.8587,
+     "recall": 0.5,
+     "precision": 0.5,
+     "csi": 0.3333,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 6,
+     "forecast_events": 5,
+     "samples": 184,
+     "hits": 1,
+     "misses": 5,
+     "false_alarms": 4,
+     "accuracy": 0.9511,
+     "recall": 0.1667,
+     "precision": 0.2,
+     "csi": 0.1,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 46.074,
+    "predicted_at_max": 12.42,
+    "error_at_max": -33.654,
+    "ratio_at_max": 0.27,
+    "top5_mean_error": -15.548,
+    "top5_mean_ratio": 0.484,
+    "date_of_max": "2025-07-07"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.0368,
+     "rmse": 1.4522,
+     "bias": 1.0368,
+     "samples": 66
+    },
+    "light_1_10": {
+     "mae": 3.1396,
+     "rmse": 4.0739,
+     "bias": 2.4109,
+     "samples": 92
+    },
+    "moderate_10_20": {
+     "mae": 4.2534,
+     "rmse": 5.2677,
+     "bias": -2.7882,
+     "samples": 20
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 17.6613,
+     "rmse": 20.4511,
+     "bias": -14.4423,
+     "samples": 6
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9891,
+    "mean_width": 26.961,
+    "below": 0.0,
+    "above": 0.0109,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 2.9617,
+     "reference_rmse": 5.8639,
+     "mae_skill": -0.0061,
+     "rmse_skill": 0.1353
+    },
+    "climatology": {
+     "reference_mae": 3.6681,
+     "reference_rmse": 5.5193,
+     "mae_skill": 0.1876,
+     "rmse_skill": 0.0813
+    }
+   }
+  },
+  "Nagaland": {
+   "continuous": {
+    "mae": 4.3927,
+    "rmse": 7.2497,
+    "bias": 0.9094,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 121,
+    "forecast_events": 144,
+    "samples": 184,
+    "hits": 119,
+    "misses": 2,
+    "false_alarms": 25,
+    "accuracy": 0.8533,
+    "recall": 0.9835,
+    "precision": 0.8264,
+    "csi": 0.8151,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 54,
+     "forecast_events": 79,
+     "samples": 184,
+     "hits": 46,
+     "misses": 8,
+     "false_alarms": 33,
+     "accuracy": 0.7772,
+     "recall": 0.8519,
+     "precision": 0.5823,
+     "csi": 0.5287,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 16,
+     "forecast_events": 14,
+     "samples": 184,
+     "hits": 8,
+     "misses": 8,
+     "false_alarms": 6,
+     "accuracy": 0.9239,
+     "recall": 0.5,
+     "precision": 0.5714,
+     "csi": 0.3636,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 61.032,
+    "predicted_at_max": 30.117,
+    "error_at_max": -30.915,
+    "ratio_at_max": 0.493,
+    "top5_mean_error": -27.469,
+    "top5_mean_ratio": 0.438,
+    "date_of_max": "2025-07-27"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.3147,
+     "rmse": 2.4302,
+     "bias": 1.2831,
+     "samples": 63
+    },
+    "light_1_10": {
+     "mae": 5.1015,
+     "rmse": 6.6255,
+     "bias": 4.7348,
+     "samples": 67
+    },
+    "moderate_10_20": {
+     "mae": 4.4942,
+     "rmse": 6.7306,
+     "bias": -0.9547,
+     "samples": 38
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 13.3035,
+     "rmse": 17.0224,
+     "bias": -12.1537,
+     "samples": 16
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9348,
+    "mean_width": 21.102,
+    "below": 0.0272,
+    "above": 0.038,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 4.4142,
+     "reference_rmse": 8.0208,
+     "mae_skill": 0.0049,
+     "rmse_skill": 0.0961
+    },
+    "climatology": {
+     "reference_mae": 5.5533,
+     "reference_rmse": 8.6315,
+     "mae_skill": 0.209,
+     "rmse_skill": 0.1601
+    }
+   }
+  },
+  "Odisha": {
+   "continuous": {
+    "mae": 3.6358,
+    "rmse": 5.5301,
+    "bias": 0.7829,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 114,
+    "forecast_events": 135,
+    "samples": 184,
+    "hits": 114,
+    "misses": 0,
+    "false_alarms": 21,
+    "accuracy": 0.8859,
+    "recall": 1.0,
+    "precision": 0.8444,
+    "csi": 0.8444,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 46,
+     "forecast_events": 58,
+     "samples": 184,
+     "hits": 32,
+     "misses": 14,
+     "false_alarms": 26,
+     "accuracy": 0.7826,
+     "recall": 0.6957,
+     "precision": 0.5517,
+     "csi": 0.4444,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 14,
+     "forecast_events": 9,
+     "samples": 184,
+     "hits": 3,
+     "misses": 11,
+     "false_alarms": 6,
+     "accuracy": 0.9076,
+     "recall": 0.2143,
+     "precision": 0.3333,
+     "csi": 0.15,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 38.056,
+    "predicted_at_max": 13.471,
+    "error_at_max": -24.585,
+    "ratio_at_max": 0.354,
+    "top5_mean_error": -17.653,
+    "top5_mean_ratio": 0.471,
+    "date_of_max": "2025-08-22"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.0216,
+     "rmse": 1.8025,
+     "bias": 1.0216,
+     "samples": 70
+    },
+    "light_1_10": {
+     "mae": 4.3584,
+     "rmse": 5.5054,
+     "bias": 4.1179,
+     "samples": 68
+    },
+    "moderate_10_20": {
+     "mae": 4.369,
+     "rmse": 5.2853,
+     "bias": -1.443,
+     "samples": 32
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 11.5214,
+     "rmse": 13.2145,
+     "bias": -11.5214,
+     "samples": 14
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9728,
+    "mean_width": 23.69,
+    "below": 0.0109,
+    "above": 0.0163,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.4843,
+     "reference_rmse": 6.0765,
+     "mae_skill": -0.0435,
+     "rmse_skill": 0.0899
+    },
+    "climatology": {
+     "reference_mae": 4.605,
+     "reference_rmse": 6.5949,
+     "mae_skill": 0.2105,
+     "rmse_skill": 0.1615
+    }
+   }
+  },
+  "Puducherry": {
+   "continuous": {
+    "mae": 4.6354,
+    "rmse": 10.1592,
+    "bias": 0.1481,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 90,
+    "forecast_events": 141,
+    "samples": 184,
+    "hits": 77,
+    "misses": 13,
+    "false_alarms": 64,
+    "accuracy": 0.5815,
+    "recall": 0.8556,
+    "precision": 0.5461,
+    "csi": 0.5,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 23,
+     "forecast_events": 20,
+     "samples": 184,
+     "hits": 13,
+     "misses": 10,
+     "false_alarms": 7,
+     "accuracy": 0.9076,
+     "recall": 0.5652,
+     "precision": 0.65,
+     "csi": 0.4333,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 8,
+     "forecast_events": 5,
+     "samples": 184,
+     "hits": 2,
+     "misses": 6,
+     "false_alarms": 3,
+     "accuracy": 0.9511,
+     "recall": 0.25,
+     "precision": 0.4,
+     "csi": 0.1818,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 110.124,
+    "predicted_at_max": 31.061,
+    "error_at_max": -79.063,
+    "ratio_at_max": 0.282,
+    "top5_mean_error": -38.474,
+    "top5_mean_ratio": 0.297,
+    "date_of_max": "2025-11-29"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 2.3132,
+     "rmse": 3.1595,
+     "bias": 2.3082,
+     "samples": 94
+    },
+    "light_1_10": {
+     "mae": 4.2117,
+     "rmse": 9.37,
+     "bias": 2.2407,
+     "samples": 67
+    },
+    "moderate_10_20": {
+     "mae": 8.7235,
+     "rmse": 9.4651,
+     "bias": -7.8273,
+     "samples": 15
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 20.4824,
+     "rmse": 25.565,
+     "bias": -20.4824,
+     "samples": 7
+    },
+    "heavy_ge64_5": {
+     "mae": 79.063,
+     "rmse": 79.063,
+     "bias": -79.063,
+     "samples": 1
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.5761,
+    "mean_width": 5.134,
+    "below": 0.2663,
+    "above": 0.1576,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 4.1704,
+     "reference_rmse": 11.4633,
+     "mae_skill": -0.1115,
+     "rmse_skill": 0.1138
+    },
+    "climatology": {
+     "reference_mae": 5.5624,
+     "reference_rmse": 11.0147,
+     "mae_skill": 0.1667,
+     "rmse_skill": 0.0777
+    }
+   }
+  },
+  "Punjab": {
+   "continuous": {
+    "mae": 4.1474,
+    "rmse": 7.0665,
+    "bias": 0.3325,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 67,
+    "forecast_events": 130,
+    "samples": 184,
+    "hits": 66,
+    "misses": 1,
+    "false_alarms": 64,
+    "accuracy": 0.6467,
+    "recall": 0.9851,
+    "precision": 0.5077,
+    "csi": 0.5038,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 24,
+     "forecast_events": 23,
+     "samples": 184,
+     "hits": 12,
+     "misses": 12,
+     "false_alarms": 11,
+     "accuracy": 0.875,
+     "recall": 0.5,
+     "precision": 0.5217,
+     "csi": 0.3429,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 16,
+     "forecast_events": 6,
+     "samples": 184,
+     "hits": 3,
+     "misses": 13,
+     "false_alarms": 3,
+     "accuracy": 0.913,
+     "recall": 0.1875,
+     "precision": 0.5,
+     "csi": 0.1579,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 48.719,
+    "predicted_at_max": 19.175,
+    "error_at_max": -29.544,
+    "ratio_at_max": 0.394,
+    "top5_mean_error": -23.002,
+    "top5_mean_ratio": 0.464,
+    "date_of_max": "2025-08-25"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 2.0009,
+     "rmse": 3.2641,
+     "bias": 2.0005,
+     "samples": 117
+    },
+    "light_1_10": {
+     "mae": 4.3563,
+     "rmse": 6.5582,
+     "bias": 2.7071,
+     "samples": 43
+    },
+    "moderate_10_20": {
+     "mae": 7.9609,
+     "rmse": 8.8993,
+     "bias": -4.0089,
+     "samples": 8
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 17.3752,
+     "rmse": 18.4705,
+     "bias": -16.0751,
+     "samples": 16
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.788,
+    "mean_width": 8.819,
+    "below": 0.0924,
+    "above": 0.1196,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.4148,
+     "reference_rmse": 7.5857,
+     "mae_skill": -0.2145,
+     "rmse_skill": 0.0684
+    },
+    "climatology": {
+     "reference_mae": 5.2708,
+     "reference_rmse": 8.6314,
+     "mae_skill": 0.2131,
+     "rmse_skill": 0.1813
+    }
+   }
+  },
+  "Rajasthan": {
+   "continuous": {
+    "mae": 2.4272,
+    "rmse": 3.9247,
+    "bias": 0.3189,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 78,
+    "forecast_events": 109,
+    "samples": 184,
+    "hits": 75,
+    "misses": 3,
+    "false_alarms": 34,
+    "accuracy": 0.7989,
+    "recall": 0.9615,
+    "precision": 0.6881,
+    "csi": 0.6696,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 21,
+     "forecast_events": 12,
+     "samples": 184,
+     "hits": 7,
+     "misses": 14,
+     "false_alarms": 5,
+     "accuracy": 0.8967,
+     "recall": 0.3333,
+     "precision": 0.5833,
+     "csi": 0.2692,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 5,
+     "forecast_events": 0,
+     "samples": 184,
+     "hits": 0,
+     "misses": 5,
+     "false_alarms": 0,
+     "accuracy": 0.9728,
+     "recall": 0.0,
+     "precision": null,
+     "csi": 0.0,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 28.646,
+    "predicted_at_max": 8.636,
+    "error_at_max": -20.01,
+    "ratio_at_max": 0.301,
+    "top5_mean_error": -13.336,
+    "top5_mean_ratio": 0.471,
+    "date_of_max": "2025-07-18"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.2056,
+     "rmse": 1.8082,
+     "bias": 1.2056,
+     "samples": 106
+    },
+    "light_1_10": {
+     "mae": 2.6093,
+     "rmse": 3.4499,
+     "bias": 1.2763,
+     "samples": 57
+    },
+    "moderate_10_20": {
+     "mae": 6.4622,
+     "rmse": 7.1782,
+     "bias": -4.6989,
+     "samples": 16
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 13.3362,
+     "rmse": 14.0342,
+     "bias": -13.3362,
+     "samples": 5
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.8967,
+    "mean_width": 8.281,
+    "below": 0.038,
+    "above": 0.0652,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 1.9774,
+     "reference_rmse": 4.1332,
+     "mae_skill": -0.2275,
+     "rmse_skill": 0.0504
+    },
+    "climatology": {
+     "reference_mae": 3.2883,
+     "reference_rmse": 5.05,
+     "mae_skill": 0.2619,
+     "rmse_skill": 0.2228
+    }
+   }
+  },
+  "Sikkim": {
+   "continuous": {
+    "mae": 7.1087,
+    "rmse": 11.9096,
+    "bias": 0.4543,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 166,
+    "forecast_events": 184,
+    "samples": 184,
+    "hits": 166,
+    "misses": 0,
+    "false_alarms": 18,
+    "accuracy": 0.9022,
+    "recall": 1.0,
+    "precision": 0.9022,
+    "csi": 0.9022,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 61,
+     "forecast_events": 82,
+     "samples": 184,
+     "hits": 51,
+     "misses": 10,
+     "false_alarms": 31,
+     "accuracy": 0.7772,
+     "recall": 0.8361,
+     "precision": 0.622,
+     "csi": 0.5543,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 35,
+     "forecast_events": 32,
+     "samples": 184,
+     "hits": 19,
+     "misses": 16,
+     "false_alarms": 13,
+     "accuracy": 0.8424,
+     "recall": 0.5429,
+     "precision": 0.5938,
+     "csi": 0.3958,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 72.217,
+    "predicted_at_max": 36.718,
+    "error_at_max": -35.499,
+    "ratio_at_max": 0.508,
+    "top5_mean_error": -36.536,
+    "top5_mean_ratio": 0.415,
+    "date_of_max": "2025-08-13"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 3.0579,
+     "rmse": 3.982,
+     "bias": 3.0579,
+     "samples": 18
+    },
+    "light_1_10": {
+     "mae": 4.9467,
+     "rmse": 8.3253,
+     "bias": 4.4101,
+     "samples": 105
+    },
+    "moderate_10_20": {
+     "mae": 4.9386,
+     "rmse": 7.7097,
+     "bias": 2.1809,
+     "samples": 26
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 15.6242,
+     "rmse": 19.7007,
+     "bias": -12.1714,
+     "samples": 33
+    },
+    "heavy_ge64_5": {
+     "mae": 44.777,
+     "rmse": 45.7281,
+     "bias": -44.777,
+     "samples": 2
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.8424,
+    "mean_width": 20.942,
+    "below": 0.0543,
+    "above": 0.1033,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 7.0773,
+     "reference_rmse": 13.5529,
+     "mae_skill": -0.0044,
+     "rmse_skill": 0.1213
+    },
+    "climatology": {
+     "reference_mae": 9.0561,
+     "reference_rmse": 13.2363,
+     "mae_skill": 0.215,
+     "rmse_skill": 0.1002
+    }
+   }
+  },
+  "Tamil Nadu": {
+   "continuous": {
+    "mae": 3.1498,
+    "rmse": 5.2255,
+    "bias": 0.1517,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 120,
+    "forecast_events": 181,
+    "samples": 184,
+    "hits": 119,
+    "misses": 1,
+    "false_alarms": 62,
+    "accuracy": 0.6576,
+    "recall": 0.9917,
+    "precision": 0.6575,
+    "csi": 0.6538,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 22,
+     "forecast_events": 8,
+     "samples": 184,
+     "hits": 5,
+     "misses": 17,
+     "false_alarms": 3,
+     "accuracy": 0.8913,
+     "recall": 0.2273,
+     "precision": 0.625,
+     "csi": 0.2,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 2,
+     "forecast_events": 2,
+     "samples": 184,
+     "hits": 0,
+     "misses": 2,
+     "false_alarms": 2,
+     "accuracy": 0.9783,
+     "recall": 0.0,
+     "precision": 0.0,
+     "csi": 0.0,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 50.991,
+    "predicted_at_max": 11.789,
+    "error_at_max": -39.202,
+    "ratio_at_max": 0.231,
+    "top5_mean_error": -19.625,
+    "top5_mean_ratio": 0.297,
+    "date_of_max": "2025-11-29"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 2.4058,
+     "rmse": 2.6467,
+     "bias": 2.4058,
+     "samples": 64
+    },
+    "light_1_10": {
+     "mae": 2.362,
+     "rmse": 3.7419,
+     "bias": 0.5131,
+     "samples": 98
+    },
+    "moderate_10_20": {
+     "mae": 6.5904,
+     "rmse": 7.5274,
+     "bias": -5.7015,
+     "samples": 20
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 31.153,
+     "rmse": 32.176,
+     "bias": -31.153,
+     "samples": 2
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.7663,
+    "mean_width": 6.915,
+    "below": 0.087,
+    "above": 0.1467,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 2.8299,
+     "reference_rmse": 5.711,
+     "mae_skill": -0.113,
+     "rmse_skill": 0.085
+    },
+    "climatology": {
+     "reference_mae": 4.0879,
+     "reference_rmse": 6.1165,
+     "mae_skill": 0.2295,
+     "rmse_skill": 0.1457
+    }
+   }
+  },
+  "Telangana": {
+   "continuous": {
+    "mae": 3.9786,
+    "rmse": 6.1893,
+    "bias": 0.3833,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 106,
+    "forecast_events": 155,
+    "samples": 184,
+    "hits": 106,
+    "misses": 0,
+    "false_alarms": 49,
+    "accuracy": 0.7337,
+    "recall": 1.0,
+    "precision": 0.6839,
+    "csi": 0.6839,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 41,
+     "forecast_events": 38,
+     "samples": 184,
+     "hits": 25,
+     "misses": 16,
+     "false_alarms": 13,
+     "accuracy": 0.8424,
+     "recall": 0.6098,
+     "precision": 0.6579,
+     "csi": 0.463,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 16,
+     "forecast_events": 7,
+     "samples": 184,
+     "hits": 5,
+     "misses": 11,
+     "false_alarms": 2,
+     "accuracy": 0.9293,
+     "recall": 0.3125,
+     "precision": 0.7143,
+     "csi": 0.2778,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 42.87,
+    "predicted_at_max": 23.58,
+    "error_at_max": -19.29,
+    "ratio_at_max": 0.55,
+    "top5_mean_error": -16.631,
+    "top5_mean_ratio": 0.534,
+    "date_of_max": "2025-08-27"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 2.1206,
+     "rmse": 3.114,
+     "bias": 2.1206,
+     "samples": 78
+    },
+    "light_1_10": {
+     "mae": 3.2712,
+     "rmse": 5.0396,
+     "bias": 2.7691,
+     "samples": 65
+    },
+    "moderate_10_20": {
+     "mae": 5.6272,
+     "rmse": 6.5005,
+     "bias": -3.3181,
+     "samples": 25
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 13.3344,
+     "rmse": 14.9685,
+     "bias": -11.995,
+     "samples": 16
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.788,
+    "mean_width": 9.36,
+    "below": 0.0924,
+    "above": 0.1196,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.5678,
+     "reference_rmse": 6.6259,
+     "mae_skill": -0.1151,
+     "rmse_skill": 0.0659
+    },
+    "climatology": {
+     "reference_mae": 5.6024,
+     "reference_rmse": 7.9797,
+     "mae_skill": 0.2898,
+     "rmse_skill": 0.2244
+    }
+   }
+  },
+  "Tripura": {
+   "continuous": {
+    "mae": 4.4257,
+    "rmse": 7.4951,
+    "bias": 0.6004,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 112,
+    "forecast_events": 137,
+    "samples": 184,
+    "hits": 112,
+    "misses": 0,
+    "false_alarms": 25,
+    "accuracy": 0.8641,
+    "recall": 1.0,
+    "precision": 0.8175,
+    "csi": 0.8175,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 41,
+     "forecast_events": 44,
+     "samples": 184,
+     "hits": 21,
+     "misses": 20,
+     "false_alarms": 23,
+     "accuracy": 0.7663,
+     "recall": 0.5122,
+     "precision": 0.4773,
+     "csi": 0.3281,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 11,
+     "forecast_events": 7,
+     "samples": 184,
+     "hits": 2,
+     "misses": 9,
+     "false_alarms": 5,
+     "accuracy": 0.9239,
+     "recall": 0.1818,
+     "precision": 0.2857,
+     "csi": 0.125,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 57.082,
+    "predicted_at_max": 12.312,
+    "error_at_max": -44.77,
+    "ratio_at_max": 0.216,
+    "top5_mean_error": -22.885,
+    "top5_mean_ratio": 0.472,
+    "date_of_max": "2025-07-07"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.439,
+     "rmse": 2.3945,
+     "bias": 1.4389,
+     "samples": 72
+    },
+    "light_1_10": {
+     "mae": 4.6867,
+     "rmse": 6.3148,
+     "bias": 4.2776,
+     "samples": 71
+    },
+    "moderate_10_20": {
+     "mae": 5.8348,
+     "rmse": 7.066,
+     "bias": -3.3417,
+     "samples": 30
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 18.4478,
+     "rmse": 22.5519,
+     "bias": -17.8716,
+     "samples": 11
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.8967,
+    "mean_width": 15.749,
+    "below": 0.0435,
+    "above": 0.0598,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 4.6569,
+     "reference_rmse": 8.6866,
+     "mae_skill": 0.0496,
+     "rmse_skill": 0.1372
+    },
+    "climatology": {
+     "reference_mae": 5.2446,
+     "reference_rmse": 8.0558,
+     "mae_skill": 0.1561,
+     "rmse_skill": 0.0696
+    }
+   }
+  },
+  "Uttar Pradesh": {
+   "continuous": {
+    "mae": 3.082,
+    "rmse": 4.692,
+    "bias": 0.4743,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 102,
+    "forecast_events": 131,
+    "samples": 184,
+    "hits": 102,
+    "misses": 0,
+    "false_alarms": 29,
+    "accuracy": 0.8424,
+    "recall": 1.0,
+    "precision": 0.7786,
+    "csi": 0.7786,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 44,
+     "forecast_events": 44,
+     "samples": 184,
+     "hits": 30,
+     "misses": 14,
+     "false_alarms": 14,
+     "accuracy": 0.8478,
+     "recall": 0.6818,
+     "precision": 0.6818,
+     "csi": 0.5172,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 7,
+     "forecast_events": 2,
+     "samples": 184,
+     "hits": 1,
+     "misses": 6,
+     "false_alarms": 1,
+     "accuracy": 0.962,
+     "recall": 0.1429,
+     "precision": 0.5,
+     "csi": 0.125,
+     "trustworthy": false,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 38.759,
+    "predicted_at_max": 18.93,
+    "error_at_max": -19.829,
+    "ratio_at_max": 0.488,
+    "top5_mean_error": -11.784,
+    "top5_mean_ratio": 0.595,
+    "date_of_max": "2025-09-01"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.0624,
+     "rmse": 1.6052,
+     "bias": 1.0605,
+     "samples": 82
+    },
+    "light_1_10": {
+     "mae": 3.7217,
+     "rmse": 4.5133,
+     "bias": 2.8294,
+     "samples": 58
+    },
+    "moderate_10_20": {
+     "mae": 4.7555,
+     "rmse": 5.7398,
+     "bias": -2.0767,
+     "samples": 37
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 12.594,
+     "rmse": 14.3383,
+     "bias": -12.4229,
+     "samples": 7
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9565,
+    "mean_width": 14.452,
+    "below": 0.0109,
+    "above": 0.0326,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.0342,
+     "reference_rmse": 5.2826,
+     "mae_skill": -0.0158,
+     "rmse_skill": 0.1118
+    },
+    "climatology": {
+     "reference_mae": 3.8574,
+     "reference_rmse": 5.6132,
+     "mae_skill": 0.201,
+     "rmse_skill": 0.1641
+    }
+   }
+  },
+  "Uttarakhand": {
+   "continuous": {
+    "mae": 3.86,
+    "rmse": 6.5619,
+    "bias": 0.7129,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 98,
+    "forecast_events": 118,
+    "samples": 184,
+    "hits": 97,
+    "misses": 1,
+    "false_alarms": 21,
+    "accuracy": 0.8804,
+    "recall": 0.9898,
+    "precision": 0.822,
+    "csi": 0.8151,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 48,
+     "forecast_events": 64,
+     "samples": 184,
+     "hits": 39,
+     "misses": 9,
+     "false_alarms": 25,
+     "accuracy": 0.8152,
+     "recall": 0.8125,
+     "precision": 0.6094,
+     "csi": 0.5342,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 18,
+     "forecast_events": 12,
+     "samples": 184,
+     "hits": 7,
+     "misses": 11,
+     "false_alarms": 5,
+     "accuracy": 0.913,
+     "recall": 0.3889,
+     "precision": 0.5833,
+     "csi": 0.3043,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 41.793,
+    "predicted_at_max": 26.094,
+    "error_at_max": -15.699,
+    "ratio_at_max": 0.624,
+    "top5_mean_error": -21.611,
+    "top5_mean_ratio": 0.435,
+    "date_of_max": "2025-09-01"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 0.7502,
+     "rmse": 1.4191,
+     "bias": 0.7038,
+     "samples": 86
+    },
+    "light_1_10": {
+     "mae": 5.3447,
+     "rmse": 6.4516,
+     "bias": 5.1358,
+     "samples": 50
+    },
+    "moderate_10_20": {
+     "mae": 4.3036,
+     "rmse": 5.8967,
+     "bias": 0.7478,
+     "samples": 30
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 13.8542,
+     "rmse": 16.0301,
+     "bias": -11.588,
+     "samples": 18
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9457,
+    "mean_width": 19.788,
+    "below": 0.0163,
+    "above": 0.038,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.929,
+     "reference_rmse": 7.5701,
+     "mae_skill": 0.0176,
+     "rmse_skill": 0.1332
+    },
+    "climatology": {
+     "reference_mae": 4.8107,
+     "reference_rmse": 7.1144,
+     "mae_skill": 0.1976,
+     "rmse_skill": 0.0777
+    }
+   }
+  },
+  "West Bengal": {
+   "continuous": {
+    "mae": 3.8657,
+    "rmse": 5.9113,
+    "bias": 0.7647,
+    "samples": 184
+   },
+   "occurrence": {
+    "events": 108,
+    "forecast_events": 133,
+    "samples": 184,
+    "hits": 108,
+    "misses": 0,
+    "false_alarms": 25,
+    "accuracy": 0.8641,
+    "recall": 1.0,
+    "precision": 0.812,
+    "csi": 0.812,
+    "trustworthy": true,
+    "threshold_mm": 1.0,
+    "decision": "forecast >= 1.0 mm"
+   },
+   "heavy": {
+    "10": {
+     "events": 51,
+     "forecast_events": 68,
+     "samples": 184,
+     "hits": 43,
+     "misses": 8,
+     "false_alarms": 25,
+     "accuracy": 0.8207,
+     "recall": 0.8431,
+     "precision": 0.6324,
+     "csi": 0.5658,
+     "trustworthy": true,
+     "threshold_mm": 10.0,
+     "decision": "forecast >= 10.0 mm"
+    },
+    "20": {
+     "events": 18,
+     "forecast_events": 9,
+     "samples": 184,
+     "hits": 4,
+     "misses": 14,
+     "false_alarms": 5,
+     "accuracy": 0.8967,
+     "recall": 0.2222,
+     "precision": 0.4444,
+     "csi": 0.1739,
+     "trustworthy": true,
+     "threshold_mm": 20.0,
+     "decision": "forecast >= 20.0 mm"
+    }
+   },
+   "peaks": {
+    "max_observed": 38.633,
+    "predicted_at_max": 17.682,
+    "error_at_max": -20.951,
+    "ratio_at_max": 0.458,
+    "top5_mean_error": -14.933,
+    "top5_mean_ratio": 0.581,
+    "date_of_max": "2025-07-28"
+   },
+   "by_intensity": {
+    "dry_lt1": {
+     "mae": 1.245,
+     "rmse": 1.9173,
+     "bias": 1.2391,
+     "samples": 76
+    },
+    "light_1_10": {
+     "mae": 5.1832,
+     "rmse": 6.7052,
+     "bias": 4.7757,
+     "samples": 57
+    },
+    "moderate_10_20": {
+     "mae": 3.3768,
+     "rmse": 4.2358,
+     "bias": -0.9445,
+     "samples": 33
+    },
+    "rather_heavy_20_64_5": {
+     "mae": 11.6552,
+     "rmse": 12.9002,
+     "bias": -10.8064,
+     "samples": 18
+    },
+    "heavy_ge64_5": {
+     "mae": null,
+     "rmse": null,
+     "bias": null,
+     "samples": 0
+    }
+   },
+   "interval": {
+    "nominal": 0.8,
+    "coverage": 0.9348,
+    "mean_width": 18.997,
+    "below": 0.0163,
+    "above": 0.0489,
+    "samples": 184
+   },
+   "skill": {
+    "persistence": {
+     "reference_mae": 3.6421,
+     "reference_rmse": 6.6368,
+     "mae_skill": -0.0614,
+     "rmse_skill": 0.1093
+    },
+    "climatology": {
+     "reference_mae": 5.0494,
+     "reference_rmse": 6.9485,
+     "mae_skill": 0.2344,
+     "rmse_skill": 0.1493
+    }
+   }
+  }
+ },
+ "gate_dynamics_pooled": {
+  "experts": [
+   "climatology",
+   "persistence",
+   "recent3",
+   "anom_persistence"
+  ],
+  "mean_weight": [
+   0.285,
+   0.2848,
+   0.1542,
+   0.2759
+  ],
+  "std_weight": [
+   0.0004,
+   0.0005,
+   0.0008,
+   0.0009
+  ],
+  "mean_std": 0.0006,
+  "mean_total_variation_step": 0.0004,
+  "mean_normalised_entropy": 0.9803,
+  "share_rows_not_modal_expert": 0.4132,
+  "static_warning": true
+ },
+ "gate_dynamics_by_state": {
+  "Andaman and Nicobar Islands": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2845,
+    0.2852,
+    0.1548,
+    0.2755
+   ],
+   "std_weight": [
+    0.0003,
+    0.0002,
+    0.0005,
+    0.0005
+   ],
+   "mean_std": 0.0004,
+   "mean_total_variation_step": 0.0005,
+   "mean_normalised_entropy": 0.9806,
+   "share_rows_not_modal_expert": 0.0978,
+   "static_warning": true
+  },
+  "Andhra Pradesh": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2848,
+    0.2851,
+    0.1542,
+    0.276
+   ],
+   "std_weight": [
+    0.0003,
+    0.0003,
+    0.0005,
+    0.0006
+   ],
+   "mean_std": 0.0004,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9803,
+   "share_rows_not_modal_expert": 0.3152,
+   "static_warning": true
+  },
+  "Arunachal Pradesh": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2847,
+    0.2853,
+    0.1543,
+    0.2757
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0008,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.212,
+   "static_warning": true
+  },
+  "Assam": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2847,
+    0.2851,
+    0.1542,
+    0.276
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0008,
+    0.0008
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9803,
+   "share_rows_not_modal_expert": 0.3859,
+   "static_warning": true
+  },
+  "Bihar": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.285,
+    0.2849,
+    0.1544,
+    0.2757
+   ],
+   "std_weight": [
+    0.0004,
+    0.0004,
+    0.0007,
+    0.0008
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0005,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.3587,
+   "static_warning": true
+  },
+  "Chandigarh": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2848,
+    0.1538,
+    0.2763
+   ],
+   "std_weight": [
+    0.0003,
+    0.0005,
+    0.0007,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0005,
+   "mean_normalised_entropy": 0.9802,
+   "share_rows_not_modal_expert": 0.3587,
+   "static_warning": true
+  },
+  "Chhattisgarh": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2849,
+    0.285,
+    0.1543,
+    0.2758
+   ],
+   "std_weight": [
+    0.0004,
+    0.0005,
+    0.0008,
+    0.0009
+   ],
+   "mean_std": 0.0007,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.4891,
+   "static_warning": true
+  },
+  "Dadra and Nagar Haveli and Daman and Diu": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2848,
+    0.1544,
+    0.2758
+   ],
+   "std_weight": [
+    0.0005,
+    0.0006,
+    0.001,
+    0.0012
+   ],
+   "mean_std": 0.0008,
+   "mean_total_variation_step": 0.0006,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.3424,
+   "static_warning": true
+  },
+  "Delhi": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2852,
+    0.2846,
+    0.154,
+    0.2762
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0007,
+    0.0008
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0006,
+   "mean_normalised_entropy": 0.9802,
+   "share_rows_not_modal_expert": 0.1848,
+   "static_warning": true
+  },
+  "Goa": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2846,
+    0.1546,
+    0.2756
+   ],
+   "std_weight": [
+    0.0004,
+    0.0004,
+    0.0009,
+    0.0009
+   ],
+   "mean_std": 0.0007,
+   "mean_total_variation_step": 0.0005,
+   "mean_normalised_entropy": 0.9805,
+   "share_rows_not_modal_expert": 0.2717,
+   "static_warning": true
+  },
+  "Gujarat": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2853,
+    0.2845,
+    0.154,
+    0.2762
+   ],
+   "std_weight": [
+    0.0004,
+    0.0006,
+    0.0008,
+    0.0009
+   ],
+   "mean_std": 0.0007,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9802,
+   "share_rows_not_modal_expert": 0.2609,
+   "static_warning": true
+  },
+  "Haryana": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2853,
+    0.2846,
+    0.1539,
+    0.2763
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0007,
+    0.0008
+   ],
+   "mean_std": 0.0005,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9802,
+   "share_rows_not_modal_expert": 0.1576,
+   "static_warning": true
+  },
+  "Himachal Pradesh": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2852,
+    0.2846,
+    0.1539,
+    0.2762
+   ],
+   "std_weight": [
+    0.0003,
+    0.0005,
+    0.0007,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9802,
+   "share_rows_not_modal_expert": 0.1957,
+   "static_warning": true
+  },
+  "Jammu and Kashmir": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2852,
+    0.2846,
+    0.154,
+    0.2761
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0006,
+    0.0007
+   ],
+   "mean_std": 0.0005,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9803,
+   "share_rows_not_modal_expert": 0.1685,
+   "static_warning": true
+  },
+  "Jharkhand": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2849,
+    0.285,
+    0.1542,
+    0.2759
+   ],
+   "std_weight": [
+    0.0004,
+    0.0004,
+    0.0008,
+    0.0008
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9803,
+   "share_rows_not_modal_expert": 0.462,
+   "static_warning": true
+  },
+  "Karnataka": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2848,
+    0.1543,
+    0.2758
+   ],
+   "std_weight": [
+    0.0004,
+    0.0004,
+    0.0006,
+    0.0006
+   ],
+   "mean_std": 0.0005,
+   "mean_total_variation_step": 0.0003,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.337,
+   "static_warning": true
+  },
+  "Kerala": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.285,
+    0.285,
+    0.1546,
+    0.2754
+   ],
+   "std_weight": [
+    0.0003,
+    0.0003,
+    0.0007,
+    0.0007
+   ],
+   "mean_std": 0.0005,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9805,
+   "share_rows_not_modal_expert": 0.4674,
+   "static_warning": true
+  },
+  "Ladakh": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2844,
+    0.1535,
+    0.2769
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0003,
+    0.0005
+   ],
+   "mean_std": 0.0004,
+   "mean_total_variation_step": 0.0003,
+   "mean_normalised_entropy": 0.98,
+   "share_rows_not_modal_expert": 0.1141,
+   "static_warning": true
+  },
+  "Lakshadweep": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2848,
+    0.1544,
+    0.2756
+   ],
+   "std_weight": [
+    0.0003,
+    0.0003,
+    0.0006,
+    0.0006
+   ],
+   "mean_std": 0.0004,
+   "mean_total_variation_step": 0.0003,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.25,
+   "static_warning": true
+  },
+  "Madhya Pradesh": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2847,
+    0.1543,
+    0.2759
+   ],
+   "std_weight": [
+    0.0005,
+    0.0005,
+    0.0009,
+    0.001
+   ],
+   "mean_std": 0.0007,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.375,
+   "static_warning": true
+  },
+  "Maharashtra": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2852,
+    0.2846,
+    0.1544,
+    0.2758
+   ],
+   "std_weight": [
+    0.0004,
+    0.0005,
+    0.0008,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0003,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.3043,
+   "static_warning": true
+  },
+  "Manipur": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2849,
+    0.285,
+    0.1542,
+    0.2759
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0008,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9803,
+   "share_rows_not_modal_expert": 0.4348,
+   "static_warning": true
+  },
+  "Meghalaya": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2847,
+    0.2851,
+    0.1544,
+    0.2758
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0009,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0005,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.3696,
+   "static_warning": true
+  },
+  "Mizoram": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2848,
+    0.2852,
+    0.1541,
+    0.276
+   ],
+   "std_weight": [
+    0.0004,
+    0.0004,
+    0.0007,
+    0.0008
+   ],
+   "mean_std": 0.0005,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9803,
+   "share_rows_not_modal_expert": 0.3587,
+   "static_warning": true
+  },
+  "Nagaland": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2848,
+    0.2851,
+    0.1544,
+    0.2757
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0009,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0005,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.375,
+   "static_warning": true
+  },
+  "Odisha": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2849,
+    0.285,
+    0.1543,
+    0.2759
+   ],
+   "std_weight": [
+    0.0005,
+    0.0005,
+    0.0009,
+    0.0009
+   ],
+   "mean_std": 0.0007,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.462,
+   "static_warning": true
+  },
+  "Puducherry": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2848,
+    0.1543,
+    0.2759
+   ],
+   "std_weight": [
+    0.0004,
+    0.0004,
+    0.0007,
+    0.0008
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0005,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.3152,
+   "static_warning": true
+  },
+  "Punjab": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2853,
+    0.2846,
+    0.1539,
+    0.2762
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0007,
+    0.0008
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9802,
+   "share_rows_not_modal_expert": 0.1739,
+   "static_warning": true
+  },
+  "Rajasthan": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2852,
+    0.2845,
+    0.1539,
+    0.2764
+   ],
+   "std_weight": [
+    0.0004,
+    0.0006,
+    0.0007,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0003,
+   "mean_normalised_entropy": 0.9802,
+   "share_rows_not_modal_expert": 0.2826,
+   "static_warning": true
+  },
+  "Sikkim": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2848,
+    0.2851,
+    0.1546,
+    0.2754
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0007,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0006,
+   "mean_normalised_entropy": 0.9805,
+   "share_rows_not_modal_expert": 0.3043,
+   "static_warning": true
+  },
+  "Tamil Nadu": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2849,
+    0.1544,
+    0.2757
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0005,
+    0.0006
+   ],
+   "mean_std": 0.0004,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.3533,
+   "static_warning": true
+  },
+  "Telangana": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2847,
+    0.1544,
+    0.2758
+   ],
+   "std_weight": [
+    0.0004,
+    0.0004,
+    0.0007,
+    0.0008
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.3152,
+   "static_warning": true
+  },
+  "Tripura": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2847,
+    0.285,
+    0.1541,
+    0.2761
+   ],
+   "std_weight": [
+    0.0004,
+    0.0004,
+    0.0008,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0005,
+   "mean_normalised_entropy": 0.9803,
+   "share_rows_not_modal_expert": 0.3804,
+   "static_warning": true
+  },
+  "Uttar Pradesh": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2851,
+    0.2848,
+    0.1543,
+    0.2759
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0007,
+    0.0007
+   ],
+   "mean_std": 0.0005,
+   "mean_total_variation_step": 0.0003,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.3152,
+   "static_warning": true
+  },
+  "Uttarakhand": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2852,
+    0.2848,
+    0.1542,
+    0.2759
+   ],
+   "std_weight": [
+    0.0003,
+    0.0004,
+    0.0008,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9803,
+   "share_rows_not_modal_expert": 0.25,
+   "static_warning": true
+  },
+  "West Bengal": {
+   "experts": [
+    "climatology",
+    "persistence",
+    "recent3",
+    "anom_persistence"
+   ],
+   "mean_weight": [
+    0.2848,
+    0.2849,
+    0.1543,
+    0.276
+   ],
+   "std_weight": [
+    0.0004,
+    0.0004,
+    0.0008,
+    0.0009
+   ],
+   "mean_std": 0.0006,
+   "mean_total_variation_step": 0.0004,
+   "mean_normalised_entropy": 0.9804,
+   "share_rows_not_modal_expert": 0.4783,
+   "static_warning": true
+  }
+ }
+}

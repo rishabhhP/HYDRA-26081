@@ -19,3 +19,8 @@ data/
 .drive_folder.html
 crop-yield-analysis/
 nwpblend/.git.local-source-backup/
+
+# v3 synthetic dry runs
+runtime/*.dry_run.json
+runtime/hydra_rain_v3_dry_run/
+reports/*.dry_run.md

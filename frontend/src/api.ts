@@ -11,4 +11,4 @@ export async function post<T>(path:string,body:unknown):Promise<T>{
 }
 export const query=(s:Selection)=>new URLSearchParams(Object.entries(s).map(([k,v])=>[k,String(v)])).toString();
 export const fmt=(x:number|null|undefined,n=2)=>x==null?'—':x.toLocaleString(undefined,{maximumFractionDigits:n});
-export const label=(s:string)=>({tp_mm:'Rainfall',t2m_C_mean:'Temperature',wind_speed_mean:'Wind speed',anom_persistence:'Anomaly persistence',recent3:'Recent 3-day mean',gating_adaptive:'HYDRA adaptive',lgbm_season:'Seasonal LightGBM'}[s]||s.replaceAll('_',' '));
+export const label=(s:string)=>({tp_mm:'Rainfall',t2m_C_mean:'Temperature',wind_speed_mean:'Wind speed',anom_persistence:'Anomaly persistence',recent3:'Recent 3-day mean',gbm_era5:'ERA5 gradient boosting',hurdle:'Wet/dry hurdle',spatial:'Spatial neighbourhood',monsoon:'Monsoon specialist',upper_q:'Upper quantile (P85)',gating_adaptive:'HYDRA adaptive',lgbm_season:'Seasonal LightGBM'}[s]||s.replaceAll('_',' '));
