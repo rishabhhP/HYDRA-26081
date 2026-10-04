@@ -136,7 +136,7 @@ class RainGate:
                 X=torch.from_numpy(self._scale(gate_inputs(rows, ex, self.numeric, self.experts, self.aux))),
                 cat=torch.from_numpy(self._cats(rows)),
                 E=torch.from_numpy(ex[self.experts].to_numpy(np.float32, copy=True)),
-                y=torch.from_numpy(rows["target"].to_numpy(np.float32)),
+                y=torch.from_numpy(rows["target"].to_numpy(np.float32, copy=True)),
                 heavy=torch.from_numpy(np.stack([heavy_labels[k] for k in self.heavy_keys], 1).astype(np.float32)),
             )
 

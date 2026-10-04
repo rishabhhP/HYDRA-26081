@@ -1,6 +1,6 @@
-# HYDRA v2 prototype
+# HYDRA prototype
 
-Map-first weather intelligence workspace with React/TypeScript, Leaflet and FastAPI. It includes the HYDRA neural-gating model code in `nwpblend/`, a retrained daily-mean state forecast cycle, and a WeatherGPT intent/slot model. Read `ARCHITECTURE.md` and `DATASET_ASSESSMENT.md` for integration boundaries.
+Map-first weather intelligence workspace with React/TypeScript, Leaflet and FastAPI. It includes the real-data HYDRA rainfall v3 replay, the separate published daily-mean state cycle, and a WeatherGPT intent/slot model. Read `ARCHITECTURE.md` and `DATASET_ASSESSMENT.md` for integration boundaries.
 
 ## Run locally (PowerShell, from HYDRA)
 
@@ -24,7 +24,7 @@ For frontend development run `npm.cmd run dev --prefix frontend` in a second ter
 - IMD state CSV through `/api/imd?state=KERALA`.
 - Deterministic weather scenarios and grounded evidence explanations. No risk numbers or live observations are fabricated.
 - Independent floating panels, world/India/Kerala views, map picking, layer search, command palette, timeline, and analytics dialogs.
-- Clickable boundaries for all 36 Indian states and union territories. Selecting a state loads the published HYDRA daily-mean neural-gating forecast at +24h and +48h.
+- Clickable boundaries for all 36 Indian states and union territories. Selecting a state loads the separately published HYDRA daily-mean neural-gating forecast at +24h and +48h.
 - Stackable renderers for forecast points, rainfall heatmaps, temperature cells, wind arrows, disagreement rings, event rings, expert diamonds and regime squares.
 - **Live IMD station weather** is a stackable map layer backed by IndianAPI. It fetches reports for distributed Indian cities through the server, caches them for 30 minutes, and never sends the provider key to the browser. Markers are live reporting stations rather than interpolated nationwide coverage.
 
@@ -51,11 +51,11 @@ To rebuild the published state cycle after staging compatible daily-mean ERA5 in
 
 The raw ERA5 archives are intentionally excluded from Git because of their size. The compact published HYDRA artifacts are committed under `runtime/hydra_daily_mean_state_blend/`.
 
-## Overview: six-month HYDRA rainfall replay
+## Overview: six-month HYDRA rainfall v3 replay
 
-The upper taskbar **Overview** shows a historical rainfall replay for every Indian state and UT. It covers **2025-07-01 through 2025-12-31**. For each valid day, HYDRA receives only the preceding **35 daily ERA5 observations**, produces a **+24-hour rainfall** prediction from its trained neural gate, and records the four actual experts: climatology, persistence, recent-three-day, and anomaly-persistence.
+The upper taskbar **Overview** shows the published HYDRA rainfall v3 historical replay for every Indian state and UT. It covers **2025-07-01 through 2025-12-31**. For each valid day, HYDRA uses only data available on its issue day, produces a **+24-hour rainfall** prediction from its trained neural gate, and records nine experts: climatology, persistence, recent-three-day, anomaly-persistence, ERA5 gradient boosting, wet/dry hurdle, spatial neighbourhood, monsoon, and upper quantile.
 
-The chart places the HYDRA blend, each expert, its empirical 80% residual interval, and the held-back ERA5 state-average rainfall on one timeline. Actual rainfall is comparison data only; it is never supplied to the forecast for the same day. The Overview does not use Open-Meteo or any hypothetical external-model line.
+The chart places the HYDRA blend, each expert, its conformal central 80% interval, and the held-back ERA5 state-average rainfall on one timeline. It also shows rain probability, heavy-rain area probabilities, local peak estimates, backtest error, and gate dynamics. Actual rainfall is comparison data only; it is never supplied to the forecast for the same day. The Overview does not use Open-Meteo or any hypothetical external-model line.
 
 To rebuild the published replay after staging the compatible 2025 archives:
 
@@ -185,7 +185,7 @@ Run (put one or more years of ERA5 daily-mean archives anywhere under the source
 
 `--synthetic-dry-run` on the first two scripts checks the pipeline on made-up weather and writes `*.dry_run.*` files only; those numbers mean nothing. Rolling validation retrains once per origin, so a multi-year run takes a while on CPU.
 
-Status: the v3 code has been exercised end to end on synthetic data, but it has not yet been trained or validated on real ERA5. Treat the replay as a heavy-rain warning model only after the rolling validation supports it.
+Published real-data result: the current v3 replay contains 184 dates for all 36 states. Across 6,624 state-days it has MAE **3.80 mm/day**, RMSE **7.47 mm/day**, and a negative bias of **0.82 mm/day**. Its central 80% intervals covered **89.9%** of held-back state means, so they are conservative. It beats climatology on MAE (17.0% skill) but is marginally worse than persistence overall (−2.7% MAE skill). It should be used for rainfall occurrence and low-to-moderate state-average rainfall, not as an accurate standalone predictor of extreme rainfall.
 
 ## Docker
 
@@ -193,4 +193,4 @@ Status: the v3 code has been exercised end to end on synthetic data, but it has 
 
 ## Known limits
 
-This prototype is not an operationally validated forecasting service. The published HYDRA state cycle is a retrained 2025 daily-mean cycle with a fixed 2025-12-31 issue date; it is not a continuously refreshed operational forecast. The dashboard reports held-out backtest error, while actual forecast error can only be calculated after matching observations for the forecast-valid period become available. The older three-cell archive remains limited to its supplied coverage. Other NWP experts, global weather fields, operational ingestion, calibrated confidence/bust models, impact/exposure models, and an LLM are integration pending. Historical benchmark skill is not local forecast verification. All pending modules explain the missing evidence.
+This prototype is not an operationally validated forecasting service. The published HYDRA state cycle is a separate 2025 daily-mean cycle with a fixed 2025-12-31 issue date; it is not the rainfall v3 replay and is not continuously refreshed. The v3 rainfall replay substantially underestimates state-average heavy rain: its >=20 mm/day recall is 24.4%, and its largest observed state mean was predicted at 2.3% of the observed amount. It must not be used alone for extreme-rain decisions. The older three-cell archive remains limited to its supplied coverage. Other NWP experts, global weather fields, operational ingestion, calibrated confidence/bust models, impact/exposure models, and an LLM are integration pending. Historical benchmark skill is not local forecast verification. All pending modules explain the missing evidence.

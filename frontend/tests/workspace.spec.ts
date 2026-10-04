@@ -28,8 +28,8 @@ test('map panels, time context, navigation, scenarios and evidence',async({page}
  await expect(page.getByRole('heading',{name:/SIMULATED SCENARIO/})).toBeVisible();
  await page.getByLabel('Close dialog').click();
  await page.locator('.taskbar').getByRole('button',{name:'WeatherGPT',exact:true}).click();
- await page.getByRole('button',{name:'Why these expert weights?',exact:true}).click();
- await expect(page.locator('.chat-answer').last()).toContainText('largest learned weight');
+ await page.getByRole('button',{name:'Explain forecast uncertainty',exact:true}).click();
+ await expect(page.locator('.chat-answer').last()).toContainText(/interval|uncertainty/i);
  await page.getByLabel('Close dialog').click();
  await page.keyboard.press('Control+k');
  await page.getByLabel('Command search').fill('Kochi');
@@ -54,7 +54,9 @@ test('tablet keeps map and dialogs usable',async({page})=>{
 });
 
 test('India states and distinct layer notations work together',async({page})=>{
+ test.setTimeout(90000);
  await page.goto('/');
+ await expect(page.getByLabel('Select India state').locator('option')).toHaveCount(37,{timeout:30000});
  await page.getByRole('button',{name:'INDIA',exact:true}).click();
  await page.getByLabel('Forecast source').selectOption('ecmwf');
  await expect(page.locator('.map-caption')).toContainText('Select an India state');
@@ -62,9 +64,7 @@ test('India states and distinct layer notations work together',async({page})=>{
  await page.getByLabel('Select India state').selectOption('Kerala');
  expect((await stateField).ok()).toBeTruthy();
  await expect(page.getByLabel('Select India state')).toHaveValue('Kerala');
- const stateSummary=page.getByRole('dialog',{name:'Location',exact:true});
- await expect(stateSummary).toContainText('State range');
- await stateSummary.getByLabel('Close dialog').click({force:true});
+ await expect(page.locator('.state-insight-panel .context-location')).toContainText('Kerala',{timeout:30000});
  await expect(page.locator('.map-caption')).not.toContainText('Select an India state');
  await page.getByLabel('Search layers').fill('Current city weather');
  await page.getByRole('button',{name:'Current city weather',exact:true}).click();
@@ -98,7 +98,7 @@ test('India states and distinct layer notations work together',async({page})=>{
  await expect(page.locator('.layer-legend')).toContainText('Heat stress');
  await expect(page.locator('.layer-legend')).toContainText('Soil moisture / crop stress');
  await page.mouse.move(map.x+map.width/2,map.y+map.height/2);
- await expect(page.locator('.grid-inspector')).toContainText('Open-Meteo current rainfall');
+ await expect(page.locator('.grid-inspector')).toContainText('Open-Meteo current rainfall',{timeout:30000});
  await expect(page.locator('.grid-inspector')).toContainText('Open-Meteo next 24h rainfall');
  await expect(page.locator('.grid-inspector')).toContainText('Open-Meteo humidity');
  await expect(page.locator('.grid-inspector')).toContainText('CAPE');

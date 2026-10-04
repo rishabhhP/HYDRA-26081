@@ -96,8 +96,28 @@ class ExpertBank:
             return clf, amount
         raise KeyError(name)
 
+    def _drop_unusable_features(self, rows: pd.DataFrame) -> None:
+        """Remove optional numeric fields that have no observation in this training fold.
+
+        ERA5 packages can legitimately omit optional fields such as total-column water
+        vapour.  HistGradientBoosting handles isolated missing values, but fails when a
+        feature is entirely NaN.  OOF folds must make this decision independently so
+        every fitted expert sees only columns available in that fold.
+        """
+        usable = [
+            column for column in self.numeric
+            if column in rows and np.isfinite(rows[column].to_numpy(np.float64, copy=False)).any()
+        ]
+        dropped = [column for column in self.numeric if column not in usable]
+        self.numeric = usable
+        self.cols = self.numeric + list(CAT_COLS)
+        self.spatial_cols = [c for c in self.numeric if c.startswith(SPATIAL_PREFIXES)] + ["season_id", "lead_days"]
+        if dropped:
+            self.meta["dropped_all_missing_features"] = dropped
+
     def fit(self, rows: pd.DataFrame) -> "ExpertBank":
         rows = _cap(rows, C.MAX_EXPERT_ROWS)
+        self._drop_unusable_features(rows)
         for name in TRAINED:
             print(f"    expert {name}: fitting on {len(rows):,} rows", flush=True)
             self.models[name] = self._fit_one(name, rows)

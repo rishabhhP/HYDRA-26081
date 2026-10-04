@@ -303,6 +303,11 @@ def state_bounds():
     return indexed
 
 
+@lru_cache(maxsize=1)
+def _imd_source_states():
+    return frozenset(r['state'] for r in rows(REPO / 'rainfall_statewise_daily_imd_clean.csv'))
+
+
 def _imd_state_name(name):
     aliases = {
         'andaman and nicobar islands': 'ANDAMAN & NICOBAR (UT)',
@@ -311,19 +316,30 @@ def _imd_state_name(name):
     }
     if name.casefold() in aliases:
         return aliases[name.casefold()]
-    available = {r['state'] for r in rows(REPO / 'rainfall_statewise_daily_imd_clean.csv')}
+    available = _imd_source_states()
     normalized = re.sub(r'[^a-z]', '', name.casefold())
     return next((v for v in available if re.sub(r'[^a-z]', '', v.casefold().replace('ut', '')) == normalized), name.upper())
 
 
+@lru_cache(maxsize=1)
 def imd_latest_by_state():
+    """Return the newest supplied IMD row for each mapped state/UT.
+
+    The catalog calls this function on the initial page load.  Indexing the
+    source file once avoids re-scanning every IMD row for each of the 36
+    states, while preserving exactly the same latest-row selection.
+    """
     data = rows(REPO / 'rainfall_statewise_daily_imd_clean.csv')
+    latest_by_source_name = {}
+    for row in data:
+        current = latest_by_source_name.get(row['state'])
+        if current is None or row['date'] >= current['date']:
+            latest_by_source_name[row['state']] = row
     result = {}
     for feature in state_features():
         name = feature['properties']['name']
-        matched = [r for r in data if r['state'] == _imd_state_name(name)]
-        if matched:
-            row = matched[-1]
+        row = latest_by_source_name.get(_imd_state_name(name))
+        if row:
             result[name] = {'date': row['date'], 'daily_actual_mm': number(row['daily_actual_mm']),
                             'daily_normal_mm': number(row['daily_normal_mm']), 'daily_category': row['daily_category']}
     return result

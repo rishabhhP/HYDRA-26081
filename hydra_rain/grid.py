@@ -230,7 +230,7 @@ def synthetic_cube(start: str = "2024-01-01", days: int = 540, shape: tuple[int,
     from scipy.ndimage import gaussian_filter
 
     H, W = shape
-    dates = np.arange(np.datetime64(start, "D"), np.datetime64(start, "D") + days)
+    dates = np.arange(np.datetime64(start, "D"), np.datetime64(start, "D") + np.timedelta64(days, "D"))
     doy = (dates - dates.astype("datetime64[Y]")).astype(int)
     monsoon = np.clip(np.sin((doy - 150) / 365 * 2 * np.pi * 1.6), 0, None)       # Jun-Sep bump
     lat = np.linspace(30, 30 - 0.25 * (H - 1), H)
