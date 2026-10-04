@@ -76,3 +76,23 @@ export function GroupedBars({groups,unit,seriesColors}:{groups:Group[];unit?:str
  </svg>
  <ul className="legend inline">{series.map((s,i)=><li key={s}><i style={{background:colour(s,i)}}/>{s}</li>)}</ul></>;
 }
+
+/* ---------- Historical timeline with an optional empirical interval ---------- */
+export type LineSeries={label:string;values:(number|null|undefined)[];color?:string;dash?:string;width?:number};
+export function TimeSeries({labels,series,unit,band}:{labels:string[];series:LineSeries[];unit?:string;band?:{lower:(number|null|undefined)[];upper:(number|null|undefined)[];label?:string;color?:string}}){
+ const values=[...series.flatMap(s=>s.values),...(band?[...band.lower,...band.upper]:[])].filter((v):v is number=>typeof v==='number'&&isFinite(v));
+ if(!values.length)return <p className="muted">No timeline data to chart.</p>;
+ const W=760,H=310,L=48,R=14,T=20,B=48,iw=W-L-R,ih=H-T-B,max=niceMax(Math.max(0,...values));
+ const x=(i:number)=>L+(labels.length<2?iw/2:i/(labels.length-1)*iw),y=(value:number)=>T+(1-Math.max(0,value)/max)*ih;
+ const ticks=[0,.25,.5,.75,1].map(t=>max*t),tf=tickFmt(max/4);
+ const path=(points:(number|null|undefined)[])=>{let open=false;return points.map((value,index)=>{if(value==null||!isFinite(value)){open=false;return ''}const command=open?'L':'M';open=true;return `${command}${x(index).toFixed(2)},${y(value).toFixed(2)}`}).join(' ')};
+ const dateLabels=labels.map((value,index)=>({value,index})).filter(({value,index})=>index===0||index===labels.length-1||value.slice(8,10)==='01');
+ const bandPath=band?`${path(band.upper)} ${[...band.lower].map((value,reverseIndex)=>{const index=band.lower.length-1-reverseIndex;if(value==null||!isFinite(value))return '';return `L${x(index).toFixed(2)},${y(value).toFixed(2)}`}).join(' ')} Z`:'';
+ return <><svg viewBox={`0 0 ${W} ${H}`} className="chart timeline-chart" role="img" aria-label="HYDRA rainfall replay timeline">
+  {ticks.map((tick,index)=><g key={index}><line x1={L} x2={W-R} y1={y(tick)} y2={y(tick)} stroke={GRID}/><text x={L-7} y={y(tick)+3} textAnchor="end" fill={AXIS} fontSize="9" fontFamily={mono}>{tf(tick)}</text></g>)}
+  {band&&<path d={bandPath} fill={band.color||'#d6a85f'} opacity=".14"><title>{band.label||'HYDRA empirical 80% interval'}</title></path>}
+  {series.map((line,index)=><path key={line.label} d={path(line.values)} fill="none" stroke={line.color||PALETTE[index%PALETTE.length]} strokeWidth={line.width||1.7} strokeDasharray={line.dash} strokeLinecap="round" strokeLinejoin="round"><title>{line.label}</title></path>)}
+  {dateLabels.map(({value,index})=><text key={`${value}-${index}`} x={x(index)} y={H-19} textAnchor={index===0?'start':index===labels.length-1?'end':'middle'} fill={AXIS} fontSize="9" fontFamily={mono}>{new Date(`${value}T00:00:00Z`).toLocaleDateString('en-IN',{month:'short',year:'2-digit',timeZone:'UTC'})}</text>)}
+  {unit&&<text x={L} y={T-6} fill={AXIS} fontSize="9" fontFamily={mono}>{unit}</text>}
+ </svg><ul className="legend inline timeline-legend">{[...(band?[{label:band.label||'Empirical 80% interval',color:band.color||'#d6a85f'}]:[]),...series].map((line,index)=><li key={line.label}><i style={{background:line.color||PALETTE[index%PALETTE.length]}}/>{line.label}</li>)}</ul></>;
+}

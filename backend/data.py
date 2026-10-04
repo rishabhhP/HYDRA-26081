@@ -21,6 +21,7 @@ SNAPSHOT = REPO / 'forecast_india_2026-09-24_0h_clean.csv'
 RUNTIME = ROOT / 'runtime'
 ERA5_IMPORT_PREFLIGHT = ROOT / 'data' / 'processed' / 'hydra_era5_2025_import_preflight.json'
 HYDRA_DAILY_MEAN_BLEND = RUNTIME / 'hydra_daily_mean_state_blend.json'
+HYDRA_ROLLING_RAINFALL_REPLAY = RUNTIME / 'hydra_rolling_rainfall_replay.json'
 INDIA_STATES = ROOT / 'frontend' / 'public' / 'india-states.geojson'
 MAP_CITIES = (
     ('Srinagar', 34.0837, 74.7973), ('Shimla', 31.1048, 77.1734),
@@ -99,6 +100,41 @@ def daily_mean_hydra_state_outlook(name):
         }
     except (OSError, ValueError, TypeError):
         return None
+
+
+def hydra_rolling_rainfall_replay(name, start=None, end=None):
+    """Return a published HYDRA-only historical rainfall replay for one state.
+
+    The replay's next-day ERA5 value is retained only as the backtest reference.
+    It is never used by the stored prediction for that day, and this function
+    intentionally has no provider fallback.
+    """
+    if not HYDRA_ROLLING_RAINFALL_REPLAY.exists():
+        return pending('The HYDRA rolling rainfall replay has not been published yet.')
+    try:
+        payload = json.loads(HYDRA_ROLLING_RAINFALL_REPLAY.read_text(encoding='utf-8'))
+        records = payload.get('states', {}).get(name)
+        if payload.get('kind') != 'hydra_rolling_rainfall_replay' or not isinstance(records, list):
+            return pending('The published rolling rainfall artifact is not valid for this state.')
+        if start:
+            records = [row for row in records if str(row.get('valid_date', '')) >= str(start)]
+        if end:
+            records = [row for row in records if str(row.get('valid_date', '')) <= str(end)]
+        if not records:
+            return {'status': 'unavailable', 'state': name, 'rows': [],
+                    'message': 'The requested dates are outside the published HYDRA rainfall replay.'}
+        return {
+            'status': 'available', 'state': name, 'rows': records,
+            'target': payload.get('target'), 'unit': payload.get('unit'),
+            'lead_hours': payload.get('lead_hours'), 'history_days': payload.get('history_days'),
+            'training_cutoff': payload.get('training_cutoff'),
+            'calibration': payload.get('calibration'), 'coverage': payload.get('coverage'),
+            'message': payload.get('message'),
+            'grid_cell_count': payload.get('grid_cell_count', {}).get(name),
+            'nearest_grid_fallback': bool(payload.get('nearest_grid_fallback', {}).get(name)),
+        }
+    except (OSError, ValueError, TypeError):
+        return pending('The HYDRA rolling rainfall replay could not be read.')
 
 
 def era5_import_preflight():

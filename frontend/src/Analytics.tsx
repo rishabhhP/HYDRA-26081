@@ -3,6 +3,7 @@ import {ArrowUpRight,Send,Database,Info} from 'lucide-react';
 import type {Context,Module,Selection,Variable,ForecastValue,StateOutlook} from './types';
 import {fmt,get,label,post} from './api';
 import {ChartCard,Donut,HBars,GroupedBars,PALETTE} from './Charts';
+import RollingRainfall from './RollingRainfall';
 
 export function Empty({children}:{children:React.ReactNode}){return <div className="empty"><Info size={22}/><h3>Loading location intelligence</h3><p>{children}</p></div>;}
 export function Weights({value}:{value:ForecastValue|undefined}){return value?.experts.length?<div className="weights">{value.experts.map((e,i)=><div key={e.name}><div className="weight-label"><span><i style={{background:['#d6a85f','#76a394','#8f9fba','#b199b9'][i%4]}}/>{label(e.name)}</span><strong>{fmt(e.weight*100,1)}%</strong></div><div className="track"><i style={{width:`${e.weight*100}%`,background:['#d6a85f','#76a394','#8f9fba','#b199b9'][i%4]}}/></div></div>)}</div>:<p className="muted">No learned expert weights for this source.</p>;}
@@ -66,8 +67,9 @@ function StateForecastBriefing({outlook}:{outlook:StateOutlook|null}){
 }
 function Operations(){const [data,setData]=useState<{status:string;missing:string[];stages:{name:string;status:string}[];sources:{name:string;status:string}[]}|null>(null),[error,setError]=useState('');useEffect(()=>{get<typeof data>('health').then(setData).catch(e=>setError(e.message))},[]);return error?<p>{error}</p>:!data?<p>Checking services…</p>:<><div className="sectionline"><h3>Pipeline status</h3><span className="badge">{data.status}</span></div><div className="opsgrid">{data.stages.map(s=><div className="card" key={s.name}><small>{s.name}</small><strong className={s.status==='available'?'green':'amber'}>{s.status}</strong></div>)}</div><h3>Source registry</h3>{data.sources.map(s=><div className="datarow" key={s.name}><span>{s.name}</span><span>{s.status}</span></div>)}<p className="note">No live ingestion cycle has run. Checkpoint availability does not mean inference is ready. Missing: {data.missing.join(', ')||'none'}.</p><a href="/api/docs" target="_blank" rel="noreferrer">Open API documentation ↗</a></>;}
 
-export default function Analytics({module,ctx,selection,variable,open,stateOutlook}:{module:Module;ctx:Context|null;selection:Selection;variable:Variable;open:(m:Module)=>void;stateOutlook?:StateOutlook|null}){
+export default function Analytics({module,ctx,selection,variable,open,stateOutlook,states=[]}:{module:Module;ctx:Context|null;selection:Selection;variable:Variable;open:(m:Module)=>void;stateOutlook?:StateOutlook|null;states?:{name:string;code:string}[]}){
  const value=ctx?.forecast[variable];
+ if(module==='Situation')return <RollingRainfall selectedState={selection.state} states={states}/>;
  if(module==='Operations')return <Operations/>;
  if(module==='Verification')return <Verification variable={variable} lead={selection.lead}/>;
  if(module==='Observations')return <Observations selection={selection}/>;

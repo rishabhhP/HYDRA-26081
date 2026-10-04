@@ -166,6 +166,17 @@ def state_outlook(state: str=Query(min_length=2, max_length=100), latitude: floa
     }
 
 
+@app.get('/api/hydra-rolling-rainfall')
+def hydra_rolling_rainfall(state: str=Query(min_length=2, max_length=100), start: date | None=None, end: date | None=None):
+    """Six-month, one-day HYDRA rainfall replay for the Overview chart."""
+    feature = D.state_feature(state)
+    if feature is None:
+        raise HTTPException(404, 'Unknown India state or union territory.')
+    if start and end and start > end:
+        raise HTTPException(422, 'start must be on or before end')
+    return D.hydra_rolling_rainfall_replay(feature['properties']['name'], start, end)
+
+
 @app.get('/api/radar-frames')
 def radar_frames():
     try:

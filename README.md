@@ -51,6 +51,20 @@ To rebuild the published state cycle after staging compatible daily-mean ERA5 in
 
 The raw ERA5 archives are intentionally excluded from Git because of their size. The compact published HYDRA artifacts are committed under `runtime/hydra_daily_mean_state_blend/`.
 
+## Overview: six-month HYDRA rainfall replay
+
+The upper taskbar **Overview** shows a historical rainfall replay for every Indian state and UT. It covers **2025-07-01 through 2025-12-31**. For each valid day, HYDRA receives only the preceding **35 daily ERA5 observations**, produces a **+24-hour rainfall** prediction from its trained neural gate, and records the four actual experts: climatology, persistence, recent-three-day, and anomaly-persistence.
+
+The chart places the HYDRA blend, each expert, its empirical 80% residual interval, and the held-back ERA5 state-average rainfall on one timeline. Actual rainfall is comparison data only; it is never supplied to the forecast for the same day. The Overview does not use Open-Meteo or any hypothetical external-model line.
+
+To rebuild the published replay after staging the compatible 2025 archives:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/build_hydra_rolling_rainfall_replay.py
+```
+
+This writes `runtime/hydra_rolling_rainfall_replay.json`, which the local `/api/hydra-rolling-rainfall` endpoint serves to the Overview.
+
 The local Natural Earth basemap works without a tile service. Fonts fall back to system fonts when offline. Natural Earth geographic data is public domain, obtained from https://github.com/nvkelso/natural-earth-vector. India state boundaries are supplied by `vardhan-maps`, generated from OpenStreetMap and licensed under ODbL 1.0; they are best-effort operational boundaries rather than survey-grade geometry.
 
 ## Fresh trained-model inference
