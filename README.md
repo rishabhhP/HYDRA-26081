@@ -162,6 +162,24 @@ npm.cmd run build --prefix frontend
 
 Browser tests (with API running on port 8000): `npm.cmd test --prefix frontend`. First install its browser with `node frontend/node_modules/@playwright/test/cli.js install chromium`.
 
+## Rainfall replay assessment and next model work
+
+The six-month Overview chart is a historical HYDRA replay, not an operational accuracy claim. It compares the +24-hour neural-gated rainfall forecast with the held-back ERA5 state-average rainfall for each day from 2025-07-01 to 2025-12-31.
+
+For the default Maharashtra replay, HYDRA follows the broad wet-to-dry seasonal pattern but does not yet predict intense rainfall accurately enough for warning decisions: MAE is **3.36 mm/day**, RMSE is **5.17 mm/day**, and the largest observed daily mean (**40.45 mm/day** on 2025-08-18) was predicted as **18.10 mm/day**. These values measure a state-average historical replay; they do not describe accuracy for every state, district, or event.
+
+Current limitations and planned changes:
+
+- The current experts derive mainly from prior rainfall. They cannot reliably anticipate a new convective system before local rainfall begins.
+- State aggregation smooths local extremes. The next training cycle should predict on the 0.25-degree grid first, then aggregate state results for display.
+- Add ERA5 atmospheric predictors to the gate and experts: temperature, dew point, humidity, CAPE, pressure, wind components, cloud cover, radiation, and moisture indicators.
+- Retain climatology and persistence as baselines, then add trained meteorological, spatial-neighbourhood, wet/dry occurrence, rainfall-amount, and monsoon-regime experts. HYDRA's neural gate should allocate among those experts using the atmospheric state.
+- Train a separate rain-occurrence and heavy-rain head, and weight high-rainfall errors appropriately. This addresses the current underprediction of peaks.
+- Use rolling-origin evaluation across years, seasons, states, and rainfall regimes. Report MAE, RMSE, bias, rain occurrence skill, heavy-rain precision/recall, peak error, interval coverage, and interval width.
+- The displayed interval is conservative: the implementation currently uses a 90th-percentile calibration residual but labels it as 80%. Replace it with a correctly calibrated central 80% conformal interval, stratified by state, season, lead, and rainfall regime.
+
+The present HYDRA replay is useful for testing the end-to-end neural-gating workflow and comparing experts. It should not be presented as a high-accuracy heavy-rainfall warning model until these changes are trained and independently validated.
+
 ## Docker
 
 `docker compose up --build` serves port 8000. Model repo, sample observations and optional runtime outputs are mounted read-only. Supply production files on the host and run the inference worker locally or in a separate container. The image is CPU-oriented and includes PyTorch.
