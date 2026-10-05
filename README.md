@@ -252,6 +252,3 @@ Published real-data result: the current v3 replay contains 184 dates for all 36 
 
 `docker compose up --build` serves port 8000. Model repo, sample observations and optional runtime outputs are mounted read-only. Supply production files on the host and run the inference worker locally or in a separate container. The image is CPU-oriented and includes PyTorch.
 
-## Known limits
-
-This prototype is not an operationally validated forecasting service. The published HYDRA state cycle is a separate 2025 daily-mean cycle with a fixed 2025-12-31 issue date; it is not the rainfall v3 replay and is not continuously refreshed. The v3 rainfall replay substantially underestimates state-average heavy rain: its >=20 mm/day recall is 24.4%, and its largest observed state mean was predicted at 2.3% of the observed amount. It must not be used alone for extreme-rain decisions. The older three-cell archive remains limited to its supplied coverage. Other NWP experts, global weather fields, operational ingestion, calibrated confidence/bust models, impact/exposure models, and an LLM are integration pending. Historical benchmark skill is not local forecast verification. All pending modules explain the missing evidence.
