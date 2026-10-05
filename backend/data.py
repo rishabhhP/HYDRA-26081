@@ -115,10 +115,10 @@ def daily_mean_hydra_state_outlook(name):
         return None
 
 
-def hydra_rolling_rainfall_replay(name, start=None, end=None):
+def hydra_rolling_rainfall_replay(name, start=None, end=None, lead=1):
     """Return a published HYDRA-only historical rainfall replay for one state.
 
-    The replay's next-day ERA5 value is retained only as the backtest reference.
+    The replay's next-day target value is retained only as the backtest reference.
     It is never used by the stored prediction for that day, and this function
     intentionally has no provider fallback.
     """
@@ -126,8 +126,19 @@ def hydra_rolling_rainfall_replay(name, start=None, end=None):
         return pending('The HYDRA rolling rainfall replay has not been published yet.')
     try:
         payload = json.loads(HYDRA_ROLLING_RAINFALL_REPLAY.read_text(encoding='utf-8'))
-        records = payload.get('states', {}).get(name)
-        if payload.get('kind') != 'hydra_rolling_rainfall_replay' or not isinstance(records, list):
+        if payload.get('kind') != 'hydra_rolling_rainfall_replay':
+            return pending('The published rolling rainfall artifact is not valid for this state.')
+        available_leads = [1]
+        if isinstance(payload.get('states_lead2'), dict):
+            available_leads.append(2)
+        if lead not in available_leads:
+            return {'status': 'unavailable', 'state': name, 'rows': [], 'available_leads': available_leads,
+                    'message': f'The published HYDRA rainfall replay has no +{lead * 24}-hour rows yet.'}
+        state_records = payload.get('states') if lead == 1 else payload.get('states_lead2')
+        if not isinstance(state_records, dict):
+            return pending('The published rolling rainfall artifact is not valid for this state.')
+        records = state_records.get(name)
+        if not isinstance(records, list):
             return pending('The published rolling rainfall artifact is not valid for this state.')
         if start:
             records = [row for row in records if str(row.get('valid_date', '')) >= str(start)]
@@ -141,8 +152,8 @@ def hydra_rolling_rainfall_replay(name, start=None, end=None):
         return {
             'status': 'available', 'state': name, 'rows': records,
             'model_version': payload.get('model_version', 'hydra-rain-v2-legacy'),
-            'target': payload.get('target'), 'unit': payload.get('unit'),
-            'lead_hours': payload.get('lead_hours'), 'history_days': payload.get('history_days'),
+            'target': payload.get('target'), 'truth': payload.get('truth') or {'source': 'era5'}, 'unit': payload.get('unit'),
+            'lead_hours': lead * 24, 'available_leads': available_leads, 'history_days': payload.get('history_days'),
             'training_cutoff': payload.get('training_cutoff'),
             'calibration': payload.get('calibration'), 'coverage': payload.get('coverage'),
             'interval': payload.get('interval') or LEGACY_INTERVAL,

@@ -1,0 +1,88 @@
+{
+ "status": "provisional",
+ "failed": [
+  "80% interval coverage within 75-85%",
+  "No more losing states than the previous release"
+ ],
+ "checks": [
+  {
+   "check": "MAE not worse than raw v3",
+   "passed": true,
+   "required": true,
+   "detail": "1.101 vs 2.314 mm/day"
+  },
+  {
+   "check": "RMSE not worse than raw v3",
+   "passed": true,
+   "required": true,
+   "detail": "3.495 vs 5.180 mm/day"
+  },
+  {
+   "check": "No more states losing to persistence",
+   "passed": true,
+   "required": true,
+   "detail": "34 vs 34 of 36"
+  },
+  {
+   "check": "80% interval coverage within 75-85%",
+   "passed": false,
+   "required": true,
+   "detail": "86.2% (adaptive conformal (ACI))"
+  },
+  {
+   "check": "Interval tails balanced (within 4 points)",
+   "passed": true,
+   "required": true,
+   "detail": "7.3% above, 6.5% below"
+  },
+  {
+   "check": "P(>=10 mm) calibrated (Brier skill > 0)",
+   "passed": true,
+   "required": true,
+   "detail": "0.764"
+  },
+  {
+   "check": "P(>=20 mm) calibrated (Brier skill > 0)",
+   "passed": true,
+   "required": true,
+   "detail": "0.698"
+  },
+  {
+   "check": "Post-processor rebuilt after the latest replay",
+   "passed": true,
+   "required": true,
+   "detail": "up to date"
+  },
+  {
+   "check": "Lead 2 (+48h) evaluated",
+   "passed": true,
+   "required": false,
+   "detail": "evaluated"
+  },
+  {
+   "check": "MAE not worse than the previous release",
+   "passed": true,
+   "required": true,
+   "detail": "1.101 vs 2.760"
+  },
+  {
+   "check": "RMSE not worse than the previous release",
+   "passed": true,
+   "required": true,
+   "detail": "3.495 vs 7.077"
+  },
+  {
+   "check": "No more losing states than the previous release",
+   "passed": false,
+   "required": true,
+   "detail": "34 vs 20"
+  }
+ ],
+ "truth": "imd",
+ "test_period": [
+  "2025-08-01",
+  "2025-12-31"
+ ],
+ "test_state_days": 5202,
+ "evaluation_file": "hydra_v3_1_evaluation_imd.json"
+}

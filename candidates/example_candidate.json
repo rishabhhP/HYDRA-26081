@@ -1,0 +1,9 @@
+{
+ "name": "example_candidate",
+ "description": "Fill in the exact settings of the promising candidate (MAE 2.59 / RMSE 6.56 / recall 40.4%), then freeze. Keys not given use production defaults.",
+ "chosen_on": {"start": "2025-08-01", "end": "2025-12-31"},
+ "amount": {"method": "blend", "blend_weight_gate": 0.7, "extreme_alpha": 5.0},
+ "gate": {"eta": 0.05, "decay": 0.95, "cap": 0.5},
+ "probabilities": "stack",
+ "interval": {"method": "aci", "gamma": 0.03, "buffer_days": 45}
+}

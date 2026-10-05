@@ -65,7 +65,8 @@ def replay_rows(states_frame) -> list[dict]:
     return rows
 
 
-def build(cube, output: Path, artifacts: Path, start: date, end: date, train_gate: bool = True, label: str = "ERA5") -> dict:
+def build(cube, output: Path, artifacts: Path, start: date, end: date, train_gate: bool = True, label: str = "ERA5",
+          truth: dict | None = None) -> dict:
     model = HydraRainModel().fit(cube, np.datetime64(start - timedelta(days=1)), train_gate=train_gate)
     model.save(artifacts)
     first = cube.day_index(np.datetime64(start)) - LEAD_DAYS
@@ -74,6 +75,7 @@ def build(cube, output: Path, artifacts: Path, start: date, end: date, train_gat
     cells = cells[cells["actual_mm"].notna()]
     states = states[states["actual_mm"].notna()]
     lead1 = states[states["lead_days"] == LEAD_DAYS]
+    lead2 = states[states["lead_days"] == 2]
     per_state, metrics_state, metrics_cell = {}, {}, {}
     for name in cube.state_names:
         frame = lead1[lead1["state"] == name]
@@ -87,6 +89,8 @@ def build(cube, output: Path, artifacts: Path, start: date, end: date, train_gat
         "kind": "hydra_rolling_rainfall_replay",
         "model_version": C.MODEL_VERSION,
         "target": "tp_mm", "unit": "mm/day", "lead_hours": LEAD_DAYS * 24,
+        # v3.4: which rainfall the model was trained and verified on ("era5" or "imd", with coverage and day alignment)
+        "truth": truth or {"source": "era5"},
         "history_days": 30,
         "training_cutoff": model.meta["cutoff"],
         "training_splits": model.meta["splits"],
@@ -106,6 +110,8 @@ def build(cube, output: Path, artifacts: Path, start: date, end: date, train_gat
                     "aggregated to the state. Every +24-hour value used only data available on its issue day; "
                     "observed rainfall is retained for comparison only."),
         "states": per_state,
+        # v3.1: +48h rows so post-processing and the diagnostic can be verified at lead 2 as well
+        "states_lead2": {name: replay_rows(lead2[lead2["state"] == name]) for name in cube.state_names},
         "metrics": {"state_scale": metrics_state, "cell_scale": metrics_cell},
         "gate_dynamics": R.gate_dynamics(lead1),
         "grid_cell_count": {name: int(len(cube.state_cells[name])) for name in cube.state_names},
@@ -121,6 +127,23 @@ def build(cube, output: Path, artifacts: Path, start: date, end: date, train_gat
     return payload
 
 
+def imd_truth(cube, args) -> dict:
+    """Swap the cube's rainfall for IMD gridded rainfall (see hydra_rain/imd_target.py)."""
+    from hydra_imd.grid import open_dir
+    from hydra_rain.imd_target import apply_imd_target
+
+    imd = open_dir(args.imd_dir, realtime=tuple(args.imd_realtime.split(":")) if args.imd_realtime else None)
+    shift = args.imd_day_shift if args.imd_day_shift == "auto" else int(args.imd_day_shift)
+    report = apply_imd_target(cube, imd, shift)
+    print(f"IMD target: day shift {report['imd_day_shift']}, {report['days_with_imd']}/{report['days_total']} days, "
+          f"{report['imd_share_model_cells']:.0%} of state cell-days from IMD", flush=True)
+    if report["alignment"]:
+        print("  alignment (shift: correlation) " + ", ".join(f"{k}: {v['correlation']:.3f}" for k, v in report["alignment"]["by_shift"].items()))
+    if report["imd_share_model_cells"] < 0.5:
+        print("  WARNING: under half of the training cell-days have IMD data; check the IMD years cover the ERA5 years.")
+    return report
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--source-dir", type=Path, default=SOURCE_DIR,
@@ -129,6 +152,11 @@ def main() -> None:
     parser.add_argument("--artifacts", type=Path, default=ARTIFACTS)
     parser.add_argument("--start", type=date.fromisoformat, default=date(2025, 7, 1))
     parser.add_argument("--end", type=date.fromisoformat, default=date(2025, 12, 31))
+    parser.add_argument("--target", choices=["era5", "imd"], default="era5",
+                        help="rainfall used as training target and rainfall-history input (v3.4)")
+    parser.add_argument("--imd-dir", type=Path, default=ROOT / "data" / "raw" / "imd")
+    parser.add_argument("--imd-realtime", help="also read IMD real-time files START:END (YYYY-MM-DD:YYYY-MM-DD)")
+    parser.add_argument("--imd-day-shift", default="auto", help="auto (measured), -1, 0 or 1")
     parser.add_argument("--synthetic-dry-run", action="store_true",
                         help="Exercise the pipeline on synthetic weather (never overwrites the published replay)")
     args = parser.parse_args()
@@ -144,8 +172,10 @@ def main() -> None:
                         date(2025, 7, 1), date(2025, 12, 29), train_gate, "synthetic")
     else:
         cube = load_era5(args.source_dir)
+        truth = imd_truth(cube, args) if args.target == "imd" else None
         output = args.output
-        payload = build(cube, output, args.artifacts, args.start, args.end)
+        payload = build(cube, output, args.artifacts, args.start, args.end, truth=truth,
+                        label="ERA5 (atmosphere) + IMD (rainfall)" if truth else "ERA5")
     print(f"Published {payload['coverage']['days']} HYDRA v3 replay days for {len(payload['states'])} states to {output}")
 
 

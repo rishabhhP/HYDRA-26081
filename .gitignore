@@ -9,6 +9,7 @@ drive-folder.html
 test-results/
 frontend/test-results/
 frontend/tsconfig.tsbuildinfo
+.tools/
 
 # Local source archives and extracted ERA5 inputs.  The published runtime
 # contains the compact trained HYDRA artifacts needed to run the dashboard.

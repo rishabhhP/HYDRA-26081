@@ -2,6 +2,7 @@ import {useEffect, useMemo, useState} from 'react';
 import {Activity, AlertTriangle, CalendarDays, CloudRain, Database, Gauge, Scale, Target} from 'lucide-react';
 import {fmt, get, label} from './api';
 import {ChartCard, TimeSeries} from './Charts';
+import PostprocessedPanel from './PostprocessedPanel';
 
 type StateOption={name:string;code:string};
 type Expert={name:string;value:number|null;weight:number|null};
@@ -12,9 +13,9 @@ type CellMetrics={heavy:Record<string,Contingency>;occurrence:Contingency&{accur
 type StateMetrics={local_heavy:Record<string,Contingency>;local_peak:{max_observed:number|null;predicted_at_max:number|null;ratio_at_max:number|null}};
 type Interval={nominal:number|null;label:string;method:string;legacy?:boolean};
 type Dynamics={mean_std:number|null;mean_total_variation_step:number|null;mean_normalised_entropy:number|null;static_warning:boolean};
-type Replay={status:string;state:string;model_version?:string;target?:string;unit?:string;lead_hours?:number;history_days?:number;training_cutoff?:string;calibration?:string;coverage?:{start:string;end:string;days:number};
- interval?:Interval;heavy_thresholds_mm?:number[];state_p95_mm?:number;experts?:string[];metrics?:{state_scale?:{lead1?:StateMetrics}|null;cell_scale?:CellMetrics|null}|null;gate_dynamics?:Dynamics|null;
- message?:string;grid_cell_count?:number;nearest_grid_fallback?:boolean;rows:ReplayRow[]};
+type Replay={status:string;state:string;model_version?:string;target?:string;truth?:{source?:string;note?:string};unit?:string;lead_hours?:number;history_days?:number;training_cutoff?:string;calibration?:string;coverage?:{start:string;end:string;days:number};
+ interval?:Interval;heavy_thresholds_mm?:number[];state_p95_mm?:number;experts?:string[];metrics?:{state_scale?:Record<string,StateMetrics>|null;cell_scale?:CellMetrics|null}|null;gate_dynamics?:Dynamics|null;
+ message?:string;grid_cell_count?:number;nearest_grid_fallback?:boolean;available_leads?:number[];rows:ReplayRow[]};
 
 const EXPERT_COLOURS=['#76a394','#8f9fba','#b199b9','#d26e55','#5fa8c9','#c9a3d9','#9cc16a','#e08fb0','#e9c979'];
 const BASELINES=['climatology','persistence','recent3','anom_persistence'];
@@ -48,9 +49,9 @@ function Metric({name,value,note,warn}:{name:string;value:string;note?:string;wa
 }
 
 export default function RollingRainfall({selectedState,states}:{selectedState?:string;states:StateOption[]}){
- const [state,setState]=useState(selectedState||'Maharashtra'),[data,setData]=useState<Replay|null>(null),[error,setError]=useState(''),[showExperts,setShowExperts]=useState<boolean|null>(null);
+ const [state,setState]=useState(selectedState||'Maharashtra'),[lead,setLead]=useState(1),[data,setData]=useState<Replay|null>(null),[error,setError]=useState(''),[showExperts,setShowExperts]=useState<boolean|null>(null);
  useEffect(()=>{if(selectedState)setState(selectedState)},[selectedState]);
- useEffect(()=>{const ac=new AbortController();setData(null);setError('');get<Replay>(`hydra-rolling-rainfall?state=${encodeURIComponent(state)}`,ac.signal).then(setData).catch(e=>{if(e.name!=='AbortError')setError(e.message)});return()=>ac.abort();},[state]);
+ useEffect(()=>{const ac=new AbortController();setData(null);setError('');get<Replay>(`hydra-rolling-rainfall?state=${encodeURIComponent(state)}&lead=${lead}`,ac.signal).then(setData).catch(e=>{if(e.name!=='AbortError')setError(e.message)});return()=>ac.abort();},[state,lead]);
  const rows=data?.rows||[];
  const expertNames=useMemo(()=>data?.experts||(rows[0]?.experts.map(e=>e.name))||BASELINES,[data,rows]);
  const v3=Boolean(rows[0]&&rows[0].p_rain!=null);
@@ -62,27 +63,28 @@ export default function RollingRainfall({selectedState,states}:{selectedState?:s
  if(!data)return <p className="loading">Preparing the HYDRA rainfall replay…</p>;
  if(data.status!=='available')return <div className="empty"><Database size={22}/><h3>Rainfall replay unavailable</h3><p>{data.message}</p></div>;
  const interval=data.interval||{nominal:null,label:'Interval',method:'',legacy:true};
+ const reference=(data.truth?.source||'era5').toUpperCase();
  const legacy=Boolean(interval.legacy);
  const nominal=interval.nominal??null;
  const coverageOff=nominal!=null?Math.abs(s.coverage-nominal)>0.05:true;
  const expertsVisible=showExperts??!v3;
- const cell=data.metrics?.cell_scale||null,local=data.metrics?.state_scale?.lead1||null;
+ const cell=data.metrics?.cell_scale||null,local=data.metrics?.state_scale?.[`lead${lead}`]||null;
  const staticGate=data.gate_dynamics?.static_warning??weightStd<0.02;
  return <div className="rolling-rainfall">
   <section className="replay-hero">
    <div><small>OVERVIEW · HYDRA ROLLING BACKTEST · {(data.model_version||'v2').toUpperCase()}</small><h3>Six-month rainfall replay</h3><p>{data.message}</p></div>
-   <label className="replay-state"><span>STATE / UT</span><select aria-label="Rainfall replay state" value={state} onChange={event=>setState(event.target.value)}>{states.map(option=><option key={option.code} value={option.name}>{option.name}</option>)}</select></label>
+   <div className="replay-controls"><label className="replay-state"><span>STATE / UT</span><select aria-label="Rainfall replay state" value={state} onChange={event=>setState(event.target.value)}>{states.map(option=><option key={option.code} value={option.name}>{option.name}</option>)}</select></label><label className="replay-state"><span>FORECAST LEAD</span><select aria-label="Rainfall replay lead" value={lead} onChange={event=>setLead(Number(event.target.value))}>{(data.available_leads||[1]).map(option=><option key={option} value={option}>+{option*24} HOURS</option>)}</select></label></div>
   </section>
   {legacy&&<div className="replay-warning" role="note"><AlertTriangle size={15}/><p><b>Legacy replay.</b> This file predates HYDRA v3: four rainfall-only experts on state averages, a nearly static gate, and a band built from the p90 residual. That band covers {pct(s.coverage,1)} here, so it is not an 80% interval. Rebuild with <code>scripts/build_hydra_rolling_rainfall_replay.py</code> after staging ERA5.</p></div>}
   <div className="replay-facts">
    <div><CalendarDays size={15}/><span>Window</span><b>{data.coverage?.start} → {data.coverage?.end}</b></div>
    <div><Activity size={15}/><span>Issue rule</span><b>{data.history_days} prior days → +{data.lead_hours}h</b></div>
    <div><Scale size={15}/><span>HYDRA replay MAE</span><b>{fmt(s.mae)} {data.unit}</b></div>
-   <div><Database size={15}/><span>State grid</span><b>{fmt(data.grid_cell_count,0)} ERA5 cells{v3?' · cell-level model':''}</b></div>
+   <div><Database size={15}/><span>State grid</span><b>{fmt(data.grid_cell_count,0)} 0.25° cells{v3?' · cell-level model':''}</b></div>
   </div>
-  <ChartCard title={`${data.state} · daily rainfall`} subtitle={`Observed ERA5 state mean vs HYDRA’s +${data.lead_hours}h neural-gated blend · ${data.unit}`}>
+  <ChartCard title={`${data.state} · daily rainfall`} subtitle={`Observed ${reference} state mean vs HYDRA’s +${data.lead_hours}h neural-gated blend · ${data.unit}`}>
    <TimeSeries labels={rows.map(row=>row.valid_date)} unit={data.unit} band={{lower:rows.map(row=>row.interval80[0]),upper:rows.map(row=>row.interval80[1]),label:interval.label,color:'#d6a85f'}} series={[
-    {label:'Observed ERA5 rainfall',values:rows.map(row=>row.actual_mm),color:'#dbe4de',width:2.5},
+    {label:`Observed ${reference} rainfall`,values:rows.map(row=>row.actual_mm),color:'#dbe4de',width:2.5},
     {label:'HYDRA adaptive blend',values:rows.map(row=>row.hydra_mm),color:'#d6a85f',width:2.2},
     ...(expertsVisible?experts.map(expert=>({label:label(expert.name),values:expert.values,color:EXPERT_COLOURS[expert.index%EXPERT_COLOURS.length],dash:'5 4',width:1.1})):[]),
    ]}/>
@@ -134,10 +136,11 @@ export default function RollingRainfall({selectedState,states}:{selectedState?:s
   <ChartCard title={`${data.state} · neural gate allocation`} subtitle={`Expert weight per day · % · ${staticGate?'nearly static: the gate is not responding to conditions':'varies with the atmospheric state'}`}>
    <TimeSeries labels={rows.map(row=>row.valid_date)} unit="%" series={experts.map(expert=>({label:label(expert.name),values:expert.weights,color:EXPERT_COLOURS[expert.index%EXPERT_COLOURS.length],width:1.5}))}/>
   </ChartCard>
+  <PostprocessedPanel state={state} unit={data.unit}/>
   <section className="replay-method">
-   <div><small>HOW TO READ THIS</small><h3>Forecast first. Observed data second.</h3><p>For every date, HYDRA issued its rainfall value using data available on the issue day only. The observed ERA5 rainfall shown in white was held back until comparison. {v3?'HYDRA v3 predicts every 0.25° grid cell from ERA5 atmospheric predictors (CAPE, moisture, pressure, wind, cloud, radiation) and rainfall history, blends nine experts with a neural gate, and only then averages to the state.':'The coloured lines are the four rainfall-derived experts supplied to the legacy gate; the gold line is its weighted blend.'}</p></div>
+   <div><small>HOW TO READ THIS</small><h3>Forecast first. Observed data second.</h3><p>For every date, HYDRA issued its rainfall value using data available on the issue day only. The observed {reference} rainfall shown in white was held back until comparison. {v3?'HYDRA v3.4 predicts every 0.25° grid cell from ERA5 atmospheric predictors (CAPE, moisture, pressure, wind, cloud, radiation) and IMD rainfall history where available, blends nine experts with a neural gate, and only then averages to the state.':'The coloured lines are the four rainfall-derived experts supplied to the legacy gate; the gold line is its weighted blend.'}</p></div>
    <dl><div><dt>Training cutoff</dt><dd>{data.training_cutoff}</dd></div><div><dt>Mean expert spread</dt><dd>{fmt(averageSpread)} {data.unit}</dd></div><div><dt>Replay RMSE</dt><dd>{fmt(s.rmse)} {data.unit}</dd></div><div><dt>Interval</dt><dd>{interval.label}</dd></div></dl>
   </section>
-  <p className="footnote"><Gauge size={11}/> {legacy?interval.method:data.calibration} Expert spread measures disagreement between HYDRA’s inputs; it is not a confidence percentage. State-mean heavy thresholds ({STATE_HEAVY_MM} mm/day) are much stricter than cell thresholds because averaging smooths local downpours. No provider forecast is used in this replay.</p>
+  <p className="footnote"><Gauge size={11}/> {legacy?interval.method:data.calibration} {data.truth?.note&&`Rainfall target: ${data.truth.note} `}Expert spread measures disagreement between HYDRA’s inputs; it is not a confidence percentage. State-mean heavy thresholds ({STATE_HEAVY_MM} mm/day) are much stricter than cell thresholds because averaging smooths local downpours. No provider forecast is used in this replay.</p>
  </div>;
 }

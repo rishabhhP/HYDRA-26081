@@ -61,6 +61,9 @@ def resolve_intent(q: str, s: Slots) -> tuple[str, float, list]:
     if not s.places and not s.variables and not s.india_scope and not re.search(weather_words, t) \
             and intent not in ("greeting", "thanks_bye", "capabilities"):
         return "out_of_scope", max(conf, 0.8), ranked
+    if re.search(r"\b(alerts?|warnings?|watch(es)?|tiers?|heavy[- ]rain risk|chance of heavy|probability of heavy)\b", t) \
+            and s.time.start and s.time.start <= _today():
+        return "extremes", max(conf, 0.8), ranked
     modelish = bool(re.search(r"\b(hydra|model|forecast(s|ing)? (error|skill|accuracy)|backtest|replay|gate|expert)\b", t))
     if re.search(r"\b(cumulative|season(al)? (total|rainfall|so far|to date)|so far this season)\b", t) and not s.state_scope:
         return "anomaly", max(conf, 0.75), ranked

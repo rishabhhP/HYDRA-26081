@@ -51,9 +51,9 @@ To rebuild the published state cycle after staging compatible daily-mean ERA5 in
 
 The raw ERA5 archives are intentionally excluded from Git because of their size. The compact published HYDRA artifacts are committed under `runtime/hydra_daily_mean_state_blend/`.
 
-## Overview: six-month HYDRA rainfall v3 replay
+## Statistics: six-month HYDRA rainfall v3 replay
 
-The upper taskbar **Overview** shows the published HYDRA rainfall v3 historical replay for every Indian state and UT. It covers **2025-07-01 through 2025-12-31**. For each valid day, HYDRA uses only data available on its issue day, produces a **+24-hour rainfall** prediction from its trained neural gate, and records nine experts: climatology, persistence, recent-three-day, anomaly-persistence, ERA5 gradient boosting, wet/dry hurdle, spatial neighbourhood, monsoon, and upper quantile.
+The upper taskbar **Statistics** shows the published HYDRA rainfall v3 historical replay for every Indian state and UT. It covers **2025-07-01 through 2025-12-31**. For each valid day, HYDRA uses only data available on its issue day, produces a **+24-hour rainfall** prediction from its trained neural gate, and records nine experts: climatology, persistence, recent-three-day, anomaly-persistence, ERA5 gradient boosting, wet/dry hurdle, spatial neighbourhood, monsoon, and upper quantile.
 
 The chart places the HYDRA blend, each expert, its conformal central 80% interval, and the held-back ERA5 state-average rainfall on one timeline. It also shows rain probability, heavy-rain area probabilities, local peak estimates, backtest error, and gate dynamics. Actual rainfall is comparison data only; it is never supplied to the forecast for the same day. The Overview does not use Open-Meteo or any hypothetical external-model line.
 
@@ -64,6 +64,59 @@ To rebuild the published replay after staging the compatible 2025 archives:
 ```
 
 This writes `runtime/hydra_rolling_rainfall_replay.json`, which the local `/api/hydra-rolling-rainfall` endpoint serves to the Overview.
+
+### v3.2 data validation and post-processing
+
+The v3.2 add-on adds a separate, gauge-based truth path and a post-processing evaluation layer. It does not replace the published replay until its out-of-sample evaluation is complete.
+
+- `hydra_imd/` downloads IMD 0.25° daily gridded rainfall, checks its grid layout and land/sea mask, then writes state means and local maxima to `runtime/imd_state_daily.csv`.
+- `hydra_post/` compares ERA5 with IMD truth, evaluates rainfall amounts and heavy-rain probabilities at both +24 h and +48 h, uses issue-time-only lagged observations, and produces asymmetric 80% intervals plus calibrated alert probabilities.
+- The rainfall feature builder now supports moisture-flux convergence and CAPE × humidity predictors. `HYDRA_EXCLUDE_FEATURES` enables the supplied ablation runner to compare them against the baseline on identical folds.
+
+Install the optional download clients and run the sequence below after configuring a CDS API key in `%USERPROFILE%\.cdsapirc`:
+
+```powershell
+.\.venv\Scripts\pip.exe install -r requirements.txt
+.\.venv\Scripts\python.exe -m hydra_imd.download --years 2015-2025 --dir data/raw/imd
+.\.venv\Scripts\python.exe -m hydra_imd.build --dir data/raw/imd
+.\.venv\Scripts\python.exe -m hydra_post.truth_check
+.\.venv\Scripts\python.exe scripts/download_era5_parallel.py --years 2020-2024 --workers 4
+.\.venv\Scripts\python.exe scripts/run_feature_ablation.py --source-dir data/raw/era5_all_years --max-folds 8 --step-days 60
+.\.venv\Scripts\python.exe scripts/build_hydra_rolling_rainfall_replay.py --source-dir data/raw/era5_all_years
+.\.venv\Scripts\python.exe -m hydra_post.evaluate --truth imd
+.\.venv\Scripts\python.exe -m hydra_post.evaluate --truth imd --lead 2
+.\.venv\Scripts\python.exe -m hydra_post.apply
+```
+
+The IMD and CDS source data are excluded from Git. The IMD provider can be temporarily unavailable; its download can be rerun without affecting the prototype. Evaluation reports, not in-sample post-processed rows, determine whether a new post-processor is published to the UI.
+
+### v3.3 calibrated replay release
+
+The rainfall replay page includes a calibrated HYDRA panel when post-processing artifacts are available. It shows out-of-sample rainfall amounts, balanced 80% intervals, calibrated heavy-rain probabilities, alert tiers, state reliability, and the release-gate result. Historical WeatherGPT heavy-rain questions use the same replay-only artifacts.
+
+Run the release gate after an evaluation and post-processing run:
+
+```powershell
+.\.venv\Scripts\python.exe -m hydra_post.release
+```
+
+The UI labels a release **Validated** only when its required checks pass. A failed check keeps the release **Provisional** and displays the reason. Before rebuilding the replay, snapshot the published artifacts; then check or roll back the result as needed:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/publish_release.py snapshot --note "before multi-year retrain"
+.\.venv\Scripts\python.exe scripts/publish_release.py check
+.\.venv\Scripts\python.exe scripts/publish_release.py rollback
+```
+
+The calibrated panel uses out-of-sample rows whenever available. It does not present fitted rows as forecasts.
+
+### v3.4 IMD-target release
+
+The current rainfall release evaluates the post-processed HYDRA replay against IMD state-average rainfall for **2025-08-01 through 2025-12-31**. Each test month is predicted using only earlier data with a one-day embargo. The published artifacts include the post-processed rows, calibrated heavy-rain probabilities, adaptive 80% intervals, the release-gate result, and separate +48-hour evaluation evidence.
+
+The current +24-hour out-of-sample release reduces amount error from **2.314 to 1.101 mm/day MAE** and from **5.180 to 3.495 mm/day RMSE** against IMD. Its calibrated probabilities have positive Brier skill for the 10 mm and 20 mm state thresholds. The release remains **Provisional**: adaptive 80% interval coverage is 86.2%, above the 75–85% target, and 34 of 36 states do not beat persistence on MAE. The dashboard presents this status and its evidence instead of calling the release validated.
+
+The final interface keeps forecast, observation, impact, and HYDRA diagnostic layers separate. Weather regime, forecast-confidence, and forecast-bust-risk controls are intentionally absent because no calibrated operational artifacts support them. The **Events** workspace is reserved for the upcoming event-intelligence feature.
 
 The local Natural Earth basemap works without a tile service. Fonts fall back to system fonts when offline. Natural Earth geographic data is public domain, obtained from https://github.com/nvkelso/natural-earth-vector. India state boundaries are supplied by `vardhan-maps`, generated from OpenStreetMap and licensed under ODbL 1.0; they are best-effort operational boundaries rather than survey-grade geometry.
 

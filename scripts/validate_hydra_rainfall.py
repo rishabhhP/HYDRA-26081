@@ -35,6 +35,10 @@ def main() -> None:
     parser.add_argument("--first-origin")
     parser.add_argument("--last-origin")
     parser.add_argument("--max-folds", type=int)
+    parser.add_argument("--target", choices=["era5", "imd"], default="era5")
+    parser.add_argument("--imd-dir", type=Path, default=ROOT / "data" / "raw" / "imd")
+    parser.add_argument("--imd-realtime")
+    parser.add_argument("--imd-day-shift", default="auto")
     parser.add_argument("--synthetic-dry-run", action="store_true")
     args = parser.parse_args()
     train_gate = True
@@ -48,9 +52,15 @@ def main() -> None:
         args.report = args.report.with_name("HYDRA_RAINFALL_VALIDATION.dry_run.md")
     else:
         cube = load_era5(args.source_dir)
+    truth = None
+    if args.target == "imd" and not args.synthetic_dry_run:
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from build_hydra_rolling_rainfall_replay import imd_truth
+        truth = imd_truth(cube, args)
     result = V.run(cube, args.step_days, args.horizon_days, args.min_train_days, args.first_origin,
                    args.last_origin, args.max_folds, train_gate)
     result["status"] = "available" if not args.synthetic_dry_run else "dry_run"
+    result["truth"] = truth or {"source": "era5"}
     result["coverage"] = {"start": str(cube.dates[0]), "end": str(cube.dates[-1]), "missing_optional": cube.missing_optional}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=1, allow_nan=False), encoding="utf-8")

@@ -17,6 +17,11 @@ from . import imagery
 from weather_query_parser.nlp.query_catalog import QUERY_CATALOG
 
 app = FastAPI(title='HYDRA Intelligence API', version='0.1.0', docs_url='/api/docs')
+
+# HYDRA v3.1 post-processed rainfall: calibrated heavy-rain probabilities, alert tiers, release gate.
+# Registered before the static frontend mount so these routes are not shadowed.
+from .postprocessed import build_router as _postprocessed_router  # noqa: E402
+app.include_router(_postprocessed_router())
 log = logging.getLogger('hydra')
 Source = Literal['archive','ecmwf','production']
 
@@ -128,9 +133,8 @@ def catalog():
             'layers': [{'id': k, 'name': v, 'group': group, 'available': available} for k,v,group,available in [
                 ('forecast','HYDRA optimized points','Forecast',True),('heatmap','Grid-value heatmap','Forecast',True),('temperature','Temperature grid','Forecast',True),('wind','Wind notation','Forecast',True),
                 ('live_weather','Live weather locations','Observations',True),('open_meteo_rainfall','Open-Meteo current rainfall','Observations',True),('open_meteo_rainfall_24h','Open-Meteo 24h rain outlook','Observations',True),('open_meteo_humidity','Open-Meteo humidity','Observations',True),('open_meteo_lightning','Lightning watch (Open-Meteo)','Observations',True),('open_meteo_thunderstorm','Thunderstorm potential','Observations',True),('open_meteo_wind_gust','Wind-gust risk','Observations',True),('open_meteo_heat_stress','Heat stress','Impact',True),('open_meteo_soil_moisture','Soil moisture / crop stress','Impact',True),
-                ('spread','Model disagreement','Intelligence',True),('weights','Expert weights','Intelligence',True),('regime','Weather regime','Intelligence',True),
-                ('events','Extreme probabilities','Events',True),('confidence','Forecast confidence','Intelligence',False),('bust','Forecast bust risk','Intelligence',False),
-                ('rainfall_obs','Current city weather','Observations',True),('radar','Radar precipitation','Observations',True),('satellite','IMD satellite IR','Observations',True),('flood','Flood risk','Impact',False),('exposure','Population exposure','Impact',False)]]}
+                ('spread','Model disagreement','HYDRA diagnostics',True),('weights','Expert weights','HYDRA diagnostics',True),('regime','Weather regime','HYDRA diagnostics',True),('events','Extreme probabilities','HYDRA diagnostics',True),
+                ('rainfall_obs','Current city weather','Observations',True),('radar','Radar precipitation','Observations',True),('satellite','IMD satellite IR','Observations',True)]]}
 
 
 @app.get('/api/weathergpt-v2/status')
@@ -183,14 +187,14 @@ def state_outlook(state: str=Query(min_length=2, max_length=100), latitude: floa
 
 
 @app.get('/api/hydra-rolling-rainfall')
-def hydra_rolling_rainfall(state: str=Query(min_length=2, max_length=100), start: date | None=None, end: date | None=None):
-    """Six-month, one-day HYDRA rainfall replay for the Overview chart."""
+def hydra_rolling_rainfall(state: str=Query(min_length=2, max_length=100), lead: int=Query(1, ge=1, le=2), start: date | None=None, end: date | None=None):
+    """HYDRA rainfall replay for the Overview chart at +24h or +48h."""
     feature = D.state_feature(state)
     if feature is None:
         raise HTTPException(404, 'Unknown India state or union territory.')
     if start and end and start > end:
         raise HTTPException(422, 'start must be on or before end')
-    return D.hydra_rolling_rainfall_replay(feature['properties']['name'], start, end)
+    return D.hydra_rolling_rainfall_replay(feature['properties']['name'], start, end, lead)
 
 
 @app.get('/api/hydra-rainfall-validation')

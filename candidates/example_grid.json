@@ -1,0 +1,10 @@
+{
+ "name": "example_grid",
+ "description": "Nested test of a selection procedure: each month picks among these variants using earlier months only. The first entry is the default for the first month.",
+ "grid": [
+  {"name": "production-like", "amount": {"method": "blend", "blend_weight_gate": 0.5}},
+  {"name": "gate-heavy blend", "amount": {"method": "blend", "blend_weight_gate": 0.7, "extreme_alpha": 5.0}},
+  {"name": "extreme-weighted mixture", "amount": {"method": "mixture", "extreme_alpha": 6.0}},
+  {"name": "skill gate only", "amount": {"method": "gate"}}
+ ]
+}

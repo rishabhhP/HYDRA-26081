@@ -1,0 +1,1725 @@
+{
+ "design": {
+  "test_period": [
+   "2025-08-01",
+   "2025-12-31"
+  ],
+  "test_state_days": 5202,
+  "folds": [
+   {
+    "test_month": "2025-08",
+    "train_days": 30,
+    "selected_amount": "skill_gate",
+    "aci_levels_end": {
+     "a_lo": 0.097,
+     "a_hi": 0.106
+    },
+    "inner_scores": {
+     "raw_hydra": 9.783,
+     "skill_gate": 1.385,
+     "log_extreme": 6.949,
+     "poisson": 6.631,
+     "mixture": 4.183
+    },
+    "probability_models": {
+     "state_10": "gradient boosting + isotonic (386 training events)",
+     "state_20": "gradient boosting + isotonic (156 training events)",
+     "state_64.5": "logistic (only 11 training events)",
+     "local_64.5": "gradient boosting + isotonic (327 training events)"
+    }
+   },
+   {
+    "test_month": "2025-09",
+    "train_days": 61,
+    "selected_amount": "skill_gate",
+    "aci_levels_end": {
+     "a_lo": 0.101,
+     "a_hi": 0.125
+    },
+    "inner_scores": {
+     "raw_hydra": 11.681,
+     "skill_gate": 1.881,
+     "log_extreme": 5.578,
+     "poisson": 4.857,
+     "mixture": 2.924
+    },
+    "probability_models": {
+     "state_10": "gradient boosting + isotonic (785 training events)",
+     "state_20": "gradient boosting + isotonic (311 training events)",
+     "state_64.5": "logistic (only 22 training events)",
+     "local_64.5": "gradient boosting + isotonic (654 training events)"
+    }
+   },
+   {
+    "test_month": "2025-10",
+    "train_days": 91,
+    "selected_amount": "skill_gate",
+    "aci_levels_end": {
+     "a_lo": 0.124,
+     "a_hi": 0.141
+    },
+    "inner_scores": {
+     "raw_hydra": 13.757,
+     "skill_gate": 1.616,
+     "log_extreme": 5.854,
+     "poisson": 5.365,
+     "mixture": 4.748
+    },
+    "probability_models": {
+     "state_10": "gradient boosting + isotonic (1035 training events)",
+     "state_20": "gradient boosting + isotonic (412 training events)",
+     "state_64.5": "logistic (only 29 training events)",
+     "local_64.5": "gradient boosting + isotonic (883 training events)"
+    }
+   },
+   {
+    "test_month": "2025-11",
+    "train_days": 122,
+    "selected_amount": "mixture",
+    "aci_levels_end": {
+     "a_lo": 0.169,
+     "a_hi": 0.19
+    },
+    "inner_scores": {
+     "raw_hydra": 4.417,
+     "skill_gate": 0.695,
+     "log_extreme": 0.455,
+     "poisson": 0.654,
+     "mixture": 0.192
+    },
+    "probability_models": {
+     "state_10": "gradient boosting + isotonic (1164 training events)",
+     "state_20": "gradient boosting + isotonic (460 training events)",
+     "state_64.5": "gradient boosting + isotonic (32 training events)",
+     "local_64.5": "gradient boosting + isotonic (1005 training events)"
+    }
+   },
+   {
+    "test_month": "2025-12",
+    "train_days": 152,
+    "selected_amount": "mixture",
+    "aci_levels_end": {
+     "a_lo": 0.262,
+     "a_hi": 0.224
+    },
+    "inner_scores": {
+     "raw_hydra": 2.116,
+     "skill_gate": 0.431,
+     "log_extreme": 0.241,
+     "poisson": 0.334,
+     "mixture": 0.079
+    },
+    "probability_models": {
+     "state_10": "gradient boosting + isotonic (1201 training events)",
+     "state_20": "gradient boosting + isotonic (476 training events)",
+     "state_64.5": "gradient boosting + isotonic (32 training events)",
+     "local_64.5": "gradient boosting + isotonic (1029 training events)"
+    }
+   }
+  ],
+  "history_selection": [
+   {
+    "month": "2025-08",
+    "amount": "hydra",
+    "probabilities": {
+     "state_10": "iso_state_10",
+     "state_20": "iso_state_20",
+     "state_64.5": "iso_state_64.5",
+     "local_64.5": "iso_local_64.5"
+    }
+   },
+   {
+    "month": "2025-09",
+    "amount": "ens_gate_mixture",
+    "probabilities": {
+     "state_10": "p_state_10",
+     "state_20": "p_state_20",
+     "state_64.5": "p_state_64.5",
+     "local_64.5": "p_local_64.5"
+    }
+   },
+   {
+    "month": "2025-10",
+    "amount": "gate",
+    "probabilities": {
+     "state_10": "p_state_10",
+     "state_20": "p_state_20",
+     "state_64.5": "p_state_64.5",
+     "local_64.5": "p_local_64.5"
+    }
+   },
+   {
+    "month": "2025-11",
+    "amount": "gate",
+    "probabilities": {
+     "state_10": "p_state_10",
+     "state_20": "p_state_20",
+     "state_64.5": "p_state_64.5",
+     "local_64.5": "p_local_64.5"
+    }
+   },
+   {
+    "month": "2025-12",
+    "amount": "gate",
+    "probabilities": {
+     "state_10": "p_state_10",
+     "state_20": "p_state_20",
+     "state_64.5": "p_state_64.5",
+     "local_64.5": "p_local_64.5"
+    }
+   }
+  ],
+  "gate_params": {
+   "eta": 0.4,
+   "decay": 0.99
+  },
+  "note": "Every number is out-of-sample: each month is predicted by models fitted only on earlier months (1-day embargo). July 2025 is training-only, so the comparison window is Aug-Dec 2025 for both raw HYDRA and the fixes.",
+  "lead_days": 1,
+  "truth": "imd"
+ },
+ "amount": {
+  "raw HYDRA v3": {
+   "n": 5202,
+   "mae": 2.314,
+   "rmse": 5.18,
+   "bias": 1.962,
+   "recall_1": 0.998,
+   "precision_1": 0.767,
+   "csi_1": 0.766,
+   "events_1": 2313,
+   "recall_10": 0.977,
+   "precision_10": 0.612,
+   "csi_10": 0.603,
+   "events_10": 809,
+   "recall_20": 0.937,
+   "precision_20": 0.699,
+   "csi_20": 0.667,
+   "events_20": 319,
+   "recall_64.5": 0.864,
+   "precision_64.5": 0.826,
+   "csi_64.5": 0.731,
+   "events_64.5": 22,
+   "bias[dry <1]": 1.162,
+   "n[dry <1]": 2889,
+   "bias[1-10]": 4.034,
+   "n[1-10]": 1504,
+   "bias[10-20]": 2.071,
+   "n[10-20]": 490,
+   "bias[20-64.5]": -0.045,
+   "n[20-64.5]": 297,
+   "bias[>=64.5]": -9.789,
+   "n[>=64.5]": 22,
+   "peak_obs": 218.453,
+   "peak_pred": 199.128,
+   "top5_ratio": 0.809,
+   "skill_vs_persistence_mae_skill": -182.631,
+   "skill_vs_persistence_rmse_skill": -56.728,
+   "skill_vs_climatology_mae_skill": 0.481,
+   "skill_vs_climatology_rmse_skill": 0.5
+  },
+  "persistence": {
+   "n": 5202,
+   "mae": 0.013,
+   "rmse": 0.09,
+   "bias": 0.002,
+   "recall_1": 1.0,
+   "precision_1": 0.998,
+   "csi_1": 0.998,
+   "events_1": 2313,
+   "recall_10": 0.998,
+   "precision_10": 0.996,
+   "csi_10": 0.994,
+   "events_10": 809,
+   "recall_20": 0.994,
+   "precision_20": 1.0,
+   "csi_20": 0.994,
+   "events_20": 319,
+   "recall_64.5": 1.0,
+   "precision_64.5": 1.0,
+   "csi_64.5": 1.0,
+   "events_64.5": 22,
+   "bias[dry <1]": 0.002,
+   "n[dry <1]": 2889,
+   "bias[1-10]": 0.005,
+   "n[1-10]": 1504,
+   "bias[10-20]": 0.005,
+   "n[10-20]": 490,
+   "bias[20-64.5]": -0.016,
+   "n[20-64.5]": 297,
+   "bias[>=64.5]": 0.0,
+   "n[>=64.5]": 22,
+   "peak_obs": 218.453,
+   "peak_pred": 218.453,
+   "top5_ratio": 1.0,
+   "skill_vs_persistence_mae_skill": 0.0,
+   "skill_vs_persistence_rmse_skill": 0.0,
+   "skill_vs_climatology_mae_skill": 0.997,
+   "skill_vs_climatology_rmse_skill": 0.991
+  },
+  "equal-weight experts": {
+   "n": 5202,
+   "mae": 2.421,
+   "rmse": 6.003,
+   "bias": -0.881,
+   "recall_1": 0.993,
+   "precision_1": 0.805,
+   "csi_1": 0.801,
+   "events_1": 2313,
+   "recall_10": 0.633,
+   "precision_10": 0.846,
+   "csi_10": 0.568,
+   "events_10": 809,
+   "recall_20": 0.241,
+   "precision_20": 0.987,
+   "csi_20": 0.241,
+   "events_20": 319,
+   "recall_64.5": 0.136,
+   "precision_64.5": 1.0,
+   "csi_64.5": 0.136,
+   "events_64.5": 22,
+   "bias[dry <1]": 0.662,
+   "n[dry <1]": 2889,
+   "bias[1-10]": 0.703,
+   "n[1-10]": 1504,
+   "bias[10-20]": -4.375,
+   "n[10-20]": 490,
+   "bias[20-64.5]": -14.122,
+   "n[20-64.5]": 297,
+   "bias[>=64.5]": -55.252,
+   "n[>=64.5]": 22,
+   "peak_obs": 218.453,
+   "peak_pred": 81.296,
+   "top5_ratio": 0.412,
+   "skill_vs_persistence_mae_skill": -191.068,
+   "skill_vs_persistence_rmse_skill": -65.91,
+   "skill_vs_climatology_mae_skill": 0.457,
+   "skill_vs_climatology_rmse_skill": 0.42
+  },
+  "skill gate": {
+   "n": 5202,
+   "mae": 0.279,
+   "rmse": 0.713,
+   "bias": -0.044,
+   "recall_1": 1.0,
+   "precision_1": 0.955,
+   "csi_1": 0.955,
+   "events_1": 2313,
+   "recall_10": 0.973,
+   "precision_10": 0.989,
+   "csi_10": 0.962,
+   "events_10": 809,
+   "recall_20": 0.922,
+   "precision_20": 1.0,
+   "csi_20": 0.922,
+   "events_20": 319,
+   "recall_64.5": 0.955,
+   "precision_64.5": 1.0,
+   "csi_64.5": 0.955,
+   "events_64.5": 22,
+   "bias[dry <1]": 0.089,
+   "n[dry <1]": 2889,
+   "bias[1-10]": 0.143,
+   "n[1-10]": 1504,
+   "bias[10-20]": -0.366,
+   "n[10-20]": 490,
+   "bias[20-64.5]": -1.351,
+   "n[20-64.5]": 297,
+   "bias[>=64.5]": -5.422,
+   "n[>=64.5]": 22,
+   "peak_obs": 218.453,
+   "peak_pred": 206.695,
+   "top5_ratio": 0.947,
+   "skill_vs_persistence_mae_skill": -21.133,
+   "skill_vs_persistence_rmse_skill": -6.943,
+   "skill_vs_climatology_mae_skill": 0.937,
+   "skill_vs_climatology_rmse_skill": 0.931
+  },
+  "log1p extreme head": {
+   "n": 5202,
+   "mae": 0.235,
+   "rmse": 2.547,
+   "bias": -0.037,
+   "recall_1": 1.0,
+   "precision_1": 0.998,
+   "csi_1": 0.998,
+   "events_1": 2313,
+   "recall_10": 0.993,
+   "precision_10": 0.99,
+   "csi_10": 0.983,
+   "events_10": 809,
+   "recall_20": 0.972,
+   "precision_20": 0.987,
+   "csi_20": 0.96,
+   "events_20": 319,
+   "recall_64.5": 1.0,
+   "precision_64.5": 0.846,
+   "csi_64.5": 0.846,
+   "events_64.5": 22,
+   "bias[dry <1]": 0.005,
+   "n[dry <1]": 2889,
+   "bias[1-10]": 0.006,
+   "n[1-10]": 1504,
+   "bias[10-20]": 0.085,
+   "n[10-20]": 490,
+   "bias[20-64.5]": 0.48,
+   "n[20-64.5]": 297,
+   "bias[>=64.5]": -18.156,
+   "n[>=64.5]": 22,
+   "peak_obs": 218.453,
+   "peak_pred": 123.184,
+   "top5_ratio": 0.588,
+   "skill_vs_persistence_mae_skill": -17.657,
+   "skill_vs_persistence_rmse_skill": -27.383,
+   "skill_vs_climatology_mae_skill": 0.947,
+   "skill_vs_climatology_rmse_skill": 0.754
+  },
+  "Poisson head": {
+   "n": 5202,
+   "mae": 0.268,
+   "rmse": 2.336,
+   "bias": -0.022,
+   "recall_1": 0.998,
+   "precision_1": 0.996,
+   "csi_1": 0.994,
+   "events_1": 2313,
+   "recall_10": 0.993,
+   "precision_10": 0.986,
+   "csi_10": 0.979,
+   "events_10": 809,
+   "recall_20": 0.962,
+   "precision_20": 0.968,
+   "csi_20": 0.933,
+   "events_20": 319,
+   "recall_64.5": 0.909,
+   "precision_64.5": 0.833,
+   "csi_64.5": 0.769,
+   "events_64.5": 22,
+   "bias[dry <1]": 0.005,
+   "n[dry <1]": 2889,
+   "bias[1-10]": 0.026,
+   "n[1-10]": 1504,
+   "bias[10-20]": 0.084,
+   "n[10-20]": 490,
+   "bias[20-64.5]": 0.503,
+   "n[20-64.5]": 297,
+   "bias[>=64.5]": -16.436,
+   "n[>=64.5]": 22,
+   "peak_obs": 218.453,
+   "peak_pred": 139.765,
+   "top5_ratio": 0.639,
+   "skill_vs_persistence_mae_skill": -20.259,
+   "skill_vs_persistence_rmse_skill": -25.035,
+   "skill_vs_climatology_mae_skill": 0.94,
+   "skill_vs_climatology_rmse_skill": 0.774
+  },
+  "heavy/non-heavy mixture": {
+   "n": 5202,
+   "mae": 0.131,
+   "rmse": 2.075,
+   "bias": -0.027,
+   "recall_1": 1.0,
+   "precision_1": 0.997,
+   "csi_1": 0.997,
+   "events_1": 2313,
+   "recall_10": 0.995,
+   "precision_10": 0.993,
+   "csi_10": 0.988,
+   "events_10": 809,
+   "recall_20": 0.978,
+   "precision_20": 0.997,
+   "csi_20": 0.975,
+   "events_20": 319,
+   "recall_64.5": 0.909,
+   "precision_64.5": 0.952,
+   "csi_64.5": 0.87,
+   "events_64.5": 22,
+   "bias[dry <1]": 0.003,
+   "n[dry <1]": 2889,
+   "bias[1-10]": 0.001,
+   "n[1-10]": 1504,
+   "bias[10-20]": -0.008,
+   "n[10-20]": 490,
+   "bias[20-64.5]": 0.165,
+   "n[20-64.5]": 297,
+   "bias[>=64.5]": -8.861,
+   "n[>=64.5]": 22,
+   "peak_obs": 218.453,
+   "peak_pred": 129.956,
+   "top5_ratio": 0.685,
+   "skill_vs_persistence_mae_skill": -9.381,
+   "skill_vs_persistence_rmse_skill": -22.124,
+   "skill_vs_climatology_mae_skill": 0.971,
+   "skill_vs_climatology_rmse_skill": 0.8
+  },
+  "gate + mixture": {
+   "n": 5202,
+   "mae": 0.177,
+   "rmse": 1.214,
+   "bias": -0.035,
+   "recall_1": 1.0,
+   "precision_1": 0.973,
+   "csi_1": 0.973,
+   "events_1": 2313,
+   "recall_10": 0.98,
+   "precision_10": 0.991,
+   "csi_10": 0.972,
+   "events_10": 809,
+   "recall_20": 0.95,
+   "precision_20": 1.0,
+   "csi_20": 0.95,
+   "events_20": 319,
+   "recall_64.5": 0.909,
+   "precision_64.5": 1.0,
+   "csi_64.5": 0.909,
+   "events_64.5": 22,
+   "bias[dry <1]": 0.046,
+   "n[dry <1]": 2889,
+   "bias[1-10]": 0.072,
+   "n[1-10]": 1504,
+   "bias[10-20]": -0.187,
+   "n[10-20]": 490,
+   "bias[20-64.5]": -0.593,
+   "n[20-64.5]": 297,
+   "bias[>=64.5]": -7.141,
+   "n[>=64.5]": 22,
+   "peak_obs": 218.453,
+   "peak_pred": 168.326,
+   "top5_ratio": 0.816,
+   "skill_vs_persistence_mae_skill": -13.069,
+   "skill_vs_persistence_rmse_skill": -12.533,
+   "skill_vs_climatology_mae_skill": 0.96,
+   "skill_vs_climatology_rmse_skill": 0.883
+  },
+  "FINAL (history-selected)": {
+   "n": 5202,
+   "mae": 1.101,
+   "rmse": 3.495,
+   "bias": 0.837,
+   "recall_1": 1.0,
+   "precision_1": 0.929,
+   "csi_1": 0.929,
+   "events_1": 2313,
+   "recall_10": 0.981,
+   "precision_10": 0.755,
+   "csi_10": 0.745,
+   "events_10": 809,
+   "recall_20": 0.953,
+   "precision_20": 0.804,
+   "csi_20": 0.774,
+   "events_20": 319,
+   "recall_64.5": 0.909,
+   "precision_64.5": 0.87,
+   "csi_64.5": 0.8,
+   "events_64.5": 22,
+   "bias[dry <1]": 0.335,
+   "n[dry <1]": 2889,
+   "bias[1-10]": 1.948,
+   "n[1-10]": 1504,
+   "bias[10-20]": 1.324,
+   "n[10-20]": 490,
+   "bias[20-64.5]": -0.083,
+   "n[20-64.5]": 297,
+   "bias[>=64.5]": -7.692,
+   "n[>=64.5]": 22,
+   "peak_obs": 218.453,
+   "peak_pred": 168.326,
+   "top5_ratio": 0.849,
+   "skill_vs_persistence_mae_skill": -86.389,
+   "skill_vs_persistence_rmse_skill": -37.948,
+   "skill_vs_climatology_mae_skill": 0.753,
+   "skill_vs_climatology_rmse_skill": 0.663
+  }
+ },
+ "confidence_intervals_95": {
+  "final_minus_raw_mae": [
+   -1.5197933368108596,
+   -0.9374238996895937
+  ],
+  "final_minus_raw_rmse": [
+   -2.4131860263374563,
+   -1.0151531308708013
+  ],
+  "final_mae_skill_vs_persistence": [
+   -110.46997128748724,
+   -65.15277019875124
+  ],
+  "aci_coverage": [
+   0.8494809688581315,
+   0.8750480584390619
+  ],
+  "asym_coverage": [
+   0.8704344482891195,
+   0.8965830449826989
+  ],
+  "asym_above": [
+   0.041138023836985775,
+   0.05440215301806997
+  ]
+ },
+ "interval": {
+  "raw HYDRA v3 (symmetric conformal)": {
+   "coverage": 0.952,
+   "above": 0.001,
+   "below": 0.047,
+   "width": 10.895
+  },
+  "asymmetric split conformal": {
+   "coverage": 0.884,
+   "above": 0.048,
+   "below": 0.068,
+   "width": 2.262
+  },
+  "adaptive conformal (ACI)": {
+   "coverage": 0.862,
+   "above": 0.073,
+   "below": 0.065,
+   "width": 2.163
+  }
+ },
+ "interval_final": "adaptive conformal (ACI)",
+ "probability": {
+  "state_10": {
+   "raw HYDRA head (pa_20)": {
+    "events": 809,
+    "base_rate": 0.156,
+    "brier": 0.213,
+    "bss": -0.622,
+    "auc": 0.95,
+    "reliability": [
+     {
+      "bin": "0.0-0.2",
+      "n": 2030,
+      "forecast": 0.062,
+      "observed": 0.0
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 438,
+      "forecast": 0.293,
+      "observed": 0.0
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 488,
+      "forecast": 0.506,
+      "observed": 0.006
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 755,
+      "forecast": 0.71,
+      "observed": 0.081
+     },
+     {
+      "bin": "0.8-1.0",
+      "n": 1491,
+      "forecast": 0.898,
+      "observed": 0.5
+     }
+    ]
+   },
+   "FINAL calibrated": {
+    "events": 809,
+    "base_rate": 0.156,
+    "brier": 0.031,
+    "bss": 0.764,
+    "auc": 0.988,
+    "reliability": [
+     {
+      "bin": "0.0-0.2",
+      "n": 3994,
+      "forecast": 0.004,
+      "observed": 0.002
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 347,
+      "forecast": 0.307,
+      "observed": 0.233
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 123,
+      "forecast": 0.493,
+      "observed": 0.528
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 78,
+      "forecast": 0.686,
+      "observed": 0.577
+     },
+     {
+      "bin": "0.8-1.0",
+      "n": 660,
+      "forecast": 0.952,
+      "observed": 0.924
+     }
+    ]
+   },
+   "tiers_final": [
+    {
+     "tier": "watch",
+     "min_prob": 0.2,
+     "issued": 1208,
+     "hit_rate": 0.663,
+     "events_captured": 0.99
+    },
+    {
+     "tier": "alert",
+     "min_prob": 0.4,
+     "issued": 861,
+     "hit_rate": 0.836,
+     "events_captured": 0.89
+    },
+    {
+     "tier": "warning",
+     "min_prob": 0.6,
+     "issued": 738,
+     "hit_rate": 0.888,
+     "events_captured": 0.81
+    }
+   ],
+   "point_forecast_detection": {
+    "events": 809,
+    "forecasts": 1291,
+    "recall": 0.977,
+    "precision": 0.612,
+    "csi": 0.603
+   }
+  },
+  "state_20": {
+   "raw HYDRA head (pa_20)": {
+    "events": 319,
+    "base_rate": 0.061,
+    "brier": 0.286,
+    "bss": -3.973,
+    "auc": 0.954,
+    "reliability": [
+     {
+      "bin": "0.0-0.2",
+      "n": 2030,
+      "forecast": 0.062,
+      "observed": 0.0
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 438,
+      "forecast": 0.293,
+      "observed": 0.0
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 488,
+      "forecast": 0.506,
+      "observed": 0.0
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 755,
+      "forecast": 0.71,
+      "observed": 0.009
+     },
+     {
+      "bin": "0.8-1.0",
+      "n": 1491,
+      "forecast": 0.898,
+      "observed": 0.209
+     }
+    ]
+   },
+   "FINAL calibrated": {
+    "events": 319,
+    "base_rate": 0.061,
+    "brier": 0.017,
+    "bss": 0.698,
+    "auc": 0.987,
+    "reliability": [
+     {
+      "bin": "0.0-0.2",
+      "n": 4734,
+      "forecast": 0.009,
+      "observed": 0.008
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 149,
+      "forecast": 0.27,
+      "observed": 0.195
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 101,
+      "forecast": 0.497,
+      "observed": 0.406
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 2,
+      "forecast": 0.785,
+      "observed": 1.0
+     },
+     {
+      "bin": "0.8-1.0",
+      "n": 216,
+      "forecast": 0.99,
+      "observed": 0.963
+     }
+    ]
+   },
+   "tiers_final": [
+    {
+     "tier": "watch",
+     "min_prob": 0.2,
+     "issued": 468,
+     "hit_rate": 0.598,
+     "events_captured": 0.878
+    },
+    {
+     "tier": "alert",
+     "min_prob": 0.4,
+     "issued": 319,
+     "hit_rate": 0.787,
+     "events_captured": 0.787
+    },
+    {
+     "tier": "warning",
+     "min_prob": 0.6,
+     "issued": 218,
+     "hit_rate": 0.963,
+     "events_captured": 0.658
+    }
+   ],
+   "point_forecast_detection": {
+    "events": 319,
+    "forecasts": 428,
+    "recall": 0.937,
+    "precision": 0.699,
+    "csi": 0.667
+   }
+  },
+  "state_64.5": {
+   "raw HYDRA head (pa_64.5)": {
+    "events": 22,
+    "base_rate": 0.004,
+    "brier": 0.049,
+    "bss": -10.629,
+    "auc": 0.923,
+    "reliability": [
+     {
+      "bin": "0.0-0.2",
+      "n": 3753,
+      "forecast": 0.043,
+      "observed": 0.0
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 909,
+      "forecast": 0.29,
+      "observed": 0.003
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 407,
+      "forecast": 0.491,
+      "observed": 0.022
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 133,
+      "forecast": 0.658,
+      "observed": 0.068
+     },
+     {
+      "bin": "0.8-1.0",
+      "n": 0,
+      "forecast": null,
+      "observed": null
+     }
+    ]
+   },
+   "FINAL calibrated": {
+    "events": 22,
+    "base_rate": 0.004,
+    "brier": 0.003,
+    "bss": 0.255,
+    "auc": 0.943,
+    "reliability": [
+     {
+      "bin": "0.0-0.2",
+      "n": 5167,
+      "forecast": 0.003,
+      "observed": 0.002
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 29,
+      "forecast": 0.258,
+      "observed": 0.138
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 3,
+      "forecast": 0.49,
+      "observed": 1.0
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 1,
+      "forecast": 0.603,
+      "observed": 1.0
+     },
+     {
+      "bin": "0.8-1.0",
+      "n": 2,
+      "forecast": 0.984,
+      "observed": 1.0
+     }
+    ]
+   },
+   "tiers_final": [
+    {
+     "tier": "watch",
+     "min_prob": 0.2,
+     "issued": 35,
+     "hit_rate": 0.286,
+     "events_captured": 0.455
+    },
+    {
+     "tier": "alert",
+     "min_prob": 0.4,
+     "issued": 6,
+     "hit_rate": 1.0,
+     "events_captured": 0.273
+    },
+    {
+     "tier": "warning",
+     "min_prob": 0.6,
+     "issued": 3,
+     "hit_rate": 1.0,
+     "events_captured": 0.136
+    }
+   ],
+   "point_forecast_detection": {
+    "events": 22,
+    "forecasts": 23,
+    "recall": 0.864,
+    "precision": 0.826,
+    "csi": 0.731
+   }
+  },
+  "local_64.5": {
+   "raw HYDRA head (pm_64.5)": {
+    "events": 707,
+    "base_rate": 0.136,
+    "brier": 0.13,
+    "bss": -0.105,
+    "auc": 0.926,
+    "reliability": [
+     {
+      "bin": "0.0-0.2",
+      "n": 2548,
+      "forecast": 0.032,
+      "observed": 0.0
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 419,
+      "forecast": 0.3,
+      "observed": 0.01
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 855,
+      "forecast": 0.521,
+      "observed": 0.091
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 1334,
+      "forecast": 0.684,
+      "observed": 0.441
+     },
+     {
+      "bin": "0.8-1.0",
+      "n": 46,
+      "forecast": 0.824,
+      "observed": 0.783
+     }
+    ]
+   },
+   "FINAL calibrated": {
+    "events": 707,
+    "base_rate": 0.136,
+    "brier": 0.044,
+    "bss": 0.629,
+    "auc": 0.973,
+    "reliability": [
+     {
+      "bin": "0.0-0.2",
+      "n": 4069,
+      "forecast": 0.009,
+      "observed": 0.014
+     },
+     {
+      "bin": "0.2-0.4",
+      "n": 291,
+      "forecast": 0.258,
+      "observed": 0.186
+     },
+     {
+      "bin": "0.4-0.6",
+      "n": 237,
+      "forecast": 0.531,
+      "observed": 0.384
+     },
+     {
+      "bin": "0.6-0.8",
+      "n": 251,
+      "forecast": 0.69,
+      "observed": 0.673
+     },
+     {
+      "bin": "0.8-1.0",
+      "n": 354,
+      "forecast": 0.984,
+      "observed": 0.944
+     }
+    ]
+   },
+   "tiers_final": [
+    {
+     "tier": "watch",
+     "min_prob": 0.2,
+     "issued": 1133,
+     "hit_rate": 0.572,
+     "events_captured": 0.917
+    },
+    {
+     "tier": "alert",
+     "min_prob": 0.4,
+     "issued": 842,
+     "hit_rate": 0.705,
+     "events_captured": 0.84
+    },
+    {
+     "tier": "warning",
+     "min_prob": 0.6,
+     "issued": 605,
+     "hit_rate": 0.831,
+     "events_captured": 0.711
+    }
+   ],
+   "point_forecast_detection": null
+  }
+ },
+ "states": {
+  "raw": {
+   "Andhra Pradesh": {
+    "n": 153,
+    "mae": 1.119,
+    "bias": 0.891,
+    "recall_20": 1.0,
+    "events_20": 7,
+    "mae_skill_persistence": -11.413,
+    "mae_skill_climatology": 0.723
+   },
+   "Arunachal Pradesh": {
+    "n": 153,
+    "mae": 2.606,
+    "bias": 2.568,
+    "recall_20": 0.8,
+    "events_20": 5,
+    "mae_skill_persistence": -45.423,
+    "mae_skill_climatology": 0.255
+   },
+   "Assam": {
+    "n": 153,
+    "mae": 2.571,
+    "bias": 2.516,
+    "recall_20": 0.75,
+    "events_20": 4,
+    "mae_skill_persistence": -15150.607,
+    "mae_skill_climatology": -0.011
+   },
+   "Bihar": {
+    "n": 153,
+    "mae": 1.592,
+    "bias": 1.257,
+    "recall_20": 0.889,
+    "events_20": 9,
+    "mae_skill_persistence": -12547.273,
+    "mae_skill_climatology": 0.496
+   },
+   "Chandigarh": {
+    "n": 153,
+    "mae": 2.389,
+    "bias": 2.065,
+    "recall_20": 0.929,
+    "events_20": 14,
+    "mae_skill_persistence": -29125.065,
+    "mae_skill_climatology": 0.574
+   },
+   "Chhattisgarh": {
+    "n": 153,
+    "mae": 1.562,
+    "bias": 1.504,
+    "recall_20": 1.0,
+    "events_20": 7,
+    "mae_skill_persistence": -10677.863,
+    "mae_skill_climatology": 0.435
+   },
+   "Dadra and Nagar Haveli and Daman and Diu": {
+    "n": 153,
+    "mae": 8.8,
+    "bias": 5.733,
+    "recall_20": 0.955,
+    "events_20": 22,
+    "mae_skill_persistence": -79129.195,
+    "mae_skill_climatology": 0.444
+   },
+   "Delhi": {
+    "n": 153,
+    "mae": 1.06,
+    "bias": 0.478,
+    "recall_20": 0.833,
+    "events_20": 6,
+    "mae_skill_persistence": -16611.819,
+    "mae_skill_climatology": 0.614
+   },
+   "Goa": {
+    "n": 153,
+    "mae": 6.884,
+    "bias": 6.229,
+    "recall_20": 1.0,
+    "events_20": 23,
+    "mae_skill_persistence": -39627.772,
+    "mae_skill_climatology": 0.511
+   },
+   "Gujarat": {
+    "n": 153,
+    "mae": 2.182,
+    "bias": 1.921,
+    "recall_20": 1.0,
+    "events_20": 8,
+    "mae_skill_persistence": -13869.015,
+    "mae_skill_climatology": 0.499
+   },
+   "Haryana": {
+    "n": 153,
+    "mae": 1.102,
+    "bias": 0.987,
+    "recall_20": 1.0,
+    "events_20": 5,
+    "mae_skill_persistence": -10242.587,
+    "mae_skill_climatology": 0.546
+   },
+   "Himachal Pradesh": {
+    "n": 153,
+    "mae": 1.618,
+    "bias": 1.583,
+    "recall_20": 1.0,
+    "events_20": 9,
+    "mae_skill_persistence": -14372.72,
+    "mae_skill_climatology": 0.526
+   },
+   "Jammu and Kashmir": {
+    "n": 153,
+    "mae": 1.683,
+    "bias": 1.274,
+    "recall_20": 0.857,
+    "events_20": 7,
+    "mae_skill_persistence": -13759.542,
+    "mae_skill_climatology": 0.55
+   },
+   "Jharkhand": {
+    "n": 153,
+    "mae": 3.101,
+    "bias": 3.009,
+    "recall_20": 1.0,
+    "events_20": 3,
+    "mae_skill_persistence": -24160.59,
+    "mae_skill_climatology": 0.28
+   },
+   "Karnataka": {
+    "n": 153,
+    "mae": 1.403,
+    "bias": 1.29,
+    "recall_20": 1.0,
+    "events_20": 4,
+    "mae_skill_persistence": -7508.777,
+    "mae_skill_climatology": 0.505
+   },
+   "Kerala": {
+    "n": 153,
+    "mae": 4.717,
+    "bias": 4.354,
+    "recall_20": 0.929,
+    "events_20": 14,
+    "mae_skill_persistence": -22505.72,
+    "mae_skill_climatology": 0.486
+   },
+   "Ladakh": {
+    "n": 153,
+    "mae": 0.469,
+    "bias": 0.419,
+    "recall_20": null,
+    "events_20": 0,
+    "mae_skill_persistence": -124.83,
+    "mae_skill_climatology": 0.557
+   },
+   "Madhya Pradesh": {
+    "n": 153,
+    "mae": 1.711,
+    "bias": 1.656,
+    "recall_20": 1.0,
+    "events_20": 2,
+    "mae_skill_persistence": -11593.551,
+    "mae_skill_climatology": 0.302
+   },
+   "Maharashtra": {
+    "n": 153,
+    "mae": 1.587,
+    "bias": 1.524,
+    "recall_20": 1.0,
+    "events_20": 8,
+    "mae_skill_persistence": -8985.17,
+    "mae_skill_climatology": 0.516
+   },
+   "Manipur": {
+    "n": 153,
+    "mae": 1.688,
+    "bias": 1.545,
+    "recall_20": 1.0,
+    "events_20": 8,
+    "mae_skill_persistence": -11514.081,
+    "mae_skill_climatology": 0.446
+   },
+   "Meghalaya": {
+    "n": 153,
+    "mae": 3.363,
+    "bias": 2.954,
+    "recall_20": 0.889,
+    "events_20": 18,
+    "mae_skill_persistence": -23944.827,
+    "mae_skill_climatology": 0.389
+   },
+   "Mizoram": {
+    "n": 153,
+    "mae": 2.256,
+    "bias": 2.078,
+    "recall_20": 0.818,
+    "events_20": 11,
+    "mae_skill_persistence": -17152.607,
+    "mae_skill_climatology": 0.424
+   },
+   "Nagaland": {
+    "n": 153,
+    "mae": 2.457,
+    "bias": 2.125,
+    "recall_20": 0.867,
+    "events_20": 15,
+    "mae_skill_persistence": -11.51,
+    "mae_skill_climatology": 0.429
+   },
+   "Odisha": {
+    "n": 153,
+    "mae": 2.28,
+    "bias": 2.139,
+    "recall_20": 1.0,
+    "events_20": 6,
+    "mae_skill_persistence": -13596.502,
+    "mae_skill_climatology": 0.361
+   },
+   "Puducherry": {
+    "n": 153,
+    "mae": 2.59,
+    "bias": 1.014,
+    "recall_20": 0.875,
+    "events_20": 16,
+    "mae_skill_persistence": -16040.244,
+    "mae_skill_climatology": 0.633
+   },
+   "Punjab": {
+    "n": 153,
+    "mae": 1.431,
+    "bias": 1.194,
+    "recall_20": 1.0,
+    "events_20": 7,
+    "mae_skill_persistence": -13815.615,
+    "mae_skill_climatology": 0.526
+   },
+   "Rajasthan": {
+    "n": 153,
+    "mae": 1.222,
+    "bias": 1.077,
+    "recall_20": 0.75,
+    "events_20": 4,
+    "mae_skill_persistence": -9275.386,
+    "mae_skill_climatology": 0.533
+   },
+   "Sikkim": {
+    "n": 153,
+    "mae": 1.935,
+    "bias": 1.801,
+    "recall_20": 1.0,
+    "events_20": 13,
+    "mae_skill_persistence": -15347.505,
+    "mae_skill_climatology": 0.565
+   },
+   "Tamil Nadu": {
+    "n": 153,
+    "mae": 1.061,
+    "bias": 0.658,
+    "recall_20": 0.75,
+    "events_20": 4,
+    "mae_skill_persistence": -12.601,
+    "mae_skill_climatology": 0.716
+   },
+   "Telangana": {
+    "n": 153,
+    "mae": 1.552,
+    "bias": 1.085,
+    "recall_20": 1.0,
+    "events_20": 16,
+    "mae_skill_persistence": -8650.997,
+    "mae_skill_climatology": 0.669
+   },
+   "Tripura": {
+    "n": 153,
+    "mae": 2.573,
+    "bias": 2.144,
+    "recall_20": 1.0,
+    "events_20": 14,
+    "mae_skill_persistence": -18481.023,
+    "mae_skill_climatology": 0.444
+   },
+   "Uttar Pradesh": {
+    "n": 153,
+    "mae": 1.323,
+    "bias": 1.244,
+    "recall_20": 0.75,
+    "events_20": 4,
+    "mae_skill_persistence": -8511.764,
+    "mae_skill_climatology": 0.424
+   },
+   "Uttarakhand": {
+    "n": 153,
+    "mae": 1.985,
+    "bias": 1.816,
+    "recall_20": 1.0,
+    "events_20": 15,
+    "mae_skill_persistence": -14551.52,
+    "mae_skill_climatology": 0.493
+   },
+   "West Bengal": {
+    "n": 153,
+    "mae": 2.813,
+    "bias": 2.589,
+    "recall_20": 0.909,
+    "events_20": 11,
+    "mae_skill_persistence": -20155.762,
+    "mae_skill_climatology": 0.219
+   }
+  },
+  "final": {
+   "Andhra Pradesh": {
+    "n": 153,
+    "mae": 0.536,
+    "bias": 0.236,
+    "recall_20": 1.0,
+    "events_20": 7,
+    "mae_skill_persistence": -4.944,
+    "mae_skill_climatology": 0.868
+   },
+   "Arunachal Pradesh": {
+    "n": 153,
+    "mae": 1.088,
+    "bias": 1.014,
+    "recall_20": 0.8,
+    "events_20": 5,
+    "mae_skill_persistence": -18.375,
+    "mae_skill_climatology": 0.689
+   },
+   "Assam": {
+    "n": 153,
+    "mae": 0.948,
+    "bias": 0.888,
+    "recall_20": 0.75,
+    "events_20": 4,
+    "mae_skill_persistence": -5584.595,
+    "mae_skill_climatology": 0.627
+   },
+   "Bihar": {
+    "n": 153,
+    "mae": 0.737,
+    "bias": 0.578,
+    "recall_20": 0.778,
+    "events_20": 9,
+    "mae_skill_persistence": -5812.399,
+    "mae_skill_climatology": 0.767
+   },
+   "Chandigarh": {
+    "n": 153,
+    "mae": 1.143,
+    "bias": 0.936,
+    "recall_20": 0.929,
+    "events_20": 14,
+    "mae_skill_persistence": -13938.636,
+    "mae_skill_climatology": 0.796
+   },
+   "Chhattisgarh": {
+    "n": 153,
+    "mae": 0.821,
+    "bias": 0.736,
+    "recall_20": 1.0,
+    "events_20": 7,
+    "mae_skill_persistence": -5611.045,
+    "mae_skill_climatology": 0.703
+   },
+   "Dadra and Nagar Haveli and Daman and Diu": {
+    "n": 153,
+    "mae": 5.166,
+    "bias": 3.046,
+    "recall_20": 1.0,
+    "events_20": 22,
+    "mae_skill_persistence": -46451.55,
+    "mae_skill_climatology": 0.673
+   },
+   "Delhi": {
+    "n": 153,
+    "mae": 0.526,
+    "bias": 0.208,
+    "recall_20": 1.0,
+    "events_20": 6,
+    "mae_skill_persistence": -8252.165,
+    "mae_skill_climatology": 0.808
+   },
+   "Goa": {
+    "n": 153,
+    "mae": 3.212,
+    "bias": 2.701,
+    "recall_20": 1.0,
+    "events_20": 23,
+    "mae_skill_persistence": -18490.724,
+    "mae_skill_climatology": 0.772
+   },
+   "Gujarat": {
+    "n": 153,
+    "mae": 1.176,
+    "bias": 1.016,
+    "recall_20": 1.0,
+    "events_20": 8,
+    "mae_skill_persistence": -7475.344,
+    "mae_skill_climatology": 0.73
+   },
+   "Haryana": {
+    "n": 153,
+    "mae": 0.544,
+    "bias": 0.459,
+    "recall_20": 1.0,
+    "events_20": 5,
+    "mae_skill_persistence": -5052.568,
+    "mae_skill_climatology": 0.776
+   },
+   "Himachal Pradesh": {
+    "n": 153,
+    "mae": 0.703,
+    "bias": 0.623,
+    "recall_20": 1.0,
+    "events_20": 9,
+    "mae_skill_persistence": -6247.958,
+    "mae_skill_climatology": 0.794
+   },
+   "Jammu and Kashmir": {
+    "n": 153,
+    "mae": 0.749,
+    "bias": 0.372,
+    "recall_20": 0.857,
+    "events_20": 7,
+    "mae_skill_persistence": -6123.409,
+    "mae_skill_climatology": 0.8
+   },
+   "Jharkhand": {
+    "n": 153,
+    "mae": 1.643,
+    "bias": 1.552,
+    "recall_20": 1.0,
+    "events_20": 3,
+    "mae_skill_persistence": -12803.888,
+    "mae_skill_climatology": 0.618
+   },
+   "Karnataka": {
+    "n": 153,
+    "mae": 0.627,
+    "bias": 0.5,
+    "recall_20": 1.0,
+    "events_20": 4,
+    "mae_skill_persistence": -3358.107,
+    "mae_skill_climatology": 0.779
+   },
+   "Kerala": {
+    "n": 153,
+    "mae": 2.195,
+    "bias": 1.894,
+    "recall_20": 0.929,
+    "events_20": 14,
+    "mae_skill_persistence": -10472.757,
+    "mae_skill_climatology": 0.761
+   },
+   "Ladakh": {
+    "n": 153,
+    "mae": 0.152,
+    "bias": 0.129,
+    "recall_20": null,
+    "events_20": 0,
+    "mae_skill_persistence": -39.732,
+    "mae_skill_climatology": 0.857
+   },
+   "Madhya Pradesh": {
+    "n": 153,
+    "mae": 0.941,
+    "bias": 0.853,
+    "recall_20": 1.0,
+    "events_20": 2,
+    "mae_skill_persistence": -6376.61,
+    "mae_skill_climatology": 0.616
+   },
+   "Maharashtra": {
+    "n": 153,
+    "mae": 0.771,
+    "bias": 0.689,
+    "recall_20": 1.0,
+    "events_20": 8,
+    "mae_skill_persistence": -4361.851,
+    "mae_skill_climatology": 0.765
+   },
+   "Manipur": {
+    "n": 153,
+    "mae": 0.754,
+    "bias": 0.653,
+    "recall_20": 1.0,
+    "events_20": 8,
+    "mae_skill_persistence": -5144.835,
+    "mae_skill_climatology": 0.753
+   },
+   "Meghalaya": {
+    "n": 153,
+    "mae": 1.54,
+    "bias": 1.098,
+    "recall_20": 0.944,
+    "events_20": 18,
+    "mae_skill_persistence": -10965.994,
+    "mae_skill_climatology": 0.72
+   },
+   "Mizoram": {
+    "n": 153,
+    "mae": 1.083,
+    "bias": 0.902,
+    "recall_20": 0.909,
+    "events_20": 11,
+    "mae_skill_persistence": -8229.676,
+    "mae_skill_climatology": 0.724
+   },
+   "Nagaland": {
+    "n": 153,
+    "mae": 1.093,
+    "bias": 0.787,
+    "recall_20": 0.933,
+    "events_20": 15,
+    "mae_skill_persistence": -4.566,
+    "mae_skill_climatology": 0.746
+   },
+   "Odisha": {
+    "n": 153,
+    "mae": 1.055,
+    "bias": 0.937,
+    "recall_20": 1.0,
+    "events_20": 6,
+    "mae_skill_persistence": -6291.745,
+    "mae_skill_climatology": 0.704
+   },
+   "Puducherry": {
+    "n": 153,
+    "mae": 0.878,
+    "bias": 0.091,
+    "recall_20": 0.875,
+    "events_20": 16,
+    "mae_skill_persistence": -5440.06,
+    "mae_skill_climatology": 0.876
+   },
+   "Punjab": {
+    "n": 153,
+    "mae": 0.639,
+    "bias": 0.463,
+    "recall_20": 1.0,
+    "events_20": 7,
+    "mae_skill_persistence": -6168.777,
+    "mae_skill_climatology": 0.788
+   },
+   "Rajasthan": {
+    "n": 153,
+    "mae": 0.655,
+    "bias": 0.522,
+    "recall_20": 0.75,
+    "events_20": 4,
+    "mae_skill_persistence": -4971.423,
+    "mae_skill_climatology": 0.75
+   },
+   "Sikkim": {
+    "n": 153,
+    "mae": 0.673,
+    "bias": 0.457,
+    "recall_20": 1.0,
+    "events_20": 13,
+    "mae_skill_persistence": -5339.134,
+    "mae_skill_climatology": 0.849
+   },
+   "Tamil Nadu": {
+    "n": 153,
+    "mae": 0.358,
+    "bias": 0.084,
+    "recall_20": 0.75,
+    "events_20": 4,
+    "mae_skill_persistence": -3.583,
+    "mae_skill_climatology": 0.904
+   },
+   "Telangana": {
+    "n": 153,
+    "mae": 0.809,
+    "bias": 0.474,
+    "recall_20": 1.0,
+    "events_20": 16,
+    "mae_skill_persistence": -4509.749,
+    "mae_skill_climatology": 0.827
+   },
+   "Tripura": {
+    "n": 153,
+    "mae": 1.33,
+    "bias": 1.022,
+    "recall_20": 1.0,
+    "events_20": 14,
+    "mae_skill_persistence": -9551.989,
+    "mae_skill_climatology": 0.713
+   },
+   "Uttar Pradesh": {
+    "n": 153,
+    "mae": 0.732,
+    "bias": 0.662,
+    "recall_20": 0.75,
+    "events_20": 4,
+    "mae_skill_persistence": -4704.652,
+    "mae_skill_climatology": 0.682
+   },
+   "Uttarakhand": {
+    "n": 153,
+    "mae": 0.893,
+    "bias": 0.746,
+    "recall_20": 1.0,
+    "events_20": 15,
+    "mae_skill_persistence": -6547.085,
+    "mae_skill_climatology": 0.772
+   },
+   "West Bengal": {
+    "n": 153,
+    "mae": 1.274,
+    "bias": 1.124,
+    "recall_20": 1.0,
+    "events_20": 11,
+    "mae_skill_persistence": -9125.483,
+    "mae_skill_climatology": 0.646
+   }
+  }
+ },
+ "states_nonpositive_mae_skill_vs_persistence": {
+  "raw": 34,
+  "final": 34
+ },
+ "states_nonpositive_mae_skill_vs_climatology": {
+  "raw": 1,
+  "final": 0
+ },
+ "upper_miss_by_state": {
+  "Dadra and Nagar Haveli and Daman and Diu": {
+   "raw": 0.02,
+   "asym": 0.059
+  },
+  "Delhi": {
+   "raw": 0.007,
+   "asym": 0.026
+  },
+  "Goa": {
+   "raw": 0.007,
+   "asym": 0.092
+  },
+  "Puducherry": {
+   "raw": 0.007,
+   "asym": 0.072
+  },
+  "Arunachal Pradesh": {
+   "raw": 0.0,
+   "asym": 0.02
+  },
+  "Andhra Pradesh": {
+   "raw": 0.0,
+   "asym": 0.196
+  },
+  "Chhattisgarh": {
+   "raw": 0.0,
+   "asym": 0.026
+  },
+  "Chandigarh": {
+   "raw": 0.0,
+   "asym": 0.0
+  }
+ },
+ "gate": {
+  "v3_trained_gate_mean_weight": {
+   "climatology": 0.288,
+   "persistence": 0.029,
+   "recent3": 0.119,
+   "anom_persistence": 0.147,
+   "gbm_era5": 0.004,
+   "hurdle": 0.264,
+   "spatial": 0.004,
+   "monsoon": 0.143,
+   "upper_q": 0.003
+  },
+  "skill_gate_mean_weight": {
+   "climatology": 0.01,
+   "persistence": 0.5,
+   "recent3": 0.01,
+   "anom_persistence": 0.42,
+   "gbm_era5": 0.01,
+   "hurdle": 0.01,
+   "spatial": 0.01,
+   "monsoon": 0.01,
+   "upper_q": 0.01,
+   "hydra": 0.01
+  },
+  "skill_gate_mean_max_weight": 0.5
+ },
+ "occurrence_definition": {
+  "p_rain>=0.5 vs obs>=1": {
+   "events": 2313,
+   "forecasts": 1522,
+   "recall": 0.633,
+   "precision": 0.963,
+   "csi": 0.618
+  },
+  "hydra>=1 vs obs>=1": {
+   "events": 2313,
+   "forecasts": 3009,
+   "recall": 0.998,
+   "precision": 0.767,
+   "csi": 0.766
+  },
+  "final>=1 vs obs>=1": {
+   "events": 2313,
+   "forecasts": 2491,
+   "recall": 1.0,
+   "precision": 0.929,
+   "csi": 0.929
+  }
+ }
+}

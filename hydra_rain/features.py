@@ -22,11 +22,20 @@ NEIGHBOUR_FIELDS = ("tp_mm", "cape", "tcwv")
 
 
 def numeric_columns(cube: GridCube) -> list[str]:
+    """All numeric predictors, minus any listed in HYDRA_EXCLUDE_FEATURES (comma-separated; used by the ablation runner)."""
+    import os
+    excluded = {c.strip() for c in os.getenv("HYDRA_EXCLUDE_FEATURES", "").split(",") if c.strip()}
+    return [c for c in _numeric_columns(cube) if c not in excluded]
+
+
+def _numeric_columns(cube: GridCube) -> list[str]:
     cols = ["latitude", "longitude"]
     cols += [f"now_{f}" for f in NOW_FIELDS]
     cols += ["now_log_cape", "msl_tend", "msl_anom30", "t2m_tend", "cape_tend"]
     cols += [f"now_{f}" for f in OPTIONAL_NOW]
     cols += ["tcwv_tend", "tcwv_anom30", "moist_flux_u", "moist_flux_v"]
+    # v3.1: moisture-flux convergence (moisture piling up ahead of convection) and an instability x moisture signal
+    cols += ["moist_flux_conv", "moist_flux_conv_nb5", "moist_flux_conv_nb9", "cape_x_rh", "cape_x_rh_nb5"]
     cols += ["tp0", "tp1", "tp2", "tp3", "tp7", "tpmax7", "wet7", "tp_anom", "clim_issue", "clim_target"]
     for size in C.NEIGHBOURHOODS:
         cols += [f"nb{size}_tp_mean", f"nb{size}_tp_max", f"nb{size}_cape_mean", f"nb{size}_tcwv_mean",
@@ -133,6 +142,18 @@ class FeatureBuilder:
         else:
             for name in ("tcwv_tend", "tcwv_anom30", "moist_flux_u", "moist_flux_v"):
                 out[name] = np.full(self.shape, np.nan, np.float32)
+        if self.has["tcwv"]:
+            # convergence of the column moisture flux, -div(q V), per 0.25 deg cell; north-to-south latitude order flips d/dy
+            dqu_dx = np.gradient(out["moist_flux_u"], axis=1)
+            dqv_dy = -np.gradient(out["moist_flux_v"], axis=0)
+            conv = -(dqu_dx + dqv_dy)
+        else:
+            conv = np.full(self.shape, np.nan, np.float32)
+        out["moist_flux_conv"] = conv
+        out["cape_x_rh"] = out["now_cape"] * out["now_rh_pct"] / 100.0
+        for size in (5, 9):
+            out[f"moist_flux_conv_nb{size}"] = uniform_filter(np.nan_to_num(conv), size, mode="nearest") if self.has["tcwv"] else conv
+        out["cape_x_rh_nb5"] = uniform_filter(out["cape_x_rh"], 5, mode="nearest")
         wet = (out["tp0"] >= C.WET_MM).astype(np.float32)
         for size in C.NEIGHBOURHOODS:
             out[f"nb{size}_tp_mean"] = uniform_filter(out["tp0"], size, mode="nearest")

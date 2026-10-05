@@ -564,6 +564,21 @@ def test_rolling_rainfall_reports_interval_contract():
         assert interval['nominal'] == 0.8 and payload['model_version'].startswith('hydra-rain-v3')
 
 
+def test_rolling_rainfall_advertises_only_published_leads():
+    from backend import data as D
+    lead1 = D.hydra_rolling_rainfall_replay('Maharashtra', lead=1)
+    assert lead1['status'] == 'available'
+    assert 1 in lead1['available_leads']
+    if 2 in lead1['available_leads']:
+        lead2 = D.hydra_rolling_rainfall_replay('Maharashtra', lead=2)
+        assert lead2['status'] == 'available'
+        assert lead2['lead_hours'] == 48
+    else:
+        lead2 = D.hydra_rolling_rainfall_replay('Maharashtra', lead=2)
+        assert lead2['status'] == 'unavailable'
+        assert '+48-hour rows' in lead2['message']
+
+
 def test_daily_mean_blend_flags_legacy_p90_interval():
     from backend import data as D
     outlook = D.daily_mean_hydra_state_outlook('Maharashtra')

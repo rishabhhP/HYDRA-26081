@@ -1,0 +1,456 @@
+{
+  "model_version": "hydra-rain-v3",
+  "validation": "Chronological holdout: 2025-07-01 to 2025-12-31, 36 state means, 6,624 state-days.",
+  "pooled": {
+    "continuous": {
+      "mae": 3.8011,
+      "rmse": 7.4667,
+      "bias": -0.8231,
+      "samples": 6624
+    },
+    "occurrence": {
+      "events": 3839,
+      "forecast_events": 3072,
+      "samples": 6624,
+      "hits": 2965,
+      "misses": 874,
+      "false_alarms": 107,
+      "accuracy": 0.8519,
+      "recall": 0.7723,
+      "precision": 0.9652,
+      "csi": 0.7514,
+      "trustworthy": true,
+      "threshold_mm": 1.0,
+      "decision": "p_rain >= 0.5",
+      "brier": 0.1199
+    },
+    "heavy": {
+      "10": {
+        "events": 1406,
+        "forecast_events": 1050,
+        "samples": 6624,
+        "hits": 668,
+        "misses": 738,
+        "false_alarms": 382,
+        "accuracy": 0.8309,
+        "recall": 0.4751,
+        "precision": 0.6362,
+        "csi": 0.3736,
+        "trustworthy": true,
+        "threshold_mm": 10.0,
+        "decision": "forecast >= 10.0 mm"
+      },
+      "20": {
+        "events": 483,
+        "forecast_events": 240,
+        "samples": 6624,
+        "hits": 118,
+        "misses": 365,
+        "false_alarms": 122,
+        "accuracy": 0.9265,
+        "recall": 0.2443,
+        "precision": 0.4917,
+        "csi": 0.195,
+        "trustworthy": true,
+        "threshold_mm": 20.0,
+        "decision": "forecast >= 20.0 mm"
+      }
+    },
+    "peaks": {
+      "max_observed": 161.871,
+      "predicted_at_max": 3.764,
+      "error_at_max": -158.107,
+      "ratio_at_max": 0.023,
+      "top5_mean_error": -88.138,
+      "top5_mean_ratio": 0.189,
+      "date_of_max": "2025-09-28"
+    },
+    "by_intensity": {
+      "dry_lt1": {
+        "mae": 0.9482,
+        "rmse": 1.8202,
+        "bias": 0.9416,
+        "samples": 2785
+      },
+      "light_1_10": {
+        "mae": 3.3196,
+        "rmse": 5.3872,
+        "bias": 1.5518,
+        "samples": 2433
+      },
+      "moderate_10_20": {
+        "mae": 6.3147,
+        "rmse": 7.5263,
+        "bias": -4.2362,
+        "samples": 923
+      },
+      "rather_heavy_20_64_5": {
+        "mae": 16.8746,
+        "rmse": 19.5708,
+        "bias": -15.4025,
+        "samples": 470
+      },
+      "heavy_ge64_5": {
+        "mae": 53.9471,
+        "rmse": 66.3108,
+        "bias": -53.9471,
+        "samples": 13
+      }
+    },
+    "interval": {
+      "nominal": 0.8,
+      "coverage": 0.899,
+      "mean_width": 11.478,
+      "below": 0.0044,
+      "above": 0.0966,
+      "samples": 6624
+    },
+    "skill": {
+      "persistence": {
+        "reference_mae": 3.7003,
+        "reference_rmse": 7.9635,
+        "mae_skill": -0.0272,
+        "rmse_skill": 0.0624
+      },
+      "climatology": {
+        "reference_mae": 4.5794,
+        "reference_rmse": 8.5195,
+        "mae_skill": 0.17,
+        "rmse_skill": 0.1236
+      }
+    }
+  },
+  "lead_time": [
+    {
+      "lead": "lead1",
+      "mae": 3.801038888888889,
+      "rmse": 7.033561111111111,
+      "bias": -0.8231583333333333,
+      "heavy20_recall": 0.19588571428571427,
+      "interval_coverage": 0.8990055555555555
+    },
+    {
+      "lead": "lead2",
+      "mae": 4.511691666666667,
+      "rmse": 8.325883333333334,
+      "bias": -1.3431444444444445,
+      "heavy20_recall": 0.07012571428571429,
+      "interval_coverage": 0.8820527777777778
+    }
+  ],
+  "gate_mean_weights": {
+    "climatology": 0.0912,
+    "persistence": 0.1346,
+    "recent3": 0.1173,
+    "anom_persistence": 0.1198,
+    "gbm_era5": 0.0193,
+    "hurdle": 0.0226,
+    "spatial": 0.0333,
+    "monsoon": 0.4399,
+    "upper_q": 0.022
+  },
+  "state_summary": {
+    "states_worse_than_persistence_mae": 25,
+    "states_worse_than_climatology_mae": 1,
+    "worst_mae": [
+      {
+        "state": "Sikkim",
+        "mae": 7.2179,
+        "bias": 0.755,
+        "persistence_mae_skill": -0.0199,
+        "climatology_mae_skill": 0.0827,
+        "heavy20_recall": 0.5429,
+        "heavy20_csi": 0.4043,
+        "coverage": 0.8913,
+        "above_interval": 0.0978
+      },
+      {
+        "state": "Goa",
+        "mae": 7.0326,
+        "bias": -4.5079,
+        "persistence_mae_skill": -0.189,
+        "climatology_mae_skill": 0.2272,
+        "heavy20_recall": 0.3256,
+        "heavy20_csi": 0.3111,
+        "coverage": 0.8043,
+        "above_interval": 0.1793
+      },
+      {
+        "state": "Dadra and Nagar Haveli and Daman and Diu",
+        "mae": 5.4629,
+        "bias": -2.3137,
+        "persistence_mae_skill": 0.0792,
+        "climatology_mae_skill": 0.0839,
+        "heavy20_recall": 0.1667,
+        "heavy20_csi": 0.125,
+        "coverage": 0.8804,
+        "above_interval": 0.1087
+      },
+      {
+        "state": "Kerala",
+        "mae": 5.2781,
+        "bias": -0.5742,
+        "persistence_mae_skill": -0.0782,
+        "climatology_mae_skill": 0.4,
+        "heavy20_recall": 0.4762,
+        "heavy20_csi": 0.4,
+        "coverage": 0.8913,
+        "above_interval": 0.0978
+      },
+      {
+        "state": "Andaman and Nicobar Islands",
+        "mae": 4.8575,
+        "bias": -2.4611,
+        "persistence_mae_skill": 0.0251,
+        "climatology_mae_skill": 0.1241,
+        "heavy20_recall": 0.1333,
+        "heavy20_csi": 0.1053,
+        "coverage": 0.837,
+        "above_interval": 0.163
+      }
+    ],
+    "weakest_heavy20_recall": [
+      {
+        "state": "Andhra Pradesh",
+        "mae": 3.1306,
+        "bias": -1.4707,
+        "persistence_mae_skill": -0.029,
+        "climatology_mae_skill": 0.1385,
+        "heavy20_recall": 0.0,
+        "heavy20_csi": 0.0,
+        "coverage": 0.8315,
+        "above_interval": 0.1576
+      },
+      {
+        "state": "Karnataka",
+        "mae": 2.5577,
+        "bias": -1.2097,
+        "persistence_mae_skill": -0.0671,
+        "climatology_mae_skill": 0.3027,
+        "heavy20_recall": 0.0,
+        "heavy20_csi": 0.0,
+        "coverage": 0.9239,
+        "above_interval": 0.0761
+      },
+      {
+        "state": "Lakshadweep",
+        "mae": 2.8921,
+        "bias": -0.7067,
+        "persistence_mae_skill": -0.0351,
+        "climatology_mae_skill": 0.2642,
+        "heavy20_recall": 0.0,
+        "heavy20_csi": 0.0,
+        "coverage": 0.8913,
+        "above_interval": 0.1087
+      },
+      {
+        "state": "Rajasthan",
+        "mae": 2.2491,
+        "bias": -0.6233,
+        "persistence_mae_skill": -0.1374,
+        "climatology_mae_skill": 0.233,
+        "heavy20_recall": 0.0,
+        "heavy20_csi": 0.0,
+        "coverage": 0.8913,
+        "above_interval": 0.0924
+      },
+      {
+        "state": "Tamil Nadu",
+        "mae": 2.6985,
+        "bias": -1.0627,
+        "persistence_mae_skill": 0.0464,
+        "climatology_mae_skill": 0.226,
+        "heavy20_recall": 0.0,
+        "heavy20_csi": 0.0,
+        "coverage": 0.875,
+        "above_interval": 0.1196
+      }
+    ],
+    "largest_underprediction_bias": [
+      {
+        "state": "Goa",
+        "mae": 7.0326,
+        "bias": -4.5079,
+        "persistence_mae_skill": -0.189,
+        "climatology_mae_skill": 0.2272,
+        "heavy20_recall": 0.3256,
+        "heavy20_csi": 0.3111,
+        "coverage": 0.8043,
+        "above_interval": 0.1793
+      },
+      {
+        "state": "Andaman and Nicobar Islands",
+        "mae": 4.8575,
+        "bias": -2.4611,
+        "persistence_mae_skill": 0.0251,
+        "climatology_mae_skill": 0.1241,
+        "heavy20_recall": 0.1333,
+        "heavy20_csi": 0.1053,
+        "coverage": 0.837,
+        "above_interval": 0.163
+      },
+      {
+        "state": "Chhattisgarh",
+        "mae": 3.9439,
+        "bias": -2.4171,
+        "persistence_mae_skill": -0.0125,
+        "climatology_mae_skill": 0.0453,
+        "heavy20_recall": 0.0667,
+        "heavy20_csi": 0.0588,
+        "coverage": 0.8641,
+        "above_interval": 0.1359
+      },
+      {
+        "state": "Dadra and Nagar Haveli and Daman and Diu",
+        "mae": 5.4629,
+        "bias": -2.3137,
+        "persistence_mae_skill": 0.0792,
+        "climatology_mae_skill": 0.0839,
+        "heavy20_recall": 0.1667,
+        "heavy20_csi": 0.125,
+        "coverage": 0.8804,
+        "above_interval": 0.1087
+      },
+      {
+        "state": "Odisha",
+        "mae": 3.494,
+        "bias": -2.1877,
+        "persistence_mae_skill": -0.0028,
+        "climatology_mae_skill": 0.2395,
+        "heavy20_recall": 0.1429,
+        "heavy20_csi": 0.1176,
+        "coverage": 0.8641,
+        "above_interval": 0.1359
+      }
+    ],
+    "largest_overprediction_bias": [
+      {
+        "state": "Arunachal Pradesh",
+        "mae": 4.5076,
+        "bias": 1.6247,
+        "persistence_mae_skill": -0.2547,
+        "climatology_mae_skill": 0.1666,
+        "heavy20_recall": 0.3889,
+        "heavy20_csi": 0.2593,
+        "coverage": 0.9783,
+        "above_interval": 0.0217
+      },
+      {
+        "state": "Mizoram",
+        "mae": 3.1316,
+        "bias": 1.2462,
+        "persistence_mae_skill": -0.0574,
+        "climatology_mae_skill": 0.2924,
+        "heavy20_recall": 0.1667,
+        "heavy20_csi": 0.1429,
+        "coverage": 0.9674,
+        "above_interval": 0.0326
+      },
+      {
+        "state": "Manipur",
+        "mae": 3.1214,
+        "bias": 0.7739,
+        "persistence_mae_skill": -0.0007,
+        "climatology_mae_skill": 0.4408,
+        "heavy20_recall": 0.3333,
+        "heavy20_csi": 0.3,
+        "coverage": 0.9783,
+        "above_interval": 0.0217
+      },
+      {
+        "state": "Sikkim",
+        "mae": 7.2179,
+        "bias": 0.755,
+        "persistence_mae_skill": -0.0199,
+        "climatology_mae_skill": 0.0827,
+        "heavy20_recall": 0.5429,
+        "heavy20_csi": 0.4043,
+        "coverage": 0.8913,
+        "above_interval": 0.0978
+      },
+      {
+        "state": "Assam",
+        "mae": 3.9811,
+        "bias": 0.5326,
+        "persistence_mae_skill": -0.0363,
+        "climatology_mae_skill": -0.1043,
+        "heavy20_recall": 0.2,
+        "heavy20_csi": 0.15,
+        "coverage": 0.9511,
+        "above_interval": 0.0489
+      }
+    ],
+    "worst_upper_interval_misses": [
+      {
+        "state": "Goa",
+        "mae": 7.0326,
+        "bias": -4.5079,
+        "persistence_mae_skill": -0.189,
+        "climatology_mae_skill": 0.2272,
+        "heavy20_recall": 0.3256,
+        "heavy20_csi": 0.3111,
+        "coverage": 0.8043,
+        "above_interval": 0.1793
+      },
+      {
+        "state": "Andaman and Nicobar Islands",
+        "mae": 4.8575,
+        "bias": -2.4611,
+        "persistence_mae_skill": 0.0251,
+        "climatology_mae_skill": 0.1241,
+        "heavy20_recall": 0.1333,
+        "heavy20_csi": 0.1053,
+        "coverage": 0.837,
+        "above_interval": 0.163
+      },
+      {
+        "state": "Puducherry",
+        "mae": 4.1664,
+        "bias": -1.1702,
+        "persistence_mae_skill": 0.001,
+        "climatology_mae_skill": 0.036,
+        "heavy20_recall": 0.25,
+        "heavy20_csi": 0.1667,
+        "coverage": 0.8261,
+        "above_interval": 0.163
+      },
+      {
+        "state": "Andhra Pradesh",
+        "mae": 3.1306,
+        "bias": -1.4707,
+        "persistence_mae_skill": -0.029,
+        "climatology_mae_skill": 0.1385,
+        "heavy20_recall": 0.0,
+        "heavy20_csi": 0.0,
+        "coverage": 0.8315,
+        "above_interval": 0.1576
+      },
+      {
+        "state": "Telangana",
+        "mae": 3.8417,
+        "bias": -1.8997,
+        "persistence_mae_skill": -0.0768,
+        "climatology_mae_skill": 0.2073,
+        "heavy20_recall": 0.1875,
+        "heavy20_csi": 0.1579,
+        "coverage": 0.837,
+        "above_interval": 0.1576
+      }
+    ]
+  },
+  "findings": [
+    "The point forecast improves RMSE versus persistence, but has worse MAE. It is useful for average error variance, not a clear overall replacement for persistence.",
+    "Heavy-rain detection is the central weakness: state-mean >=20 mm/day recall is low and extreme peaks are severely damped.",
+    "The nominal 80% interval over-covers, but misses are mostly above the upper bound. This is an asymmetric upper-tail calibration failure.",
+    "The gate is dynamic, but its mean allocation is concentrated in the monsoon expert while the learned GBM, hurdle, spatial, and upper-quantile experts receive small average weights.",
+    "Only one year is available and the model is evaluated on one chronological six-month holdout. Reliability across years, storm types, and operational data revisions is not established."
+  ],
+  "recommendations": [
+    "Train a separate extreme-rain amount head in log1p space and a threshold-specific calibrator for >=10, >=20, and >=64.5 mm/day events; choose alert thresholds from precision-recall curves rather than a fixed 0.5 cutoff.",
+    "Use upper-tail asymmetric conformal intervals or quantile calibration by state, season, lead, and regime so upper bounds widen when convective or monsoon-active signals are present.",
+    "Make the gate optimize against out-of-fold skill relative to persistence and climatology, with a regularizer that prevents the monsoon expert from dominating when learned experts have better recent validation loss.",
+    "Add predictors that describe storm initiation and transport: CAPE, boundary-layer humidity, wind components, moisture-flux convergence, pressure tendency, and spatial rainfall context. Keep only fields available at issue time.",
+    "Use multiple years of ERA5 and rolling-origin folds across complete monsoon and post-monsoon seasons. Publish state-level reliability labels; do not present sparse >=64.5 mm/day metrics as trustworthy.",
+    "In the UI, distinguish a rainfall amount forecast from an event-risk forecast and display a warning when state-specific heavy-rain recall or sample count is weak."
+  ]
+}

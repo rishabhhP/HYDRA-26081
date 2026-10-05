@@ -309,6 +309,13 @@ def h_forecast(q: str, s: Slots) -> Answer:
                 leads.append(f"I can't produce a forecast for {place.name} {_period(ts)} right now.")
     if not leads:
         return _unavailable(places[0].name, variables[0], ts, "No forecast source answered.")
+    if re.search(r"\b(heavy|very heavy|alert|warning|risk|chance|probability|extreme)\b", q.lower()):
+        from . import calibrated as CAL
+        cov = CAL.coverage()
+        if cov:
+            sections.append(("Calibrated heavy-rain risk", f"HYDRA v3.1 calibrated probabilities and alert tiers exist for {cov[0]} to {cov[1]} "
+                                                           "(replay). Future dates need the daily post-processing run; until then use the provider "
+                                                           "rain chance above."))
     if any("HYDRA forecast" in l for l in leads):
         sections.append(("How to read HYDRA", "the 80% range is a calibrated interval; expert weights show how the neural gate blended its experts."))
     return Answer(" ".join(leads), sections, sources=sources, handler="forecast",
@@ -801,6 +808,24 @@ def h_model_accuracy(q: str, s: Slots) -> Answer:
     if val.get("state_scale"):
         pooled = val["state_scale"]["pooled"]["continuous"]
         sections.append(("Rolling validation", f"multi-origin MAE {f(pooled.get('mae'), 2)}, RMSE {f(pooled.get('rmse'), 2)} ({val['design']['folds']} folds)."))
+    try:
+        from . import calibrated as CAL
+        if CAL.available():
+            g = CAL.gate()
+            target = next((p.state for p in s.places if p.state), None)
+            card = (CAL.state_summary(target) or {}).get("reliability") if target else None
+            if card:
+                sections.append(("HYDRA v3.1 (post-processed)", f"{target}: MAE {card['mae_mm']:.2f} vs {card['raw_mae_mm']:.2f} mm/day raw, "
+                                 f"skill vs persistence {card['mae_skill_vs_persistence'] * 100:+.0f}%, reliability {card['reliability']}, "
+                                 f"{card['heavy_20mm_events']} heavy days in the test period ({card['heavy_rain_evidence']})."))
+            checks = {c["check"]: c["detail"] for c in g.get("checks", [])}
+            if checks:
+                sections.append(("v3.1 release gate", f"{g['status']}; MAE {checks.get('MAE not worse than raw v3', 'n/a')}, "
+                                 f"80% range coverage {checks.get('80% interval coverage within 75-85%', 'n/a')}, "
+                                 f"P(≥20 mm) Brier skill {checks.get('P(>=20 mm) calibrated (Brier skill > 0)', 'n/a')}"
+                                 + (f"; failing: {', '.join(g['failed'])}" if g.get("failed") else "") + "."))
+    except Exception:
+        pass
     sections.append(("Source", "HYDRA rolling replay vs ERA5 state-mean rainfall (runtime/hydra_rolling_rainfall_replay.json)"))
     return Answer(lead, sections, ranks, [{"file": "runtime/hydra_rolling_rainfall_replay.json", "method": "replay verification"}], handler="model_accuracy",
                   followups=["Which state does HYDRA predict best?", "Did HYDRA catch the biggest rain day in Maharashtra?", "What does the 80% interval mean?"])
@@ -831,6 +856,13 @@ def h_model_vs_actual(q: str, s: Slots) -> Answer:
             sections.append(("Local extreme", f"wettest cell observed {f(r['actual_local_max_mm'])} mm vs HYDRA's wettest cell {f(r['local_peak_mm'])} mm."))
         if pd.notna(r.get("p_rain")):
             sections.append(("Rain chance", f"HYDRA expected {f(r['p_rain'] * 100, 0)}% of the state's cells to be wet."))
+        try:
+            from . import calibrated as CAL
+            row = CAL.state_day(r["place"], r["date"]) if CAL.available() else None
+        except Exception:
+            row = None
+        if row:
+            sections.append(("HYDRA v3.1", CAL.risk_sentence(row) + f" ({CAL.label(row)})"))
         sections.append(("Source", "HYDRA rolling replay"))
         return Answer(lead, sections, handler="model_vs_actual", followups=[f"Why did HYDRA {'under' if r['hydra_mm'] < r['actual_mm'] else 'over'}-predict in {r['place']}?",
                                                                             f"How accurate is HYDRA in {r['place']}?"])
@@ -866,10 +898,76 @@ def h_uncertainty(q: str, s: Slots) -> Answer:
 
 
 # ================================================================== extremes, advice, why
+def _calibrated_extremes(q: str, s: Slots, place: Place) -> Answer | None:
+    """HYDRA v3.1 calibrated heavy-rain risk for replay dates (out-of-sample when available)."""
+    from . import calibrated as CAL
+    cov = CAL.coverage()
+    if not cov or not s.time.start or s.time.start > cov[1] or s.time.end < cov[0]:
+        return None
+    day = max(s.time.start, cov[0]) if s.time.start == s.time.end else None
+    if place.kind == "india" or not place.state:
+        if day is None:
+            return None
+        res = CAL.alerts(day, "local_64.5" if re.search(r"64\.5|very heavy|extreme|cloudburst|district|anywhere|local", q.lower()) else "state_20")
+        if res.get("status") != "available":
+            return None
+        issued = res["issued"]
+        ranks = [f"{x['state']}: {CAL.pct(x['probability'])} ({x['tier'].upper()})" + ("" if x["observed"] is None else
+                 f", {'happened' if x['observed'] else 'did not happen'} ({x['observed_mm']:.0f} mm)") for x in issued[:12]]
+        hit = [x for x in issued if x["observed"]]
+        missed = [x["state"] for x in res["states"] if x["observed"] and not x["tier"]]
+        lead = (f"On {day:%d %b %Y}, HYDRA v3.1 issued a heavy-rain tier for {len(issued)} state(s) for '{res['event_label']}'."
+                if issued else f"On {day:%d %b %Y}, HYDRA v3.1 issued no heavy-rain tier for '{res['event_label']}'.")
+        sections = [("Outcome", f"{len(hit)} of {len(issued)} flagged states saw the event" + (f"; missed (no tier): {', '.join(missed[:8])}" if missed else "; no unflagged state saw it") + "."),
+                    ("Tiers", "watch ≥ 20%, alert ≥ 40%, warning ≥ 60% calibrated probability."),
+                    ("Status", CAL.label({"release_gate": res["release_gate"], "provenance": "out_of_sample" if "oos" in res["source"] else "fitted"})),
+                    ("Source", f"HYDRA v3.1 post-processing ({res['source']})")]
+        return Answer(lead, sections, ranks, [{"file": res["source"], "method": "calibrated heavy-rain risk"}], handler="extremes-calibrated")
+    if day is None:
+        summary = CAL.state_summary(place.state)
+        if not summary:
+            return None
+        rows = [r for r in summary["rows"] if s.time.start.isoformat() <= r["valid_date"] <= s.time.end.isoformat()]
+        flagged = [r for r in rows if r["alert"]["state_20"] or r["alert"]["local_64.5"]]
+        if not rows:
+            return None
+        ranks = [f"{r['valid_date']}: state ≥20 {CAL.pct(r['probabilities']['state_20'])} ({(r['alert']['state_20'] or '-').upper()}), "
+                 f"≥64.5 somewhere {CAL.pct(r['probabilities']['local_64.5'])} ({(r['alert']['local_64.5'] or '-').upper()}); observed {r['observed_mm']:.1f} mm"
+                 for r in sorted(flagged, key=lambda r: -max(r['probabilities']['state_20'] or 0, r['probabilities']['local_64.5'] or 0))[:10]]
+        lead = f"HYDRA v3.1 flagged heavy-rain risk on {len(flagged)} of {len(rows)} days in {place.state} {_period(s.time)}."
+        card = summary.get("reliability") or {}
+        sections = [("Reliability", f"{card.get('reliability', 'n/a')} ({card.get('heavy_20mm_events', 'n/a')} heavy days in the test period; {card.get('heavy_rain_evidence', '')})"),
+                    ("Status", CAL.label(summary)), ("Source", "HYDRA v3.1 post-processing")]
+        return Answer(lead, sections, ranks, handler="extremes-calibrated")
+    row = CAL.state_day(place.state, day)
+    if not row:
+        return None
+    lead = f"HYDRA v3.1 heavy-rain risk for {place.state} on {day:%d %b %Y}: " + CAL.risk_sentence(row)
+    sections = [("Outcome", CAL.outcome_sentence(row)), ("HYDRA v3 (raw)", f"{row['hydra_v3_mm']:.1f} mm")]
+    card = row.get("reliability") or {}
+    if card:
+        sections.append(("Reliability", f"{place.state} is rated {card['reliability']} ({card['heavy_20mm_events']} heavy days in the test period)."))
+    sections += [("Status", CAL.label(row)), ("Source", "HYDRA v3.1 post-processing")]
+    return Answer(lead, sections, handler="extremes-calibrated")
+
+
 def h_extremes(q: str, s: Slots) -> Answer:
     places = _places(s) or [Place("India", "india")]
     place = places[0]
     t = q.lower()
+    calibrated = None
+    if not (s.time.start and s.time.start > today()) and not re.search(r"\bheat ?wave|extreme heat\b", t):
+        calibrated = _calibrated_extremes(q, s, place)
+        asks_risk = re.search(r"\b(alerts?|warnings?|watch|tiers?|risk|chance|probabilit|forecast|predict|flag)", t)
+        if calibrated and (asks_risk or place.kind == "india" or not place.state):
+            return calibrated
+    observed = _observed_extremes(q, s, place, places, t)
+    if calibrated and observed.handler != "unavailable":
+        observed.sections.insert(len(observed.sections) - 1, ("HYDRA v3.1 risk for this period", calibrated.lead))
+    return observed
+
+
+def _observed_extremes(q: str, s: Slots, place: Place, places: list, t: str) -> Answer:
     if re.search(r"\b(will|coming|expected|upcoming|hogi)\b", t) or s.time.start and s.time.start > today() or re.search(r"\b(probability|chance|likely|risk|alert|sambhavna)\b", t) and (not s.time.start or s.time.start >= today()):
         return h_forecast(q, s)
     if re.search(r"\bheat ?wave|extreme heat\b", t):
